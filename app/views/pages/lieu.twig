@@ -1,7 +1,48 @@
 {% extends "layout.twig" %}
 
 {% block content %}
-	<h1>Me contacter</h1>
+	<h1>Mes lieux</h1>
 	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Coordonnées</th>
+                <th>Adresse</th>
+                <th colspan="2" align="center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if lieux %}
+            {% for row in lieux %}
+            <tr>
+                <td>{{ row.nom }}</td>
+                <td>{{ row.description }}</td>
+                <td>
+                	{{ row.longitude }}<br>
+                	{{ row.latitude }}
+                </td>
+                <td>
+                	{{ row.adresse }}<br>
+                	{{ row.cp }} {{ row.ville }}
+                </td>
+                <td><a href="lieu/{{row.id_lieu}}" class="btn btn-info">Éditer</a></td>
+                <td>
+                    <form action="lieu" method="POST"> 
+                        <input class="btn btn-danger" type = "submit" value ="Supprimer">
+                        <input type="hidden" id="delete" name="delete" value="1">
+                        <input type="hidden" id="id_lieu" name="id_lieu" value="{{row.id_lieu}}">
+                    </form>
+                </td>
+            </tr>
+
+            {% endfor %} 
+            {% else %}
+            <p>Pas de lieux</p>
+            {% endif %}
+        </tbody>
+    </table>
 
 {% endblock %}

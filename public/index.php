@@ -32,18 +32,13 @@ $app->post('/contact', \App\Controllers\PagesController::class.':postContact');
 
 $app->get('/lieu', \App\Controllers\PagesController::class.':getLieu')->setName('lieu');
 
-$app->get('/lieuBis', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
-	// this works here :
-	//$lieux = $this->db->query('SELECT * FROM Lieu');
+// $app->get('/api/lieu', function ($request, $response) {
 
-	// or this is working too :
-	$mapper = new Database($this->pdo);
-   	$lieux = $mapper->query('SELECT * FROM Lieu');
-
-	var_dump($lieux);
-
-	return $response->write('Salut');
-});
+// 	$lieux = $this->db->query('SELECT * FROM Lieu');
+// 	var_dump($lieux);
+	
+// 	return $response->write('Salut');
+// });
 
 
 $app->run();

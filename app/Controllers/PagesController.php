@@ -7,11 +7,11 @@ use Psr\Http\Message\ResponseInterface;
 class PagesController extends Controller {
 
 	public function home(RequestInterface $request, ResponseInterface $response) {
-		$this->render($response, 'pages/home.twig');
+		$this->render($response, 'pages/home.twig', []);
 	}
 
 	public function getContact(RequestInterface $request, ResponseInterface $response) {
-		$this->render($response, 'pages/contact.twig');
+		$this->render($response, 'pages/contact.twig', []);
 	}
 
 	public function postContact(RequestInterface $request, ResponseInterface $response) {
@@ -19,12 +19,12 @@ class PagesController extends Controller {
 		die();
 	}
 
-
 	public function getLieu(RequestInterface $request, ResponseInterface $response) {
-		// but here this crash :
-		// $lieux = $this->$database->query('SELECT * FROM Lieu');
-		// var_dump($lieux);
 
-		$this->render($response, 'pages/lieu.twig');
+		$lieux = $this->database->query('SELECT * FROM Lieu');
+
+		$this->render($response, 'pages/lieu.twig', [
+        	'lieux' => $lieux
+		]);
 	}
 }
