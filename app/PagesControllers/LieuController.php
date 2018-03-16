@@ -1,10 +1,10 @@
 <?php
-namespace App\Controllers;
+namespace App\PagesControllers;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class PagesController extends Controller {
+class LieuController extends Controller {
 
 	public function home(RequestInterface $request, ResponseInterface $response) {
 		$this->render($response, 'pages/home.twig', []);
@@ -21,7 +21,9 @@ class PagesController extends Controller {
 
 	public function getLieu(RequestInterface $request, ResponseInterface $response) {
 
-		$lieux = $this->database->query('SELECT * FROM Lieu');
+		$req = $this->pdo->prepare('SELECT * FROM Lieu');
+	    $req->execute();
+		$lieux =  $req->fetchAll();
 
 		$this->render($response, 'pages/lieu.twig', [
         	'lieux' => $lieux

@@ -8,37 +8,22 @@ $app = new \Slim\App([
 	]
 ]);
 
-class Database{
-	private $pdo;
-
-	public function __construct(PDO $pdo) {
-		$this->pdo = $pdo;
-	}
-
-	public function query($sql) {
-		$req = $this->pdo->prepare($sql);
-		$req->execute();
-		return $req->fetchAll();
-	}
-}
-
 require('../app/container.php');
 
-$app->get('/', \App\Controllers\PagesController::class.':home')->setName('home');
+$app->get('/', \App\PagesControllers\LieuController::class.':home')->setName('home');
 
-$app->get('/contact', \App\Controllers\PagesController::class.':getContact')->setName('contact');
+$app->get('/contact', \App\PagesControllers\LieuController::class.':getContact')->setName('contact');
 
-$app->post('/contact', \App\Controllers\PagesController::class.':postContact');
+$app->post('/contact', \App\PagesControllers\LieuController::class.':postContact');
 
-$app->get('/lieu', \App\Controllers\PagesController::class.':getLieu')->setName('lieu');
+$app->get('/lieu', \App\PagesControllers\LieuController::class.':getLieu')->setName('lieu');
 
-// $app->get('/api/lieu', function ($request, $response) {
-
-// 	$lieux = $this->db->query('SELECT * FROM Lieu');
-// 	var_dump($lieux);
-	
-// 	return $response->write('Salut');
-// });
-
+// API lieu
+$app->get('/api/lieux', \App\ApiControllers\LieuController::class.':getAll');
+$app->get('/api/lieu/[{id}]', \App\ApiControllers\LieuController::class.':get');
+$app->get('/api/lieu/search/[{query}]', \App\ApiControllers\LieuController::class.':search');
+$app->post('/api/lieu', \App\ApiControllers\LieuController::class.':add');
+$app->delete('/api/lieu/[{id}]', \App\ApiControllers\LieuController::class.':delete');
+$app->put('/api/lieu/[{id}]', \App\ApiControllers\LieuController::class.':update');
 
 $app->run();

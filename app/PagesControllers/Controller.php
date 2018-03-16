@@ -1,16 +1,17 @@
 <?php
-namespace App\Controllers;
+namespace App\PagesControllers;
 
 use Psr\Http\Message\ResponseInterface;
 
+// controleur dédié au Front-End
 class Controller {
 
 	private $container;
-	protected $database;
+	protected $pdo;
 
 	public function __construct($container) {
 		$this->container = $container;
-		$this->database = $this->container->get('db');
+		$this->pdo = $this->container->get('pdo');
 	}
 
 	public function render(ResponseInterface $response, $file, $data) {

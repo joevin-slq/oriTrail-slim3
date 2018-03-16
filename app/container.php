@@ -26,7 +26,3 @@ $container['pdo'] = function () {
 
 	return $pdo;
 };
-
-$container['db'] = function ($container) {
-	return new Database($container->pdo);
-};
