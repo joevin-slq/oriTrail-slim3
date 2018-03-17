@@ -1,0 +1,55 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+	<h1>S'inscrire</h1>
+
+	<form action="{{ path_for('signup') }}" method="post">
+		<div class="form-group">
+			<label for="login">Pseudo :</label>
+			<input type="text" name="login" id="login" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<label for="password">Mot de passe :</label>
+			<input type="password" name="password" id="password" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<label for="mail">Mail :</label>
+			<input type="email" name="mail" id="mail" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<label for="nom">Nom :</label>
+			<input type="text" id="nom" name="nom" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<label for="prenom">Prénom :</label>
+			<input type="text" id="prenom" name="prenom" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<label for="adresse">Adresse :</label>
+			<input type="text" id="adresse" name="adresse" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="cp">Code Postal :</label>
+			<input type="text" id="cp" name="cp" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="mail">Ville :</label>
+			<input type="text" id="ville" name="ville" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="age">Âge :</label>
+			<input type="number" name="age" id="age" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="genre">Genre :</label>
+			<select name="genre" id="genre" class="custom-select">
+			  <option value="M">Homme</option>
+			  <option value="F">Femme</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<input type="reset" value="Annuler" class="btn">
+			<input type="submit" value="Envoyer" class="btn btn-primary">
+		</div>
+	</form>
+{% endblock %}
