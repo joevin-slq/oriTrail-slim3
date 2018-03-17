@@ -7,29 +7,41 @@
     <meta name="description" content="Course d'orientation.">
     <link rel="icon" href="img/favicon.ico">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-  	<header>
-  	    <nav class="navbar navbar-static-top bg-dark">
-          <div class="container">
-            <div class="navbar-header">
-              <a href="{{ path_for('home') }}" class="navbar-brand">oriTrail</a>
-            </div>
-            <div class="nav navbar-nav">
-              <li><a href="{{ path_for('lieu') }}">Lieu</a></li>
-            </div>
-            <div class="nav navbar-nav">
-              <li><a href="{{ path_for('login') }}">Se connecter</a></li>
-            </div>
-            <div class="nav navbar-nav">
-              <li><a href="{{ path_for('signin') }}">S'enregistrer</a></li>
-            </div>
-          </div>
-  	    </nav>
-  	</header>
-  	<div>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+      <!-- Logo -->
+      <a class="navbar-brand" href="{{ path_for('home') }}">oriTrail</a>
+      <!-- Boutton sandwitch -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Liens du menu -->
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path_for('lieu') }}">Lieu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path_for('login') }}">Se connecter</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path_for('register') }}">S'enregistrer</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+{% if page == 'home' %}
+  <div class="jumbotron text-center">
+    <h1>Page d'accueil</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit!</p>
+  </div>
+{% endif %}
+    <div class="container">
       {% block content %}{% endblock %}
     </div>
+    <script src="js/jquery.slim.js"></script>
+    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>

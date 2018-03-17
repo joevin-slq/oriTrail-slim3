@@ -14,10 +14,10 @@ class UserController extends Controller {
 		die();
 	}
 
-	public function getSignin(RequestInterface $request, ResponseInterface $response) {
-		$this->render($response, 'pages/signin.twig', []);
+	public function getRegister(RequestInterface $request, ResponseInterface $response) {
+		$this->render($response, 'pages/register.twig', []);
 	}
-	public function postSignin(RequestInterface $request, ResponseInterface $response) {
+	public function postRegister(RequestInterface $request, ResponseInterface $response) {
 		var_dump($request->getParams());
 		die();
 	}

@@ -15,7 +15,7 @@ $app->get('/', \App\PagesControllers\LieuController::class.':home')->setName('ho
 
 $app->get('/lieu', \App\PagesControllers\LieuController::class.':getLieu')->setName('lieu');
 
-$app->get('/signin', \App\PagesControllers\UserController::class.':getSignin')->setName('signin');
+$app->get('/register', \App\PagesControllers\UserController::class.':getRegister')->setName('register');
 $app->get('/login', \App\PagesControllers\UserController::class.':getLogin')->setName('login');
 
 // API lieu
