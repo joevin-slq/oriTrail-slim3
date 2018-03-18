@@ -14,3 +14,11 @@ Objectif :
 ----
 ## Base de données
 Un export de la base de données est fourni dans le fichier *BDD.sql*
+
+----
+## Contribuer
+[Documentation](https://www.slimframework.com/docs/)
+
+[Tuto vidéo pour débuter](https://www.grafikart.fr/tutoriels/php/slim-framework-831)
+
+Installer [git](https://git-scm.com/)
