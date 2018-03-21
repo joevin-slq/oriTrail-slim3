@@ -8,11 +8,11 @@ use Psr\Http\Message\ResponseInterface;
 class Controller {
 
 	private $container;
-	protected $pdo;
+	protected $router;
 
 	public function __construct($container) {
 		$this->container = $container;
-		$this->pdo = $this->container->get('pdo');
+		$this->router = $this->container->get('router');
 	}
 
 	public function render(ResponseInterface $response, $file, $data) {

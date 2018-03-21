@@ -8,21 +8,18 @@ $container['view'] = function ($container) {
         'cache' => false //$dir . '/tmp/cache'
     ]);
 
-    // Instantiate and add Slim specific extension
+    // Initialise Slim et l'extension Twig
     $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
 
     return $view;
 };
 
-$container['pdo'] = function () {
-    $server     = 'localhost';
-    $username   = 'root';
-    $password   = '';
-    $database   = 'database';
+$capsule = new \Illuminate\Database\Capsule\Manager;
+$capsule->addConnection($container['settings']['db']);
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
 
-	$pdo = new PDO("mysql:host=$server;dbname=$database", $username, $password);
-	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-	return $pdo;
+$container['db'] = function ($container) use ($capsule) {
+	return $capsule;
 };

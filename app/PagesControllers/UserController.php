@@ -3,6 +3,7 @@ namespace App\PagesControllers;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use App\Models\Utilisateur;
 
 class UserController extends Controller {
 
@@ -14,41 +15,30 @@ class UserController extends Controller {
 	public function postSignup(RequestInterface $request, ResponseInterface $response) {
 		$input = $request->getParsedBody();
 
-		$req = $this->pdo->prepare('INSERT INTO Utilisateur
-			   (login, password, nom, prenom, mail, age, genre)
-		VALUES (:login, :password, :nom, :prenom, :mail, :age, :genre)
-		');
-        $req->execute(array(
-          "login" => $input['login'],
-          "password" => password_hash($input['password'], PASSWORD_DEFAULT), 
-          "nom" => $input['nom'], 
-          "prenom" => $input['prenom'],
-          "mail" => $input['mail'],
-          "age" => $input['age'],
-          "genre" => $input['genre']
-        ));
-		$req->execute();
+		$user = Utilisateur::create([
+			"login" => $input['login'],
+			"password" => password_hash($input['password'], PASSWORD_DEFAULT),
+			"nom" => $input['nom'],
+			"prenom" => $input['prenom'],
+			"mail" => $input['mail'],
+			"age" => $input['age'],
+			"genre" => $input['genre']
+		]);
 
-		$input['id'] = $this->pdo->lastInsertId();
-
-		var_dump($input);
+		return $response->withRedirect($this->router->pathFor('home'));
 	}
 
 	// formulaire de connexion
 	public function getSignin(RequestInterface $request, ResponseInterface $response) {
 		$this->render($response, 'pages/signin.twig', []);
 	}
-	// connecte un utilisateur
+	// connecte un Utilisateur
 	public function postSignin(RequestInterface $request, ResponseInterface $response) {
 		$input = $request->getParsedBody();
 
-		$req = $this->pdo->prepare('SELECT login, password
-									FROM Utilisateur
-									WHERE login = ?');
-        $req->execute(array($input['login']));
-		$result = $req->fetch();
+		$user = Utilisateur::where('login', $input['login'])->first();
 
-		if(password_verify($input['password'], $result['password'])) {
+		if(password_verify($input['password'], $user->password)) {
 			$access = "GRANTED";
 		}
 		else { $access = "DENY"; }

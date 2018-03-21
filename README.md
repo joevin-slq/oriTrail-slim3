@@ -4,7 +4,7 @@ Projet de course d'orientation.
 Technologies :
 - micro framework Slim 3
 - moteur de templates Twig
-- accès base via PDO
+- accès base via l'ORM Eloquent
 - base de donnée MySQL / MariaDB
 
 Objectif :

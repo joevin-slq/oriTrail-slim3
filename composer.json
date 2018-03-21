@@ -7,6 +7,7 @@
 	},
     "require": {
         "slim/slim": "^3.9",
-        "slim/twig-view": "^2.3"
+        "slim/twig-view": "^2.3",
+        "illuminate/database": "^5.6"
     }
 }

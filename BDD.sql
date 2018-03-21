@@ -1,12 +1,12 @@
 SET FOREIGN_KEY_CHECKS=0;
-DROP TABLE IF EXISTS `Balise`, `Realise`, `Course`, `Lieu`, `Utilisateur`;
+DROP TABLE IF EXISTS `Balises`, `Realise`, `Courses`, `Lieux`, `Utilisateurs`;
 SET FOREIGN_KEY_CHECKS=1;
 
 #------------------------------------------------------------
-# Table: Utilisateur
+# Table: Utilisateurs
 #------------------------------------------------------------
 
-CREATE TABLE Utilisateur (
+CREATE TABLE Utilisateurs (
         id_user   INTEGER AUTO_INCREMENT NOT NULL,
         login     VARCHAR (255) NOT NULL,
         password  VARCHAR (255) NOT NULL,
@@ -21,10 +21,10 @@ CREATE TABLE Utilisateur (
 
 
 #------------------------------------------------------------
-# Table: Course
+# Table: Courses
 #------------------------------------------------------------
 
-CREATE TABLE Course (
+CREATE TABLE Courses (
         id_course    INTEGER AUTO_INCREMENT NOT NULL,
         nom          VARCHAR (255) NOT NULL,
         type         VARCHAR (255) NOT NULL,
@@ -38,10 +38,10 @@ CREATE TABLE Course (
   DEFAULT CHARSET=utf8;
 
 #------------------------------------------------------------
-# Table: Lieu
+# Table: Lieux
 #------------------------------------------------------------
 
-CREATE TABLE Lieu (
+CREATE TABLE Lieux (
         id_lieu     INTEGER AUTO_INCREMENT NOT NULL,
         nom         VARCHAR (255) NOT NULL,
         description TEXT NOT NULL,
@@ -56,10 +56,10 @@ CREATE TABLE Lieu (
 
 
 #------------------------------------------------------------
-# Table: Balise
+# Table: Balises
 #------------------------------------------------------------
 
-CREATE TABLE Balise (
+CREATE TABLE Balises (
         id_balise INTEGER AUTO_INCREMENT NOT NULL,
         valeur    INTEGER NOT NULL,
         longitude DOUBLE NOT NULL,
@@ -86,28 +86,28 @@ CREATE TABLE Realise (
 #------------------------------------------------------------
 #-- Contraintes
 #------------------------------------------------------------
-ALTER TABLE Course
-	ADD FOREIGN KEY (fk_user) REFERENCES Utilisateur(id_user)
+ALTER TABLE Courses
+	ADD FOREIGN KEY (fk_user) REFERENCES Utilisateurs(id_user)
         ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE Course
-        ADD FOREIGN KEY (fk_lieu) REFERENCES Lieu(id_lieu)
+ALTER TABLE Courses
+        ADD FOREIGN KEY (fk_lieu) REFERENCES Lieux(id_lieu)
         ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE Balise
-        ADD FOREIGN KEY (fk_course) REFERENCES Course(id_course)
-        ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE Realise
-        ADD FOREIGN KEY (fk_user) REFERENCES Utilisateur(id_user)
+ALTER TABLE Balises
+        ADD FOREIGN KEY (fk_course) REFERENCES Courses(id_course)
         ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE Realise
-        ADD FOREIGN KEY (fk_course) REFERENCES Course(id_course)
+        ADD FOREIGN KEY (fk_user) REFERENCES Utilisateurs(id_user)
+        ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE Realise
+        ADD FOREIGN KEY (fk_course) REFERENCES Courses(id_course)
         ON UPDATE CASCADE ON DELETE CASCADE;
 
 #------------------------------------------------------------
 #-- Données
 #------------------------------------------------------------
-INSERT INTO `Lieu` (`id_lieu`, `nom`, `description`, `longitude`, `latitude`, `adresse`, `cp`, `ville`) VALUES
+INSERT INTO `Lieux` (`id_lieu`, `nom`, `description`, `longitude`, `latitude`, `adresse`, `cp`, `ville`) VALUES
 (1, 'Rodez', 'Parc de Vabres', 44.4026478, 2.5658006999999543, 'Vabre', '12850', 'Onet-le-Château');
 
-INSERT INTO `Utilisateur` (`id_user`, `login`, `password`, `nom`, `prenom`, `mail`, `age`, `genre`) VALUES (NULL, 'root', '$2y$10$h4vkidOHWnaMXNXfaDNUxOQv4xGDkhKa2eX/mBNgwQq0/hYFS7BAe', 'USER', 'user', 'user@mail.fr', '20', 'M');
+INSERT INTO `Utilisateurs` (`id_user`, `login`, `password`, `nom`, `prenom`, `mail`, `age`, `genre`) VALUES (NULL, 'root', '$2y$10$h4vkidOHWnaMXNXfaDNUxOQv4xGDkhKa2eX/mBNgwQq0/hYFS7BAe', 'USER', 'user', 'user@mail.fr', '20', 'M');
 
-INSERT INTO `Course` (`id_course`, `nom`, `type`, `debut`, `fin`, `tempsImparti`, `fk_lieu`, `fk_user`) VALUES (NULL, 'La ruthénoise', 'Course', '2018-04-01 00:00:00', '2018-04-30 00:00:00', '02:00:00', '1', '1');
+INSERT INTO `Courses` (`id_course`, `nom`, `type`, `debut`, `fin`, `tempsImparti`, `fk_lieu`, `fk_user`) VALUES (NULL, 'La ruthénoise', 'Courses', '2018-04-01 00:00:00', '2018-04-30 00:00:00', '02:00:00', '1', '1');
