@@ -27,3 +27,7 @@ $container['db'] = function ($container) use ($capsule) {
 $container['validator'] = function ($container) {
 	return new App\Validation\Validator;
 };
+
+$container['csrf'] = function ($container) {
+	return new \Slim\Csrf\Guard;
+};

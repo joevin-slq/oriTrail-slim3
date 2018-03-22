@@ -10,13 +10,13 @@ class AuthController extends Controller {
 
 	// formulaire d'inscription
 	public function getSignUp(RequestInterface $request, ResponseInterface $response) {
-		$this->render($response, 'pages/signup.twig', []);
+		return $this->render($response, 'pages/signup.twig', []);
 	}
 	// ajout d'un utilisateur dans la BDD
 	public function postSignUp(RequestInterface $request, ResponseInterface $response) {
 
 		$validation = $this->validator->validate($request, [
-			'login' => v::noWhitespace()->notEmpty(),
+			'login' => v::noWhitespace()->notEmpty()->LoginAvailable(),
 			'password' => v::notEmpty(),
 			'nom' => v::notEmpty()->alpha(),
 			'prenom' => v::notEmpty()->alpha(),
@@ -45,7 +45,7 @@ class AuthController extends Controller {
 
 	// formulaire de connexion
 	public function getSignIn(RequestInterface $request, ResponseInterface $response) {
-		$this->render($response, 'pages/signin.twig', []);
+		return $this->render($response, 'pages/signin.twig', []);
 	}
 	// connecte un Utilisateur
 	public function postSignIn(RequestInterface $request, ResponseInterface $response) {
@@ -63,6 +63,6 @@ class AuthController extends Controller {
 
 	// déconnecte l'utilisateur
 	public function getSignOut(RequestInterface $request, ResponseInterface $response) {
-		$this->render($response, 'pages/signout.twig', []);
+		return $this->render($response, 'pages/signout.twig', []);
 	}
 }

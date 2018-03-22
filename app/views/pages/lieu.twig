@@ -30,7 +30,7 @@
                 </td>
                 <td><a href="lieu/{{row.id_lieu}}" class="btn btn-info">Éditer</a></td>
                 <td>
-                    <form action="lieu" method="POST"> 
+                    <form action="lieu" method="POST">
                         <input class="btn btn-danger" type = "submit" value ="Supprimer">
                         <input type="hidden" id="delete" name="delete" value="1">
                         <input type="hidden" id="id_lieu" name="id_lieu" value="{{row.id_lieu}}">
@@ -38,7 +38,7 @@
                 </td>
             </tr>
 
-            {% endfor %} 
+            {% endfor %}
             {% else %}
             <p>Pas de lieux</p>
             {% endif %}
