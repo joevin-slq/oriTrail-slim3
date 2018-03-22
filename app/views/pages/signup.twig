@@ -2,50 +2,59 @@
 
 {% block content %}
 	<h1>S'inscrire</h1>
-
 	<form action="{{ path_for('signup') }}" method="post">
 		<div class="form-group">
 			<label for="login">Pseudo :</label>
-			<input type="text" name="login" id="login" class="form-control" required>
+			<input type="text" name="login" id="login" value="{{old.email}}" class="form-control {{ errors.login ? 'is-invalid' : ''}}">
+			{% if errors.login %}
+			<div class="invalid-feedback">{{ errors.login | first }}</div>
+			{% endif %}
 		</div>
 		<div class="form-group">
 			<label for="password">Mot de passe :</label>
-			<input type="password" name="password" id="password" class="form-control" required>
+			<input type="password" name="password" id="password" class="form-control {{ errors.password ? 'is-invalid' : ''}}">
+			{% if errors.password %}
+			<div class="invalid-feedback">{{ errors.password | first }}</div>
+			{% endif %}
 		</div>
 		<div class="form-group">
 			<label for="mail">Mail :</label>
-			<input type="email" name="mail" id="mail" class="form-control" required>
+			<input type="email" name="mail" id="mail" value="{{old.mail}}" class="form-control {{ errors.mail ? 'is-invalid' : ''}}">
+			{% if errors.mail %}
+			<div class="invalid-feedback">{{ errors.mail | first }}</div>
+			{% endif %}
 		</div>
-		<div class="form-group">
-			<label for="nom">Nom :</label>
-			<input type="text" id="nom" name="nom" class="form-control" required>
-		</div>
-		<div class="form-group">
-			<label for="prenom">Prénom :</label>
-			<input type="text" id="prenom" name="prenom" class="form-control" required>
-		</div>
-		<div class="form-group">
-			<label for="adresse">Adresse :</label>
-			<input type="text" id="adresse" name="adresse" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="cp">Code Postal :</label>
-			<input type="text" id="cp" name="cp" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="mail">Ville :</label>
-			<input type="text" id="ville" name="ville" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="age">Âge :</label>
-			<input type="number" name="age" id="age" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="genre">Genre :</label>
-			<select name="genre" id="genre" class="custom-select">
-			  <option value="M">Homme</option>
-			  <option value="F">Femme</option>
-			</select>
+		<div class="form-row">
+	    <div class="form-group col-md-6">
+	      <label for="nom">Nom :</label>
+	      <input type="text" id="nom" name="nom" value="{{old.nom}}" class="form-control {{ errors.nom ? 'is-invalid' : ''}}">
+				{% if errors.nom %}
+				<div class="invalid-feedback">{{ errors.nom | first }}</div>
+				{% endif %}
+	    </div>
+	    <div class="form-group col-md-6">
+	      <label for="prenom">Prénom :</label>
+	      <input type="text" id="prenom" name="prenom" value="{{old.prenom}}" class="form-control {{ errors.prenom ? 'is-invalid' : ''}}">
+				{% if errors.prenom %}
+				<div class="invalid-feedback">{{ errors.prenom | first }}</div>
+				{% endif %}
+	    </div>
+	  </div>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="dateNaissance">Date de naissance :</label>
+				<input type="date" name="dateNaissance" id="dateNaissance" value="{{old.dateNaissance}}" class="form-control {{ errors.dateNaissance ? 'is-invalid' : ''}}">
+				{% if errors.dateNaissance %}
+				<div class="invalid-feedback">{{ errors.dateNaissance | first }}</div>
+				{% endif %}
+			</div>
+			<div class="form-group col-md-6">
+				<label for="sexe">Sexe :</label>
+				<select name="sexe" id="sexe" class="custom-select">
+				  <option value="M" {{ old.sexe == 'M' ? 'selected' : ''}}>Homme</option>
+				  <option value="F" {{ old.sexe == 'F' ? 'selected' : ''}}>Femme</option>
+				</select>
+			</div>
 		</div>
 		<div class="form-group">
 			<input type="reset" value="Annuler" class="btn">

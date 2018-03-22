@@ -23,3 +23,7 @@ $capsule->bootEloquent();
 $container['db'] = function ($container) use ($capsule) {
 	return $capsule;
 };
+
+$container['validator'] = function ($container) {
+	return new App\Validation\Validator;
+};

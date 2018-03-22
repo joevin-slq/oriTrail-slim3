@@ -14,8 +14,8 @@ class Utilisateur extends Model
     'nom',
     'prenom',
     'mail',
-    'age',
-    'genre'
+    'dateNaissance',
+    'sexe'
   ];
 
   public function getUtilisateurs() {

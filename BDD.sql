@@ -7,14 +7,14 @@ SET FOREIGN_KEY_CHECKS=1;
 #------------------------------------------------------------
 
 CREATE TABLE Utilisateurs (
-        id_user   INTEGER AUTO_INCREMENT NOT NULL,
-        login     VARCHAR (255) NOT NULL,
-        password  VARCHAR (255) NOT NULL,
-        nom       VARCHAR (255) NOT NULL,
-        prenom    VARCHAR (255) NOT NULL,
-        mail      VARCHAR (255) NOT NULL,
-        age       INTEGER NOT NULL,
-        genre     CHAR (1) NOT NULL,
+        id_user   	INTEGER AUTO_INCREMENT NOT NULL,
+        login     	VARCHAR (255) NOT NULL,
+        password  	VARCHAR (255) NOT NULL,
+        nom       	VARCHAR (255) NOT NULL,
+        prenom    	VARCHAR (255) NOT NULL,
+        mail      	VARCHAR (255) NOT NULL,
+        dateNaissance	DATE NOT NULL,
+        sexe     	CHAR (1) NOT NULL,
         PRIMARY KEY (id_user)
 ) ENGINE = InnoDB
   DEFAULT CHARSET=utf8;
@@ -108,6 +108,6 @@ ALTER TABLE Realise
 INSERT INTO `Lieux` (`id_lieu`, `nom`, `description`, `longitude`, `latitude`, `adresse`, `cp`, `ville`) VALUES
 (1, 'Rodez', 'Parc de Vabres', 44.4026478, 2.5658006999999543, 'Vabre', '12850', 'Onet-le-Château');
 
-INSERT INTO `Utilisateurs` (`id_user`, `login`, `password`, `nom`, `prenom`, `mail`, `age`, `genre`) VALUES (NULL, 'root', '$2y$10$h4vkidOHWnaMXNXfaDNUxOQv4xGDkhKa2eX/mBNgwQq0/hYFS7BAe', 'USER', 'user', 'user@mail.fr', '20', 'M');
+INSERT INTO `Utilisateurs` (`id_user`, `login`, `password`, `nom`, `prenom`, `mail`, `dateNaissance`, `sexe`) VALUES (NULL, 'root', '$2y$10$h4vkidOHWnaMXNXfaDNUxOQv4xGDkhKa2eX/mBNgwQq0/hYFS7BAe', 'USER', 'user', 'user@mail.fr', '2000-04-05', 'M');
 
 INSERT INTO `Courses` (`id_course`, `nom`, `type`, `debut`, `fin`, `tempsImparti`, `fk_lieu`, `fk_user`) VALUES (NULL, 'La ruthénoise', 'Courses', '2018-04-01 00:00:00', '2018-04-30 00:00:00', '02:00:00', '1', '1');

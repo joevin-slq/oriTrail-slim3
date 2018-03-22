@@ -24,6 +24,10 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
             'Slim\\Views\\' => 11,
             'Slim\\' => 5,
         ),
+        'R' => 
+        array (
+            'Respect\\Validation\\' => 19,
+        ),
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
@@ -76,6 +80,10 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
         'Slim\\' => 
         array (
             0 => __DIR__ . '/..' . '/slim/slim/Slim',
+        ),
+        'Respect\\Validation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/respect/validation/library',
         ),
         'Psr\\SimpleCache\\' => 
         array (

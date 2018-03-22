@@ -9,10 +9,12 @@ class Controller {
 
 	private $container;
 	protected $router;
+	protected $validator;
 
 	public function __construct($container) {
 		$this->container = $container;
 		$this->router = $this->container->get('router');
+		$this->validator = $this->container->get('validator');
 	}
 
 	public function render(ResponseInterface $response, $file, $data) {

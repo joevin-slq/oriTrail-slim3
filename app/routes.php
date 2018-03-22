@@ -5,11 +5,11 @@ $app->get('/', \App\PagesControllers\LieuController::class.':home')->setName('ho
 
 $app->get('/lieu', \App\PagesControllers\LieuController::class.':getLieu')->setName('lieu');
 
-$app->get('/signup', \App\PagesControllers\UserController::class.':getSignup')->setName('signup');
-$app->post('/signup', \App\PagesControllers\UserController::class.':postSignup')->setName('signup');
-$app->get('/signin', \App\PagesControllers\UserController::class.':getSignin')->setName('signin');
-$app->post('/signin', \App\PagesControllers\UserController::class.':postSignin')->setName('signin');
-$app->get('/signout', \App\PagesControllers\UserController::class.':getSignout')->setName('signout');
+$app->get('/auth/signup', \App\PagesControllers\AuthController::class.':getSignUp')->setName('signup');
+$app->post('/auth/signup', \App\PagesControllers\AuthController::class.':postSignUp')->setName('signup');
+$app->get('/auth/signin', \App\PagesControllers\AuthController::class.':getSignIn')->setName('signin');
+$app->post('/auth/signin', \App\PagesControllers\AuthController::class.':postSignIn')->setName('signin');
+$app->get('/auth/signout', \App\PagesControllers\AuthController::class.':getSignOut')->setName('signout');
 
 // API lieu
 $app->get('/api/lieux', \App\ApiControllers\LieuController::class.':getAll');

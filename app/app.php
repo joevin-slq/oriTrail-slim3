@@ -1,4 +1,7 @@
 <?php
+
+use Respect\Validation\Validator as v;
+
 session_start();
 
 require '../vendor/autoload.php';
@@ -21,3 +24,8 @@ $app = new \Slim\App([
 
 require('container.php');
 require('routes.php');
+
+$app->add(new \App\Middleware\ValidationErrorsMiddleware($container));
+$app->add(new \App\Middleware\OldInputMiddleware($container));
+
+v::with('App\\Validation\\Rules\\');
