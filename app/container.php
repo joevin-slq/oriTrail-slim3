@@ -21,6 +21,8 @@ $container['view'] = function ($container) {
 			'user'  => $container->auth->user()
 		]);
 
+		$view->getEnvironment()->addGlobal('flash', $container->flash);
+
     return $view;
 };
 
@@ -39,4 +41,8 @@ $container['validator'] = function ($container) {
 
 $container['csrf'] = function ($container) {
 	return new \Slim\Csrf\Guard;
+};
+
+$container['flash'] = function ($container) {
+	return new \Slim\Flash\Messages;
 };

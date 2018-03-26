@@ -11,6 +11,8 @@ class Controller {
 	protected $router;
 	protected $validator;
 	protected $csrf;
+	protected $auth;
+	protected $flash;
 
 	public function __construct($container) {
 		$this->container = $container;
@@ -18,6 +20,7 @@ class Controller {
 		$this->validator = $this->container->get('validator');
 		$this->csrf = $this->container->get('csrf');
 		$this->auth = $this->container->get('auth');
+		$this->flash = $this->container->get('flash');
 	}
 
 	public function render(ResponseInterface $response, $file, $data) {

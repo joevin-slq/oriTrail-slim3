@@ -40,6 +40,8 @@ class AuthController extends Controller {
 			"sexe" => $input['sexe']
 		]);
 
+		$this->flash->addMessage('info', 'Vous êtes inscrit avec succès !');
+
 		$this->auth->attempt($user->login, $input['password']);
 
 		return $response->withRedirect($this->router->pathFor('home'));
@@ -58,6 +60,7 @@ class AuthController extends Controller {
 		);
 
 		if(!$auth) {
+			$this->flash->addMessage('error', 'Impossible de se connecter, identifiants invalide.');
 			return $response->withRedirect($this->router->pathFor('signin'));
 		}
 		return $response->withRedirect($this->router->pathFor('home'));
@@ -66,7 +69,7 @@ class AuthController extends Controller {
 	// déconnecte l'utilisateur
 	public function getSignOut(RequestInterface $request, ResponseInterface $response) {
 		$this->auth->logout();
-		
+
 		return $response->withRedirect($this->router->pathFor('home'));
 	}
 }
