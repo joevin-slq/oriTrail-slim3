@@ -17,6 +17,7 @@ class Controller {
 		$this->router = $this->container->get('router');
 		$this->validator = $this->container->get('validator');
 		$this->csrf = $this->container->get('csrf');
+		$this->auth = $this->container->get('auth');
 	}
 
 	public function render(ResponseInterface $response, $file, $data) {

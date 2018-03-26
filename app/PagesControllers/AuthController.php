@@ -40,6 +40,8 @@ class AuthController extends Controller {
 			"sexe" => $input['sexe']
 		]);
 
+		$this->auth->attempt($user->login, $input['password']);
+
 		return $response->withRedirect($this->router->pathFor('home'));
 	}
 
@@ -47,22 +49,24 @@ class AuthController extends Controller {
 	public function getSignIn(RequestInterface $request, ResponseInterface $response) {
 		return $this->render($response, 'pages/signin.twig', []);
 	}
+
 	// connecte un Utilisateur
 	public function postSignIn(RequestInterface $request, ResponseInterface $response) {
-		$input = $request->getParsedBody();
+		$auth = $this->auth->attempt(
+			$request->getParam('login'),
+			$request->getParam('password')
+		);
 
-		$user = Utilisateur::where('login', $input['login'])->first();
-
-		if(password_verify($input['password'], $user->password)) {
-			$access = "GRANTED";
+		if(!$auth) {
+			return $response->withRedirect($this->router->pathFor('signin'));
 		}
-		else { $access = "DENY"; }
-
-		var_dump($access);
+		return $response->withRedirect($this->router->pathFor('home'));
 	}
 
 	// déconnecte l'utilisateur
 	public function getSignOut(RequestInterface $request, ResponseInterface $response) {
-		return $this->render($response, 'pages/signout.twig', []);
+		$this->auth->logout();
+		
+		return $response->withRedirect($this->router->pathFor('home'));
 	}
 }
