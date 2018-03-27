@@ -1,0 +1,66 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+	<h1>Ajouter un emplacement</h1>
+
+	<form action="{{ path_for('lieu.ajout') }}" method="post">
+		<div class="form-group">
+			<label for="nom">Nom :</label>
+			<input type="text" name="nom" id="nom" value="{{old.nom}}" class="form-control {{ errors.nom ? 'is-invalid' : ''}}">
+			{% if errors.nom %}
+			<div class="invalid-feedback">{{ errors.nom | first }}</div>
+			{% endif %}
+		</div>
+		<div class="form-group">
+			<label for="description">Description :</label>
+			<input type="text" name="description" id="description" value="{{old.description}}" class="form-control {{ errors.description ? 'is-invalid' : ''}}">
+			{% if errors.description %}
+			<div class="invalid-feedback">{{ errors.description | first }}</div>
+			{% endif %}
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="longitude">Longitude :</label>
+				<input type="text" name="longitude" id="longitude" value="{{old.longitude}}" class="form-control {{ errors.longitude ? 'is-invalid' : ''}}">
+				{% if errors.longitude %}
+				<div class="invalid-feedback">{{ errors.longitude | first }}</div>
+				{% endif %}
+			</div>
+	    <div class="form-group col-md-6">
+	      <label for="latitude">Latitude :</label>
+	      <input type="text" id="latitude" name="latitude" value="{{old.latitude}}" class="form-control {{ errors.latitude ? 'is-invalid' : ''}}">
+				{% if errors.latitude %}
+				<div class="invalid-feedback">{{ errors.latitude | first }}</div>
+				{% endif %}
+	    </div>
+	  </div>
+    <div class="form-group">
+      <label for="adresse">Adresse :</label>
+      <input type="text" id="adresse" name="adresse" value="{{old.adresse}}" class="form-control {{ errors.adresse ? 'is-invalid' : ''}}">
+			{% if errors.adresse %}
+			<div class="invalid-feedback">{{ errors.adresse | first }}</div>
+			{% endif %}
+    </div>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="cp">Code postal :</label>
+				<input type="text" name="cp" id="cp" value="{{old.cp}}" class="form-control {{ errors.cp ? 'is-invalid' : ''}}">
+				{% if errors.cp %}
+				<div class="invalid-feedback">{{ errors.cp | first }}</div>
+				{% endif %}
+			</div>
+			<div class="form-group col-md-6">
+				<label for="ville">Ville :</label>
+				<input type="text" name="ville" id="ville" value="{{old.ville}}" class="form-control {{ errors.ville ? 'is-invalid' : ''}}">
+				{% if errors.ville %}
+				<div class="invalid-feedback">{{ errors.ville | first }}</div>
+				{% endif %}
+			</div>
+		</div>
+		<div class="form-group">
+			{{ csrf.field | raw }}
+			<input type="reset" value="Annuler" class="btn">
+			<input type="submit" value="Envoyer" class="btn btn-primary">
+		</div>
+	</form>
+{% endblock %}

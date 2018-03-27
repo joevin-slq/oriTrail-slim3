@@ -10,7 +10,7 @@ class AuthController extends Controller {
 
 	// formulaire d'inscription
 	public function getSignUp(RequestInterface $request, ResponseInterface $response) {
-		return $this->render($response, 'pages/signup.twig', []);
+		return $this->render($response, 'pages/auth/signup.twig', []);
 	}
 	// ajout d'un utilisateur dans la BDD
 	public function postSignUp(RequestInterface $request, ResponseInterface $response) {
@@ -49,7 +49,7 @@ class AuthController extends Controller {
 
 	// formulaire de connexion
 	public function getSignIn(RequestInterface $request, ResponseInterface $response) {
-		return $this->render($response, 'pages/signin.twig', []);
+		return $this->render($response, 'pages/auth/signin.twig', []);
 	}
 
 	// connecte un Utilisateur
