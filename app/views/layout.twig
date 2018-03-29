@@ -7,6 +7,7 @@
     <meta name="description" content="Course d'orientation.">
     <link rel="icon" href="{{ path_for('home') }}img/favicon.ico">
     <link rel="stylesheet" href="{{ path_for('home') }}css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ path_for('home') }}css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
@@ -49,12 +50,17 @@
 {% if page == 'home' %}
   <div class="jumbotron text-center">
     <h1>Page d'accueil</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit!</p>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit!</p>
   </div>
 {% endif %}
     <div class="container">
       {% block content %}{% endblock %}
     </div>
+    <footer class="footer">
+      <div class="container text-center">
+        <span class="text-muted">oriTrail - 2018</span>
+      </div>
+    </footer>
     <script src="{{ path_for('home') }}js/jquery.slim.js"></script>
     <script src="{{ path_for('home') }}js/bootstrap.min.js"></script>
   </body>

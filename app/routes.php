@@ -21,7 +21,7 @@ $app->group('', function() {
   $this->get('/lieu/ajout', \App\PagesControllers\LieuController::class.':getAjout')->setName('lieu.ajout');
   $this->post('/lieu/ajout', \App\PagesControllers\LieuController::class.':postAjout')->setName('lieu.ajout');
 
-  $this->delete('/lieu', \App\PagesControllers\LieuController::class.':deleteLieu')->setName('lieu');
+  $this->get('/lieu/suppr/[{id}]', \App\PagesControllers\LieuController::class.':getSuppr')->setName('lieu');
 
   $this->get('/auth/signout', \App\PagesControllers\AuthController::class.':getSignOut')->setName('signout');
 })->add(new AuthMiddleware($container));

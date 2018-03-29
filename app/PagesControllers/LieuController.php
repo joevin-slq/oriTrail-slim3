@@ -16,8 +16,8 @@ class LieuController extends Controller {
 		]);
 	}
 
-	public function deleteLieu(RequestInterface $request, ResponseInterface $response) {
-		$id = $request->getParam('id_lieu');
+	public function getSuppr(RequestInterface $request, ResponseInterface $response) {
+		$id = $request->getAttribute('id');
 
 		Lieu::where('id_lieu', $id)->delete();
 
