@@ -6,15 +6,18 @@ session_start();
 
 require '../vendor/autoload.php';
 
+$dotenv = new Dotenv\Dotenv(__DIR__ . '/../');
+$dotenv->load();
+
 $app = new \Slim\App([
 	'settings' => [
 		'displayErrorDetails' => true,
 		'db' => [
 			'driver' => 'mysql',
-			'host' => 'localhost',
-			'database' => 'oriTrail',
-			'username' => 'root',
-			'password' => '',
+			'host' => getenv('DB_HOST'),
+			'database' => getenv('DB_NAME'),
+			'username' => getenv('DB_USER'),
+			'password' => getenv('DB_PASS'),
 			'charset' => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix' => '',
