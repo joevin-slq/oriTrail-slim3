@@ -46,3 +46,7 @@ $container['csrf'] = function ($container) {
 $container['flash'] = function ($container) {
 	return new \Slim\Flash\Messages;
 };
+
+$container['apiauth'] = function ($container) {
+	return new App\Auth\ApiAuth;
+};

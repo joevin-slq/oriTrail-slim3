@@ -1,5 +1,6 @@
 <?php
 use App\Middleware\AuthMiddleware;
+use App\Middleware\ApiAuthMiddleware;
 /*
  * Front-End
  */
@@ -15,7 +16,6 @@ $app->post('/auth/signin', \App\PagesControllers\AuthController::class.':postSig
 
 // ces routes imposent que l'utilisateur soit connecté
 $app->group('', function() {
-
   $this->get('/lieu', \App\PagesControllers\LieuController::class.':getLieu')->setName('lieu');
 
   $this->get('/lieu/ajout', \App\PagesControllers\LieuController::class.':getAjout')->setName('lieu.ajout');
@@ -28,11 +28,19 @@ $app->group('', function() {
 
 
 /*
- * API lieu
+ * Back-End
  */
-$app->get('/api/lieux', \App\ApiControllers\LieuController::class.':getAll');
-$app->get('/api/lieu/[{id}]', \App\ApiControllers\LieuController::class.':get');
-$app->get('/api/lieu/search/[{query}]', \App\ApiControllers\LieuController::class.':search');
-$app->post('/api/lieu', \App\ApiControllers\LieuController::class.':add');
-$app->delete('/api/lieu/[{id}]', \App\ApiControllers\LieuController::class.':delete');
-$app->put('/api/lieu/[{id}]', \App\ApiControllers\LieuController::class.':update');
+// Authentification
+$app->post('/api/token/create', \App\ApiControllers\AuthController::class.':postCreate')->setName('token');
+$app->post('/api/token/check', \App\ApiControllers\AuthController::class.':postCheck')->setName('check');
+$app->post('/api/token/renew', \App\ApiControllers\AuthController::class.':postRenew')->setName('renew');
+
+// ces routes imposent que l'utilisateur soit connecté
+$app->group('/api', function() {
+  $this->get('/lieux', \App\ApiControllers\LieuController::class.':getAll');
+  $this->get('/lieu/[{id}]', \App\ApiControllers\LieuController::class.':get');
+  $this->get('/lieu/search/[{query}]', \App\ApiControllers\LieuController::class.':search');
+  $this->post('/lieu', \App\ApiControllers\LieuController::class.':add');
+  $this->delete('/lieu/[{id}]', \App\ApiControllers\LieuController::class.':delete');
+  $this->put('/lieu/[{id}]', \App\ApiControllers\LieuController::class.':update');
+})->add(new ApiAuthMiddleware($container));
