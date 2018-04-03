@@ -141,9 +141,8 @@ class Guard
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
     {
       $path = $request->getUri()->getPath();
-      $root =  explode("/", $path);;
 
-      if ($root[0] === 'api') {
+      if (strpos($path, 'api') !== false) {
           // Contourne la vérification CSRF
           return $next($request, $response);
       }

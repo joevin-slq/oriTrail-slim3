@@ -31,7 +31,7 @@ class ApiAuth
   public function createToken($login)
   {
 		$key = getenv('JWT_SECRET');
-    $future = new \DateTime("now +2 minutes");
+    $future = new \DateTime("now +10 minutes");
     $payload = [
         "future" => $future->getTimestamp(),
         "user"   => $login
@@ -72,7 +72,7 @@ class ApiAuth
       return false;
     }
 
-    $future = new \DateTime("now +2 minutes");
+    $future = new \DateTime("now +10 minutes");
     $payload->future = $future->getTimestamp();
 
     return JWT::encode($payload, $key);

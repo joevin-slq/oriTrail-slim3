@@ -41,14 +41,22 @@ class LieuController extends Controller {
 			"ville" => $input['ville']
 		]);
 
-		return $this->response->withJson($user);
+		return $response->withJson($user);
 	}
 
 	// supprime un lieu via son identifiant
 	public function delete(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
 		$lieu = Lieu::where('id_lieu', $id);
-		return $response->withJson($lieu->delete());
+		if(!$lieu->delete()) {
+			return $response->withJson([
+				['status' => 'Lieu introuvable']
+			],404);
+		}
+
+		return $response->withJson([
+			['status' => $lieu->nom . 'Lieu supprimé avec succès']
+		]);
 	}
 
 
@@ -66,6 +74,6 @@ class LieuController extends Controller {
 			"ville" => $input['ville']
 		]);
 
-		return $this->response->withJson($user);
+		return $response->withJson($user);
 	}
 }
