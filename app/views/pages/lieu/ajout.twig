@@ -18,22 +18,6 @@
 			<div class="invalid-feedback">{{ errors.description | first }}</div>
 			{% endif %}
 		</div>
-		<div class="form-row">
-			<div class="form-group col-md-6">
-				<label for="longitude">Longitude :</label>
-				<input type="text" name="longitude" id="longitude" value="{{old.longitude}}" class="form-control {{ errors.longitude ? 'is-invalid' : ''}}">
-				{% if errors.longitude %}
-				<div class="invalid-feedback">{{ errors.longitude | first }}</div>
-				{% endif %}
-			</div>
-	    <div class="form-group col-md-6">
-	      <label for="latitude">Latitude :</label>
-	      <input type="text" id="latitude" name="latitude" value="{{old.latitude}}" class="form-control {{ errors.latitude ? 'is-invalid' : ''}}">
-				{% if errors.latitude %}
-				<div class="invalid-feedback">{{ errors.latitude | first }}</div>
-				{% endif %}
-	    </div>
-	  </div>
     <div class="form-group">
       <label for="adresse">Adresse :</label>
       <input type="text" id="adresse" name="adresse" value="{{old.adresse}}" class="form-control {{ errors.adresse ? 'is-invalid' : ''}}">
@@ -56,6 +40,26 @@
 				<div class="invalid-feedback">{{ errors.ville | first }}</div>
 				{% endif %}
 			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="longitude">Longitude :</label>
+				<input type="text" name="longitude" id="longitude" value="{{old.longitude}}" class="form-control {{ errors.longitude ? 'is-invalid' : ''}}">
+				{% if errors.longitude %}
+				<div class="invalid-feedback">{{ errors.longitude | first }}</div>
+				{% endif %}
+			</div>
+	    <div class="form-group col-md-6">
+	      <label for="latitude">Latitude :</label>
+	      <input type="text" id="latitude" name="latitude" value="{{old.latitude}}" class="form-control {{ errors.latitude ? 'is-invalid' : ''}}">
+				{% if errors.latitude %}
+				<div class="invalid-feedback">{{ errors.latitude | first }}</div>
+				{% endif %}
+	    </div>
+	  </div>
+		<div class="form-group">
+    	<input id="map-input" class="controls" type="text" placeholder="Entrez un lieu">
+			<div id="map"></div>
 		</div>
 		<div class="form-group">
 			{{ csrf.field | raw }}

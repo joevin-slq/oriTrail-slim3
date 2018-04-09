@@ -28,7 +28,9 @@ class LieuController extends Controller {
 
 
 	public function getAjout(RequestInterface $request, ResponseInterface $response) {
-		$this->render($response, 'pages/lieu/ajout.twig', []);
+		$this->render($response, 'pages/lieu/ajout.twig', [
+        'page' => 'lieu'
+    ]);
 	}
 
 	public function postAjout(RequestInterface $request, ResponseInterface $response) {

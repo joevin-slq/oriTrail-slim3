@@ -8,7 +8,7 @@
     <link rel="icon" href="{{ path_for('home') }}img/favicon.ico">
     <link rel="stylesheet" href="{{ path_for('home') }}css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ path_for('home') }}css/style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -63,5 +63,9 @@
     </footer>
     <script src="{{ path_for('home') }}js/jquery.slim.js"></script>
     <script src="{{ path_for('home') }}js/bootstrap.min.js"></script>
+    <script src="{{ path_for('home') }}js/script.js"></script>
+{% if page == 'lieu' %}
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCdrr00DUMh0cuWgVx5-28Jb2mkiXmQWg&libraries=places&callback=initMap"></script>
+{% endif %}
   </body>
 </html>
