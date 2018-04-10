@@ -21,6 +21,9 @@ $app->group('', function() {
   $this->get('/lieu/ajout', \App\PagesControllers\LieuController::class.':getAjout')->setName('lieu.ajout');
   $this->post('/lieu/ajout', \App\PagesControllers\LieuController::class.':postAjout')->setName('lieu.ajout');
 
+  $this->get('/lieu/edit/[{id}]', \App\PagesControllers\LieuController::class.':getEdit')->setName('lieu.edit');
+  $this->post('/lieu/edit/[{id}]', \App\PagesControllers\LieuController::class.':postEdit')->setName('lieu.edit');
+
   $this->get('/lieu/suppr/[{id}]', \App\PagesControllers\LieuController::class.':getSuppr')->setName('lieu');
 
   $this->get('/auth/signout', \App\PagesControllers\AuthController::class.':getSignOut')->setName('signout');

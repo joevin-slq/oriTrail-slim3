@@ -50,7 +50,7 @@ class LieuController extends Controller {
 		}
 
 		$input = $request->getParsedBody();
-		$user = Lieu::create([
+		Lieu::create([
 			"nom" => $input['nom'],
 			"description" => $input['description'],
 			"longitude" => $input['longitude'],
@@ -61,6 +61,51 @@ class LieuController extends Controller {
 		]);
 
 		$this->flash->addMessage('info', 'Lieu créé avec succès !');
+
+		return $response->withRedirect($this->router->pathFor('lieu'));
+	}
+
+	public function getEdit(RequestInterface $request, ResponseInterface $response) {
+		$id = $request->getAttribute('id');
+
+		$lieu = Lieu::where('id_lieu', $id)->first();
+
+		$this->render($response, 'pages/lieu/edit.twig', [
+        'page' => 'lieu',
+				'post' => $lieu,
+    ]);
+	}
+
+	public function postEdit(RequestInterface $request, ResponseInterface $response) {
+
+		$validation = $this->validator->validate($request, [
+			'nom' => v::notEmpty(),
+			'description' => v::notEmpty(),
+			'longitude' => v::numeric(),
+			'latitude' => v::numeric(),
+			'adresse' => v::notEmpty(),
+			'cp' => v::stringType()->length(5,5),
+			'ville' => v::notEmpty(),
+		]);
+
+		if($validation->failed()) {
+			return $response->withRedirect($this->router->pathFor('lieu.edit'));
+		}
+
+		$input = $request->getParsedBody();
+		$id = $request->getAttribute('id');
+
+		Lieu::where('id_lieu', $id)->update([
+			"nom" => $input['nom'],
+			"description" => $input['description'],
+			"longitude" => $input['longitude'],
+			"latitude" => $input['latitude'],
+			"adresse" => $input['adresse'],
+			"cp" => $input['cp'],
+			"ville" => $input['ville']
+		]);
+
+		$this->flash->addMessage('info', 'Lieu modifié avec succès !');
 
 		return $response->withRedirect($this->router->pathFor('lieu'));
 	}

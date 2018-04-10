@@ -62,9 +62,10 @@ class LieuController extends Controller {
 
 	// met à jour un lieu via son identifiant
 	public function update(RequestInterface $request, ResponseInterface $response) {
+		$id = $request->getAttribute('id');
 		$input = $request->getParsedBody();
 
-		$user = Lieu::update([
+		$lieu = Lieu::where('id_lieu', $id)->update([
 			"nom" => $input['nom'],
 			"description" => $input['description'],
 			"longitude" => $input['longitude'],
@@ -74,6 +75,14 @@ class LieuController extends Controller {
 			"ville" => $input['ville']
 		]);
 
-		return $response->withJson($user);
+		if(!$lieu) {
+			return $response->withJson([
+				['status' => 'Erreur']
+			],400);
+		}
+
+		return $response->withJson([
+			['status' => $lieu->nom . 'Lieu modifié avec succès']
+		]);
 	}
 }
