@@ -1,0 +1,73 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+	<h1>Modifier une course</h1>
+
+	<form action="{{ path_for('course.edit') }}{{post.id_course}}" method="post">
+		<div class="form-group">
+			<label for="nom">Nom :</label>
+			<input type="text" name="nom" id="nom" value="{{post.nom}}" class="form-control {{ errors.nom ? 'is-invalid' : ''}}">
+			{% if errors.nom %}
+			<div class="invalid-feedback">{{ errors.nom | first }}</div>
+			{% endif %}
+		</div>
+		<div class="form-group">
+			<label for="nom">Lieu :</label>
+			<input type="text" name="lieu" id="lieu" value="{{post.fk_lieu}}" class="form-control {{ errors.lieu ? 'is-invalid' : ''}}">
+			{% if errors.lieu %}
+			<div class="invalid-feedback">{{ errors.lieu | first }}</div>
+			{% endif %}
+		</div>
+		<div class="form-group">
+			<label for="prive">Privé :</label>
+			<input type="text" name="prive" id="prive" value="{{post.prive}}" class="form-control {{ errors.prive ? 'is-invalid' : ''}}">
+			{% if errors.prive %}
+			<div class="invalid-feedback">{{ errors.prive | first }}</div>
+			{% endif %}
+		</div>
+    <div class="form-group">
+      <label for="type">Type :</label>
+      <input type="text" id="type" name="type" value="{{post.type}}" class="form-control {{ errors.type ? 'is-invalid' : ''}}">
+			{% if errors.type %}
+			<div class="invalid-feedback">{{ errors.type | first }}</div>
+			{% endif %}
+    </div>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="debut">Début :</label>
+				<input type="text" name="debut" id="debut" value="{{post.debut}}" class="form-control {{ errors.debut ? 'is-invalid' : ''}}">
+				{% if errors.debut %}
+				<div class="invalid-feedback">{{ errors.debut | first }}</div>
+				{% endif %}
+			</div>
+			<div class="form-group col-md-6">
+				<label for="fin">Fin :</label>
+				<input type="text" name="fin" id="fin" value="{{post.fin}}" class="form-control {{ errors.fin ? 'is-invalid' : ''}}">
+				{% if errors.fin %}
+				<div class="invalid-feedback">{{ errors.fin | first }}</div>
+				{% endif %}
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="tempsImparti">Temps imparti :</label>
+				<input type="text" name="tempsImparti" id="tempsImparti" value="{{post.tempsImparti}}" class="form-control {{ errors.tempsImparti ? 'is-invalid' : ''}}">
+				{% if errors.tempsImparti %}
+				<div class="invalid-feedback">{{ errors.tempsImparti | first }}</div>
+				{% endif %}
+			</div>
+	    <div class="form-group col-md-6">
+	      <label for="penalite">Pénalité :</label>
+	      <input type="text" id="penalite" name="penalite" value="{{post.penalite}}" class="form-control {{ errors.penalite ? 'is-invalid' : ''}}">
+				{% if errors.penalite %}
+				<div class="invalid-feedback">{{ errors.penalite | first }}</div>
+				{% endif %}
+	    </div>
+	  </div>
+		<div class="form-group">
+			{{ csrf.field | raw }}
+			<input type="reset" value="Annuler" class="btn">
+			<input type="submit" value="Envoyer" class="btn btn-primary">
+		</div>
+	</form>
+{% endblock %}

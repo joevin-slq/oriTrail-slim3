@@ -7,6 +7,9 @@
     <meta name="description" content="Course d'orientation.">
     <link rel="icon" href="{{ path_for('home') }}img/favicon.ico">
     <link rel="stylesheet" href="{{ path_for('home') }}css/bootstrap.min.css">
+{% if page == 'course' %}
+    <link rel="stylesheet" href="{{ path_for('home') }}css/tempusdominus.min.css">
+{% endif %}
     <link rel="stylesheet" href="{{ path_for('home') }}css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -23,6 +26,9 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="{{ path_for('lieu') }}">Lieu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path_for('course') }}">Course</a>
           </li>
         </ul>
         <ul class="navbar-nav">
@@ -63,6 +69,11 @@
     </footer>
     <script src="{{ path_for('home') }}js/jquery.slim.js"></script>
     <script src="{{ path_for('home') }}js/bootstrap.min.js"></script>
+{% if page == 'course' %}
+    <script src="{{ path_for('home') }}js/moment-with-locales.min.js"></script>
+    <script src="{{ path_for('home') }}js/tempusdominus.min.js"></script>
+    <script defer src="{{ path_for('home') }}js/fontawesome-all.min.js"></script>
+{% endif %}
     <script src="{{ path_for('home') }}js/script.js"></script>
 {% if page == 'lieu' %}
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCdrr00DUMh0cuWgVx5-28Jb2mkiXmQWg&libraries=places&callback=initMap"></script>

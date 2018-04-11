@@ -8,7 +8,7 @@ use App\Models\Lieu;
 
 class LieuController extends Controller {
 
-	public function getLieu(RequestInterface $request, ResponseInterface $response) {
+	public function getAll(RequestInterface $request, ResponseInterface $response) {
 		$lieux = Lieu::all();
 
 		$this->render($response, 'pages/lieu/lieu.twig', [

@@ -86,3 +86,36 @@ function initMap() {
     document.getElementById('cp').value      = cp;
   });
 }
+
+// Configuration datetimepicker pour utiliser FontAwesome 5
+$.fn.datetimepicker.Constructor.Default = $.extend($.fn.datetimepicker.Constructor.Default, {
+  icons: {
+    time: 'far fa-clock',
+    date: 'far fa-calendar',
+    up: 'fas fa-arrow-up',
+    down: 'fas fa-arrow-down',
+    previous: 'fas fa-chevron-left',
+    next: 'fas fa-chevron-right',
+    today: 'far fa-calendar-check-o',
+    clear: 'far fa-trash',
+    close: 'far fa-times'
+  }
+});
+
+// Personalisation datetimepicker
+$('.datetimepicker').datetimepicker({
+    format: 'L LT',
+    locale: 'fr',
+    sideBySide: true
+});
+
+$('.timepicker').datetimepicker({
+    format: 'LT',
+    locale: 'fr'
+    // TODO : définir une heure défaut à 0h:0s
+});
+
+
+$('.datetimepicker-input').on('focus',function(){
+  // TODO : empêcher le clavier de s'afficher
+});

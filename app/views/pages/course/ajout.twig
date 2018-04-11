@@ -1,0 +1,97 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+	<h1>Créer une course</h1>
+
+	<form action="{{ path_for('course.ajout') }}" method="post">
+		<div class="form-group">
+			<label for="nom">Nom :</label>
+			<input type="text" name="nom" id="nom" value="{{old.nom}}" class="form-control {{ errors.nom ? 'is-invalid' : ''}}">
+			{% if errors.nom %}
+			<div class="invalid-feedback">{{ errors.nom | first }}</div>
+			{% endif %}
+		</div>
+		<div class="form-group">
+			<label for="nom">Lieu :</label>
+			<input type="text" name="lieu" id="lieu" value="{{old.lieu}}" class="form-control {{ errors.lieu ? 'is-invalid' : ''}}">
+			{% if errors.lieu %}
+			<div class="invalid-feedback">{{ errors.lieu | first }}</div>
+			{% endif %}
+		</div>
+		<div class="custom-control custom-checkbox mb-2 mr-sm-2">
+			<input type="checkbox" class="custom-control-input" name="prive" id="prive" {{ old.prive ? 'checked' : ''}}>
+			<label for="prive" class="custom-control-label">Course privée</label>
+		</div>
+
+		<div class="custom-control custom-radio">
+		  <input class="custom-control-input" type="radio" name="type" id="S" value="S" {{ old.type is same as("S") ? 'checked' : ''}}>
+		  <label class="custom-control-label" for="S">Mode score</label>
+		</div>
+		<div class="custom-control custom-radio">
+		  <input class="custom-control-input" type="radio" name="type" id="P" value="P" {{ old.type is same as("P") ? 'checked' : ''}}>
+		  <label class="custom-control-label" for="P">Mode parcours</label>
+		</div>
+		{% if errors.type %}
+		<p class="small text-danger">{{ errors.type | first }}</p>
+		{% endif %}
+
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="dateDebut">Début :</label>
+				<div class="input-group datetimepicker" id="dateDebut" data-target-input="nearest">
+						<input type="text" name="debut" id="dateDebut" value="{{old.debut}}" class="form-control datetimepicker-input {{ errors.debut ? 'is-invalid' : ''}}" data-target="#dateDebut"/>
+						<div class="input-group-append" data-target="#dateDebut" data-toggle="datetimepicker">
+								<div class="input-group-text"><i class="far fa-calendar"></i></div>
+						</div>
+				</div>
+				{% if errors.debut %}
+				<p class="small text-danger">{{ errors.debut | first }}</p>
+				{% endif %}
+			</div>
+			<div class="form-group col-md-6">
+				<label for="dateFin">Fin :</label>
+				<div class="input-group datetimepicker" id="dateFin" data-target-input="nearest">
+						<input type="text" name="fin" id="dateFin" value="{{old.fin}}" class="form-control datetimepicker-input {{ errors.fin ? 'is-invalid' : ''}}" data-target="#dateFin"/>
+						<div class="input-group-append" data-target="#dateFin" data-toggle="datetimepicker">
+								<div class="input-group-text"><i class="far fa-calendar"></i></div>
+						</div>
+				</div>
+				{% if errors.fin %}
+				<p class="small text-danger">{{ errors.fin | first }}</p>
+				{% endif %}
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="tempsImparti">Temps imparti :</label>
+				<div class="input-group timepicker" id="tempsImparti" data-target-input="nearest">
+						<input type="text" name="tempsImparti" id="tempsImparti" value="{{old.tempsImparti}}" class="form-control datetimepicker-input {{ errors.debut ? 'is-invalid' : ''}}" data-target="#tempsImparti"/>
+						<div class="input-group-append" data-target="#tempsImparti" data-toggle="datetimepicker">
+								<div class="input-group-text"><i class="far fa-clock"></i></div>
+						</div>
+				</div>
+				{% if errors.tempsImparti %}
+				<p class="small text-danger">{{ errors.tempsImparti | first }}</p>
+				{% endif %}
+			</div>
+			<div class="form-group col-md-6">
+				<label for="tempsImparti">Pénalité :</label>
+				<div class="input-group timepicker" id="penalite" data-target-input="nearest">
+						<input type="text" name="penalite" id="penalite" value="{{old.penalite}}" class="form-control datetimepicker-input {{ errors.debut ? 'is-invalid' : ''}}" data-target="#penalite"/>
+						<div class="input-group-append" data-target="#penalite" data-toggle="datetimepicker">
+								<div class="input-group-text"><i class="far fa-clock"></i></div>
+						</div>
+				</div>
+				{% if errors.penalite %}
+				<p class="small text-danger">{{ errors.penalite | first }}</p>
+				{% endif %}
+			</div>
+	  </div>
+		<div class="form-group">
+			{{ csrf.field | raw }}
+			<input type="reset" value="Annuler" class="btn">
+			<input type="submit" value="Envoyer" class="btn btn-primary">
+		</div>
+	</form>
+{% endblock %}

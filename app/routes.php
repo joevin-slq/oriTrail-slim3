@@ -16,7 +16,7 @@ $app->post('/auth/signin', \App\PagesControllers\AuthController::class.':postSig
 
 // ces routes imposent que l'utilisateur soit connecté
 $app->group('', function() {
-  $this->get('/lieu', \App\PagesControllers\LieuController::class.':getLieu')->setName('lieu');
+  $this->get('/lieu', \App\PagesControllers\LieuController::class.':getAll')->setName('lieu');
 
   $this->get('/lieu/ajout', \App\PagesControllers\LieuController::class.':getAjout')->setName('lieu.ajout');
   $this->post('/lieu/ajout', \App\PagesControllers\LieuController::class.':postAjout')->setName('lieu.ajout');
@@ -25,6 +25,19 @@ $app->group('', function() {
   $this->post('/lieu/edit/[{id}]', \App\PagesControllers\LieuController::class.':postEdit')->setName('lieu.edit');
 
   $this->get('/lieu/suppr/[{id}]', \App\PagesControllers\LieuController::class.':getSuppr')->setName('lieu');
+
+
+  $this->get('/course', \App\PagesControllers\CourseController::class.':getAll')->setName('course');
+
+  $this->get('/course/ajout', \App\PagesControllers\CourseController::class.':getAjout')->setName('course.ajout');
+  $this->post('/course/ajout', \App\PagesControllers\CourseController::class.':postAjout')->setName('course.ajout');
+
+  $this->get('/course/edit/[{id}]', \App\PagesControllers\CourseController::class.':getEdit')->setName('course.edit');
+  $this->post('/course/edit/[{id}]', \App\PagesControllers\CourseController::class.':postEdit')->setName('course.edit');
+
+  $this->get('/course/suppr/[{id}]', \App\PagesControllers\CourseController::class.':getSuppr')->setName('course');
+
+
 
   $this->get('/auth/signout', \App\PagesControllers\AuthController::class.':getSignOut')->setName('signout');
 })->add(new AuthMiddleware($container));
