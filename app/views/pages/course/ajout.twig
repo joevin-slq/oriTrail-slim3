@@ -13,9 +13,13 @@
 		</div>
 		<div class="form-group">
 			<label for="nom">Lieu :</label>
-			<input type="text" name="lieu" id="lieu" value="{{old.lieu}}" class="form-control {{ errors.lieu ? 'is-invalid' : ''}}">
+			<select name="lieu" class="custom-select {{ errors.lieu ? 'is-invalid' : ''}}">
+			{% for row in lieux %}
+					<option value="{{ row.id_lieu }}"{{ (row.id_lieu == old.lieu) ? 'selected' : ''}}>{{ row.nom }} ({{ row.adresse }}, {{ row.cp }} {{ row.ville }})</option>
+			{% endfor %}
+			</select>
 			{% if errors.lieu %}
-			<div class="invalid-feedback">{{ errors.lieu | first }}</div>
+			<p class="small text-danger">{{ errors.lieu | first }}</p>
 			{% endif %}
 		</div>
 		<div class="custom-control custom-checkbox mb-2 mr-sm-2">

@@ -5,6 +5,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Respect\Validation\Validator as v;
 use App\Models\Course;
+use App\Models\Lieu;
 
 class CourseController extends Controller {
 
@@ -12,7 +13,7 @@ class CourseController extends Controller {
 		$courses = Course::all();
 
 		$this->render($response, 'pages/course/course.twig', [
-        	'courses' => $courses
+  			'courses' => $courses
 		]);
 	}
 
@@ -28,8 +29,11 @@ class CourseController extends Controller {
 
 
 	public function getAjout(RequestInterface $request, ResponseInterface $response) {
+		$lieux = Lieu::all();
+
 		$this->render($response, 'pages/course/ajout.twig', [
-        'page' => 'course'
+        'page' => 'course',
+				'lieux' => $lieux
     ]);
 	}
 
@@ -37,7 +41,6 @@ class CourseController extends Controller {
 
 		$validation = $this->validator->validate($request, [
 			'nom' => v::notEmpty(),
-			'prive' => v::notEmpty(),
 			'type' => v::stringType()->length(1,1),
 			'debut' => v::notEmpty(),
 			'fin' => v::notEmpty(),
@@ -53,7 +56,7 @@ class CourseController extends Controller {
 		$input = $request->getParsedBody();
 		Course::create([
 			"nom" => $input['nom'],
-			"prive" => $input['prive'],
+			"prive" => ($input['prive']) ? true : false,
 			"type" => $input['type'],
 			"debut" => date("Y-m-d H:i:s", strtotime($input['debut'])),
 			"fin" => date("Y-m-d H:i:s", strtotime($input['fin'])),
@@ -83,7 +86,6 @@ class CourseController extends Controller {
 
 		$validation = $this->validator->validate($request, [
 			'nom' => v::notEmpty(),
-			'prive' => v::notEmpty(),
 			'type' => v::stringType()->length(1,1),
 			'debut' => v::notEmpty(),
 			'fin' => v::notEmpty(),
@@ -102,10 +104,10 @@ class CourseController extends Controller {
 
 		Course::where('id_course', $id)->update([
 			"nom" => $input['nom'],
-			"prive" => $input['prive'],
+			"prive" => ($input['prive']) ? true : false,
 			"type" => $input['type'],
-			"debut" => $input['debut'],
-			"fin" => $input['fin'],
+			"debut" => date("Y-m-d H:i:s", strtotime($input['debut'])),
+			"fin" => date("Y-m-d H:i:s", strtotime($input['fin'])),
 			"tempsImparti" => $input['tempsImparti'],
 			"penalite" => $input['penalite'],
 			"fk_user" => $_SESSION['user'],

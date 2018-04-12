@@ -26,4 +26,8 @@ class Course extends Model
     return $courses;
   }
 
+  public function lieu() {
+    return $this->hasOne('App\Models\Lieu', 'id_lieu', 'fk_lieu');
+  }
+
 }
