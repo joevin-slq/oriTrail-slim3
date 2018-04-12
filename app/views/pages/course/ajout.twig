@@ -39,7 +39,7 @@
 			<div class="form-group col-md-6">
 				<label for="dateDebut">Début :</label>
 				<div class="input-group datetimepicker" id="dateDebut" data-target-input="nearest">
-						<input type="text" name="debut" id="dateDebut" value="{{old.debut}}" class="form-control datetimepicker-input {{ errors.debut ? 'is-invalid' : ''}}" data-target="#dateDebut"/>
+						<input type="text" name="debut" id="dateDebut" value="{{old.debut}}" class="form-control datetimepicker-input {{ errors.debut ? 'is-invalid' : ''}}" data-target="#dateDebut" readonly="true"/>
 						<div class="input-group-append" data-target="#dateDebut" data-toggle="datetimepicker">
 								<div class="input-group-text"><i class="far fa-calendar"></i></div>
 						</div>
@@ -51,7 +51,7 @@
 			<div class="form-group col-md-6">
 				<label for="dateFin">Fin :</label>
 				<div class="input-group datetimepicker" id="dateFin" data-target-input="nearest">
-						<input type="text" name="fin" id="dateFin" value="{{old.fin}}" class="form-control datetimepicker-input {{ errors.fin ? 'is-invalid' : ''}}" data-target="#dateFin"/>
+						<input type="text" name="fin" id="dateFin" value="{{old.fin}}" class="form-control datetimepicker-input {{ errors.fin ? 'is-invalid' : ''}}" data-target="#dateFin" readonly="true"/>
 						<div class="input-group-append" data-target="#dateFin" data-toggle="datetimepicker">
 								<div class="input-group-text"><i class="far fa-calendar"></i></div>
 						</div>
@@ -65,8 +65,8 @@
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label for="tempsImparti">Temps imparti :</label>
-				<div class="input-group timepicker" id="tempsImparti" data-target-input="nearest">
-						<input type="text" name="tempsImparti" id="tempsImparti" value="{{old.tempsImparti}}" class="form-control datetimepicker-input {{ errors.debut ? 'is-invalid' : ''}}" data-target="#tempsImparti"/>
+				<div class="input-group" id="tempsImparti" data-target-input="nearest">
+						<input type="text" name="tempsImparti" id="tempsImparti" value="{{old.tempsImparti}}" class="form-control datetimepicker-input {{ errors.debut ? 'is-invalid' : ''}}" data-target="#tempsImparti" readonly="true"/>
 						<div class="input-group-append" data-target="#tempsImparti" data-toggle="datetimepicker">
 								<div class="input-group-text"><i class="far fa-clock"></i></div>
 						</div>
@@ -77,8 +77,8 @@
 			</div>
 			<div class="form-group col-md-6">
 				<label for="tempsImparti">Pénalité :</label>
-				<div class="input-group timepicker" id="penalite" data-target-input="nearest">
-						<input type="text" name="penalite" id="penalite" value="{{old.penalite}}" class="form-control datetimepicker-input {{ errors.debut ? 'is-invalid' : ''}}" data-target="#penalite"/>
+				<div class="input-group" id="penalite" data-target-input="nearest">
+						<input type="text" name="penalite" id="penalite" value="{{old.penalite}}" class="form-control datetimepicker-input {{ errors.debut ? 'is-invalid' : ''}}" data-target="#penalite" readonly="true"/>
 						<div class="input-group-append" data-target="#penalite" data-toggle="datetimepicker">
 								<div class="input-group-text"><i class="far fa-clock"></i></div>
 						</div>

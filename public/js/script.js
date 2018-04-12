@@ -3,7 +3,7 @@
  */
 
  // désactive l'appui sur la touche entrée
- $('html').bind('keypress', function(e)
+ $('#map').bind('keypress', function(e)
  {
     if(e.keyCode == 13) {
        return false;
@@ -106,16 +106,20 @@ $.fn.datetimepicker.Constructor.Default = $.extend($.fn.datetimepicker.Construct
 $('.datetimepicker').datetimepicker({
     format: 'L LT',
     locale: 'fr',
-    sideBySide: true
+    sideBySide: true,
+    ignoreReadonly: true
 });
 
-$('.timepicker').datetimepicker({
+$('#tempsImparti').datetimepicker({
     format: 'LT',
-    locale: 'fr'
-    // TODO : définir une heure défaut à 0h:0s
+    locale: 'fr',
+    defaultDate: moment().hour(2).minute(0),
+    ignoreReadonly: true
 });
 
-
-$('.datetimepicker-input').on('focus',function(){
-  // TODO : empêcher le clavier de s'afficher
+$('#penalite').datetimepicker({
+    format: 'LT',
+    locale: 'fr',
+    defaultDate: moment().hour(0).minute(15),
+    ignoreReadonly: true
 });
