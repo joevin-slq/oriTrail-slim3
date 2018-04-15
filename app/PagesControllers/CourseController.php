@@ -6,6 +6,7 @@ use Psr\Http\Message\ResponseInterface;
 use Respect\Validation\Validator as v;
 use App\Models\Course;
 use App\Models\Lieu;
+use App\Models\BaliseCourse;
 
 class CourseController extends Controller {
 
@@ -54,7 +55,7 @@ class CourseController extends Controller {
 		}
 
 		$input = $request->getParsedBody();
-		Course::create([
+		$course = Course::create([
 			"nom" => $input['nom'],
 			"prive" => ($input['prive']) ? true : false,
 			"type" => $input['type'],
@@ -66,6 +67,16 @@ class CourseController extends Controller {
 			"fk_lieu" => $input['lieu']
 		]);
 
+		$nbBalise = count($input['nomBalise']);
+		for($i=0 ; $i < $nbBalise; $i++) {
+    	BaliseCourse::create([
+				"numero" => $i,
+				"nom" => $input['nomBalise'][$i],
+				"valeur" => $input['valeurBalise'][$i],
+				"fk_course" => $course->id_course
+			]);
+		}
+
 		$this->flash->addMessage('info', 'Course créé avec succès !');
 
 		return $response->withRedirect($this->router->pathFor('course'));
@@ -75,10 +86,12 @@ class CourseController extends Controller {
 		$id = $request->getAttribute('id');
 
 		$course = Course::where('id_course', $id)->first();
+		$balises = BaliseCourse::where('fk_course', $id)->get();
 
 		$this->render($response, 'pages/course/edit.twig', [
         'page' => 'course',
-				'post' => $course,
+				'course' => $course,
+				'balises' => $balises
     ]);
 	}
 

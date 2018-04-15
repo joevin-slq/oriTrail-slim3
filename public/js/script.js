@@ -126,25 +126,8 @@ $('#penalite').datetimepicker({
 });
 
 // Gestion des balises
-var regex = /^(.+?)(\d+)$/i;
-var index = $(".champ-visible").length;
-
 $('.ajouter').click(function() {
-  $('.champ-cache').first().clone()
-  .appendTo('.champ-visible').show()
-	.attr("id",   "champ-cache" + index)
-	.attr("name", "champ-cache" + index)
-  .find("*")
-  .each(function() {
-      var id = this.id || "";
-      var match = id.match(regex) || [];
-      if (match.length == 3) {
-          this.id   = match[1] + (index);
-          this.name = match[1] + (index);
-      }
-  });
-	index++;
-
+  $('.champ-cache').first().clone().appendTo('.champ-visible').show();
 	supprimerBalise();
 });
 
