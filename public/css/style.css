@@ -47,3 +47,10 @@ body {
 #map-input:focus {
   border-color: #4d90fe;
 }
+
+/* Personalisation formulaire balises
+-------------------------------------------------- */
+.form-balise {
+  padding: 1rem;
+  border: solid #f7f7f9;
+}

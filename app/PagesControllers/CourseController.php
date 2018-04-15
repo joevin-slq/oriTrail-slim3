@@ -40,13 +40,13 @@ class CourseController extends Controller {
 	public function postAjout(RequestInterface $request, ResponseInterface $response) {
 
 		$validation = $this->validator->validate($request, [
-			'nom' => v::notEmpty(),
+			'nom' => v::notEmpty()->alpha(),
 			'type' => v::stringType()->length(1,1),
-			'debut' => v::notEmpty(),
-			'fin' => v::notEmpty(),
-			'tempsImparti' => v::notEmpty(),
-			'penalite' => v::notEmpty(),
-			'lieu' => v::notEmpty()
+			'debut' => v::date('d/m/Y H:i'),
+			'fin' => v::date('d/m/Y H:i'),
+			'tempsImparti' => v::date('H:i'),
+			'penalite' => v::date('H:i:s'),
+			'lieu' => v::notEmpty()->numeric()
 		]);
 
 		if($validation->failed()) {
@@ -85,14 +85,14 @@ class CourseController extends Controller {
 	public function postEdit(RequestInterface $request, ResponseInterface $response) {
 
 		$validation = $this->validator->validate($request, [
-			'nom' => v::notEmpty(),
+			'nom' => v::notEmpty()->alpha(),
 			'type' => v::stringType()->length(1,1),
-			'debut' => v::notEmpty(),
-			'fin' => v::notEmpty(),
-			'tempsImparti' => v::notEmpty(),
-			'penalite' => v::notEmpty(),
-			'fk_user' => v::notEmpty(),
-			'fk_lieu' => v::notEmpty()
+			'debut' => v::date('d/m/Y H:i'),
+			'fin' => v::date('d/m/Y H:i'),
+			'tempsImparti' => v::date('H:i'),
+			'penalite' => v::date('H:i:s'),
+			'lieu' => v::notEmpty()->numeric(),
+			'fk_lieu' => v::notEmpty()->numeric()
 		]);
 
 		if($validation->failed()) {

@@ -106,6 +106,7 @@ $.fn.datetimepicker.Constructor.Default = $.extend($.fn.datetimepicker.Construct
 $('.datetimepicker').datetimepicker({
     format: 'L LT',
     locale: 'fr',
+    defaultDate: moment().hour(0).minute(00),
     sideBySide: true,
     ignoreReadonly: true
 });
@@ -118,8 +119,38 @@ $('#tempsImparti').datetimepicker({
 });
 
 $('#penalite').datetimepicker({
-    format: 'LT',
+    format: 'H:m:ss',
     locale: 'fr',
-    defaultDate: moment().hour(0).minute(15),
+    defaultDate: moment().hour(0).minute(15).seconds(0),
     ignoreReadonly: true
 });
+
+// Gestion des balises
+var regex = /^(.+?)(\d+)$/i;
+var index = $(".champ-visible").length;
+
+$('.ajouter').click(function() {
+  $('.champ-cache').first().clone()
+  .appendTo('.champ-visible').show()
+	.attr("id",   "champ-cache" + index)
+	.attr("name", "champ-cache" + index)
+  .find("*")
+  .each(function() {
+      var id = this.id || "";
+      var match = id.match(regex) || [];
+      if (match.length == 3) {
+          this.id   = match[1] + (index);
+          this.name = match[1] + (index);
+      }
+  });
+	index++;
+
+	supprimerBalise();
+});
+
+function supprimerBalise() {
+  $('.supprimer').off();
+  $('.supprimer').click(function() {
+    $(this).closest('.form-inline').remove();
+  });
+}
