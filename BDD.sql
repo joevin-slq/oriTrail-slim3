@@ -64,14 +64,14 @@ CREATE TABLE Lieux (
 #------------------------------------------------------------
 
 CREATE TABLE BaliseCourses (
-        id_baliseCourses INTEGER AUTO_INCREMENT NOT NULL,
+        id_baliseCourse INTEGER AUTO_INCREMENT NOT NULL,
         nom       VARCHAR (255) NOT NULL,
         numero    INTEGER NOT NULL,
         valeur    INTEGER,
         longitude DECIMAL(9,6),
         latitude  DECIMAL(9,6),
         fk_course INT NOT NULL,
-        PRIMARY KEY (id_baliseCourses)
+        PRIMARY KEY (id_baliseCourse)
 ) ENGINE = InnoDB
   DEFAULT CHARSET=utf8;
 
@@ -97,11 +97,11 @@ CREATE TABLE Resultats (
 #------------------------------------------------------------
 
 CREATE TABLE BaliseResultats (
-        id_baliseResultats INTEGER AUTO_INCREMENT  NOT NULL,
+        id_baliseResultat INTEGER AUTO_INCREMENT  NOT NULL,
         tempsInter         TIME NOT NULL,
         fk_resultat        INT NOT NULL,
         fk_baliseCourses   INT NOT NULL,
-        PRIMARY KEY (id_baliseResultats)
+        PRIMARY KEY (id_baliseResultat)
 ) ENGINE = InnoDB
   DEFAULT CHARSET=utf8;
 
@@ -128,7 +128,7 @@ ALTER TABLE BaliseResultats
         ADD FOREIGN KEY (fk_resultat) REFERENCES Resultats(id_resultat)
         ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE BaliseResultats
-        ADD FOREIGN KEY (fk_baliseCourses) REFERENCES BaliseCourses(id_baliseCourses)
+        ADD FOREIGN KEY (fk_baliseCourses) REFERENCES BaliseCourses(id_baliseCourse)
         ON UPDATE CASCADE ON DELETE CASCADE;
 
 #------------------------------------------------------------
@@ -141,8 +141,8 @@ INSERT INTO `Utilisateurs` (`id_user`, `login`, `password`, `nom`, `prenom`, `ma
 
 INSERT INTO `Courses` (`id_course`, `nom`, `prive`, `type`, `debut`, `fin`, `tempsImparti`, `penalite`, `fk_lieu`, `fk_user`) VALUES (NULL, 'La ruthénoise', 0, 'Courses', '2018-04-01 00:00:00', NULL, NULL, '00:05:00', '1', '1');
 
-INSERT INTO `BaliseCourses` (`id_baliseCourses`, `nom`, `numero`, `valeur`, `longitude`, `latitude`, `fk_course`) VALUES (NULL, 'Départ', '0', NULL, NULL, NULL, '1'), (NULL, 'Balise n°1', '1', NULL, NULL, NULL, '1'), (NULL, 'Balise n°2', '2', NULL, NULL, NULL, '1'), (NULL, 'Fin', '3', NULL, NULL, NULL, '1');
+INSERT INTO `BaliseCourses` (`id_baliseCourse`, `nom`, `numero`, `valeur`, `longitude`, `latitude`, `fk_course`) VALUES (NULL, 'Départ', '0', NULL, NULL, NULL, '1'), (NULL, 'Balise n°1', '1', NULL, NULL, NULL, '1'), (NULL, 'Balise n°2', '2', NULL, NULL, NULL, '1'), (NULL, 'Fin', '3', NULL, NULL, NULL, '1');
 
 INSERT INTO `Resultats` (`id_resultat`, `debut`, `fin`, `score`, `fk_user`, `fk_course`) VALUES (NULL, '2018-04-09 14:00:00', '2018-04-09 15:00:00', NULL, '1', '1');
 
-INSERT INTO `BaliseResultats` (`id_baliseResultats`, `tempsInter`, `fk_resultat`, `fk_baliseCourses`) VALUES (NULL, '00:00:00', '1', '1'), (NULL, '00:20:00', '1', '2'), (NULL, '00:20:00', '1', '3'), (NULL, '00:20:00', '1', '4');
+INSERT INTO `BaliseResultats` (`id_baliseResultat`, `tempsInter`, `fk_resultat`, `fk_baliseCourses`) VALUES (NULL, '00:00:00', '1', '1'), (NULL, '00:20:00', '1', '2'), (NULL, '00:20:00', '1', '3'), (NULL, '00:20:00', '1', '4');

@@ -154,3 +154,13 @@ function supprimerBalise() {
     $(this).closest('.form-inline').remove();
   });
 }
+
+// affiche le champ "Valeur" en mode score
+$('#S').click(function() {
+    $('.champ-cache :input[type="hidden"]').attr('type', 'number');
+});
+
+// cache le champ "Valeur" en mode parcours
+$('#P').click(function() {
+    $('.champ-cache :input[type="number"]').attr('type', 'hidden');
+});
