@@ -3,76 +3,79 @@ namespace App\ApiControllers;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use App\Models\Lieu;
+use App\Models\Course;
 
-class LieuController extends Controller {
+class CourseController extends Controller {
 
-	// récupère tous les lieux
+	// récupère tous les courses
 	public function getAll(RequestInterface $request, ResponseInterface $response) {
-		$lieux = Lieu::all();
+		$lieux = Course::all();
 		return $response->withJson($lieux);
 	}
 
-	// récupère un lieu via son identifiant
+	// récupère une course via son identifiant
 	public function get(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
-		$lieu = Lieu::where('id_lieu', $id);
+		$lieu = Course::where('id_course', $id);
 		return $response->withJson($lieu->get());
 	}
 
- 	// recherche un lieu
+ 	// recherche une course
 	public function search(RequestInterface $request, ResponseInterface $response) {
 		$query = '%' . $request->getAttribute('query') . '%';
-		$lieu = Lieu::where('nom', 'LIKE', $query);
+		$lieu = Course::where('nom', 'LIKE', $query);
 		return $response->withJson($lieu->get());
 	}
 
-	// ajoute un lieu
+	// ajoute une course
 	public function add(RequestInterface $request, ResponseInterface $response) {
 		$input = $request->getParsedBody();
 
-		$user = Lieu::create([
+		$user = Course::create([
 			"nom" => $input['nom'],
 			"description" => $input['description'],
-			"longitude" => $input['longitude'],
-			"latitude" => $input['latitude'],
-			"adresse" => $input['adresse'],
-			"cp" => $input['cp'],
-			"ville" => $input['ville']
+			"prive" => $input['prive'],
+			"type" => $input['type'],
+			"debut" => $input['debut'],
+			"fin" => $input['fin'],
+			"tempsImparti" => $input['tempsImparti'],
+			"penalite" => $input['penalite'],
+			"fk_user" => $input['user']
 		]);
 
 		return $response->withJson($user);
 	}
 
-	// supprime un lieu via son identifiant
+	// supprime une course via son identifiant
 	public function delete(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
-		$lieu = Lieu::where('id_lieu', $id);
+		$lieu = Course::where('id_course', $id);
 		if(!$lieu->delete()) {
 			return $response->withJson([
-				['status' => 'Lieu introuvable']
+				['status' => 'Course introuvable']
 			],404);
 		}
 
 		return $response->withJson([
-			['status' => $lieu->nom . 'Lieu supprimé avec succès']
+			['status' => $lieu->nom . 'Course supprimé avec succès']
 		]);
 	}
-
 
 	// met à jour un lieu via son identifiant
 	public function update(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
 		$input = $request->getParsedBody();
 
-		$lieu = Lieu::where('id_lieu', $id)->update([
+		$lieu = Course::where('id_course', $id)->update([
 			"nom" => $input['nom'],
 			"description" => $input['description'],
-			"longitude" => $input['longitude'],
-			"latitude" => $input['latitude'],
-			"adresse" => $input['adresse'],
-			"cp" => $input['cp'],
-			"ville" => $input['ville']
+			"prive" => $input['prive'],
+			"type" => $input['type'],
+			"debut" => $input['debut'],
+			"fin" => $input['fin'],
+			"tempsImparti" => $input['tempsImparti'],
+			"penalite" => $input['penalite'],
+			"fk_user" => $input['user']
 		]);
 
 		if(!$lieu) {
@@ -82,7 +85,7 @@ class LieuController extends Controller {
 		}
 
 		return $response->withJson([
-			['status' => $lieu->nom . 'Lieu modifié avec succès']
+			['status' => $lieu->nom . 'Course modifié avec succès']
 		]);
 	}
 }

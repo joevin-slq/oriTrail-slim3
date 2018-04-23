@@ -12,14 +12,10 @@
 			{% endif %}
 		</div>
 		<div class="form-group">
-			<label for="nom">Lieu :</label>
-			<select name="lieu" class="custom-select {{ errors.lieu ? 'is-invalid' : ''}}">
-			{% for row in lieux %}
-					<option value="{{ row.id_lieu }}"{{ (row.id_lieu == old.lieu) ? 'selected' : ''}}>{{ row.nom }} ({{ row.adresse }}, {{ row.cp }} {{ row.ville }})</option>
-			{% endfor %}
-			</select>
-			{% if errors.lieu %}
-			<p class="small text-danger">{{ errors.lieu | first }}</p>
+			<label for="description">Description :</label>
+			<input type="text" name="description" id="description" value="{{old.description}}" class="form-control {{ errors.description ? 'is-invalid' : ''}}">
+			{% if errors.description %}
+			<div class="invalid-feedback">{{ errors.description | first }}</div>
 			{% endif %}
 		</div>
 		<div class="custom-control custom-checkbox mb-2 mr-sm-2">
@@ -70,7 +66,7 @@
 			<div class="form-group col-md-6">
 				<label for="tempsImparti">Temps imparti :</label>
 				<div class="input-group" id="tempsImparti" data-target-input="nearest">
-						<input type="text" name="tempsImparti" id="tempsImparti" value="{{old.tempsImparti}}" class="form-control datetimepicker-input {{ errors.debut ? 'is-invalid' : ''}}" data-target="#tempsImparti" readonly="true"/>
+						<input type="text" name="tempsImparti" id="tempsImparti" value="{{old.tempsImparti}}" class="form-control datetimepicker-input {{ errors.tempsImparti ? 'is-invalid' : ''}}" data-target="#tempsImparti" readonly="true"/>
 						<div class="input-group-append" data-target="#tempsImparti" data-toggle="datetimepicker">
 								<div class="input-group-text"><i class="far fa-clock"></i></div>
 						</div>
@@ -82,7 +78,7 @@
 			<div class="form-group col-md-6">
 				<label for="tempsImparti">Pénalité :</label>
 				<div class="input-group" id="penalite" data-target-input="nearest">
-						<input type="text" name="penalite" id="penalite" value="{{old.penalite}}" class="form-control datetimepicker-input {{ errors.debut ? 'is-invalid' : ''}}" data-target="#penalite" readonly="true"/>
+						<input type="text" name="penalite" id="penalite" value="{{old.penalite}}" class="form-control datetimepicker-input {{ errors.penalite ? 'is-invalid' : ''}}" data-target="#penalite" readonly="true"/>
 						<div class="input-group-append" data-target="#penalite" data-toggle="datetimepicker">
 								<div class="input-group-text"><i class="far fa-clock"></i></div>
 						</div>

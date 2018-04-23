@@ -5,10 +5,22 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Respect\Validation\Validator as v;
 use App\Models\Course;
-use App\Models\Lieu;
 use App\Models\BaliseCourse;
 
 class CourseController extends Controller {
+
+		public function get(RequestInterface $request, ResponseInterface $response) {
+			$id = $request->getAttribute('id');
+
+			$course = Course::where('id_course', $id)->first();
+			$balises = BaliseCourse::where('fk_course', $id)->get();
+
+			$this->render($response, 'pages/course/get.twig', [
+	        'page' => 'course',
+					'course' => $course,
+					'balises' => $balises
+	    ]);
+		}
 
 	public function getAll(RequestInterface $request, ResponseInterface $response) {
 		$courses = Course::all();
@@ -30,11 +42,8 @@ class CourseController extends Controller {
 
 
 	public function getAjout(RequestInterface $request, ResponseInterface $response) {
-		$lieux = Lieu::all();
-
 		$this->render($response, 'pages/course/ajout.twig', [
-        'page' => 'course',
-				'lieux' => $lieux
+        'page' => 'course'
     ]);
 	}
 
@@ -46,8 +55,7 @@ class CourseController extends Controller {
 			'debut' => v::date('d/m/Y H:i'),
 			'fin' => v::date('d/m/Y H:i'),
 			'tempsImparti' => v::date('H:i'),
-			'penalite' => v::date('H:i:s'),
-			'lieu' => v::notEmpty()->numeric()
+			'penalite' => v::date('H:i:s')
 		]);
 
 		if($validation->failed()) {
@@ -57,14 +65,14 @@ class CourseController extends Controller {
 		$input = $request->getParsedBody();
 		$course = Course::create([
 			"nom" => $input['nom'],
+			"description" => $input['description'],
 			"prive" => ($input['prive']) ? true : false,
 			"type" => $input['type'],
 			"debut" => date("Y-m-d H:i:s", strtotime($input['debut'])),
 			"fin" => date("Y-m-d H:i:s", strtotime($input['fin'])),
 			"tempsImparti" => $input['tempsImparti'],
 			"penalite" => $input['penalite'],
-			"fk_user" => $_SESSION['user'],
-			"fk_lieu" => $input['lieu']
+			"fk_user" => $_SESSION['user']
 		]);
 
 		$nbBalise = count($input['nomBalise']);
@@ -104,8 +112,7 @@ class CourseController extends Controller {
 			'fin' => v::date('d/m/Y H:i'),
 			'tempsImparti' => v::date('H:i'),
 			'penalite' => v::date('H:i:s'),
-			'lieu' => v::notEmpty()->numeric(),
-			'fk_lieu' => v::notEmpty()->numeric()
+			'lieu' => v::notEmpty()->numeric()
 		]);
 
 		if($validation->failed()) {
@@ -117,14 +124,14 @@ class CourseController extends Controller {
 
 		Course::where('id_course', $id)->update([
 			"nom" => $input['nom'],
+			"description" => $input['description'],
 			"prive" => ($input['prive']) ? true : false,
 			"type" => $input['type'],
 			"debut" => date("Y-m-d H:i:s", strtotime($input['debut'])),
 			"fin" => date("Y-m-d H:i:s", strtotime($input['fin'])),
 			"tempsImparti" => $input['tempsImparti'],
 			"penalite" => $input['penalite'],
-			"fk_user" => $_SESSION['user'],
-			"fk_lieu" => $input['lieu']
+			"fk_user" => $_SESSION['user']
 		]);
 
 		$this->flash->addMessage('info', 'Course modifié avec succès !');

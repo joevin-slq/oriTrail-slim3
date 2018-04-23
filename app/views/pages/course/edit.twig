@@ -12,10 +12,10 @@
 			{% endif %}
 		</div>
 		<div class="form-group">
-			<label for="nom">Lieu :</label>
-			<input type="text" name="lieu" id="lieu" value="{{course.fk_lieu}}" class="form-control {{ errors.lieu ? 'is-invalid' : ''}}">
-			{% if errors.lieu %}
-			<div class="invalid-feedback">{{ errors.lieu | first }}</div>
+			<label for="description">Description :</label>
+			<input type="text" name="description" id="description" value="{{course.description}}" class="form-control {{ errors.description ? 'is-invalid' : ''}}">
+			{% if errors.description %}
+			<div class="invalid-feedback">{{ errors.description | first }}</div>
 			{% endif %}
 		</div>
 		<div class="form-group">

@@ -1,0 +1,41 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+	<h1>Course : {{ course.nom }}
+		<a href="{{ path_for('course') }}/suppr/{{course.id_course}}" class="btn btn-lg btn-danger" role="button">Supprimer</a>
+		<a href="{{ path_for('course.edit') }}{{course.id_course}}" class="btn btn-lg btn-info" role="button">Éditer</a>
+	</h1>
+	<p>Description : {{ course.description }}</p>
+	<p>Type de course : {{ course.type }}</p>
+	<p>Début : {{ course.debut }}</p>
+	<p>Fin : {{ course.fin }}</p>
+
+	{% if balises is not empty %}
+	<div class="table-responsive">
+		<table class="table table-hover">
+				<thead>
+						<tr>
+								<th>Numéro</th>
+								<th>Nom</th>
+								<th>Valeur</th>
+								<th>Position</th>
+						</tr>
+				</thead>
+				<tbody>
+						{% for row in balises %}
+						<tr>
+								<td>{{ row.numero }}</td>
+								<td>{{ row.nom }}</td>
+								<td>{{ row.valeur }}</td>
+								<td>
+									{{ row.longitude }}<br>
+									{{ row.latitude }}
+								</td>
+						</tr>
+						{% endfor %}
+				</tbody>
+		</table>
+	</div>
+	{% endif %}
+
+{% endblock %}
