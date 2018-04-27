@@ -15,6 +15,10 @@ class CourseController extends Controller {
 			$course = Course::where('id_course', $id)->first();
 			$balises = BaliseCourse::where('fk_course', $id)->get();
 
+			foreach ($balises as $champ) {
+					$champ['qrcode'] = json_encode(array('numero' => $champ['numero'], 'nom' => $champ['nom']));
+			}
+
 			$this->render($response, 'pages/course/get.twig', [
 	        'page' => 'course',
 					'course' => $course,

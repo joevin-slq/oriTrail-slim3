@@ -12,9 +12,10 @@ $container['view'] = function ($container) {
         'cache' => false //$dir . '/tmp/cache'
     ]);
 
-    // Initialise Slim et l'extension Twig
+    // Initialise Slim et les extensions Twig
     $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
+		$view->addExtension(new App\Extension\QrCodeExtension());
 
 		$view->getEnvironment()->addGlobal('auth', [
 			'check' => $container->auth->check(),

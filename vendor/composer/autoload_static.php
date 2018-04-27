@@ -22,6 +22,7 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Component\\Translation\\' => 30,
+            'Symfony\\Component\\OptionsResolver\\' => 34,
             'Slim\\Views\\' => 11,
             'Slim\\Flash\\' => 11,
             'Slim\\Csrf\\' => 10,
@@ -50,6 +51,10 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
             'Firebase\\JWT\\' => 13,
             'FastRoute\\' => 10,
         ),
+        'E' => 
+        array (
+            'Endroid\\QrCode\\' => 15,
+        ),
         'D' => 
         array (
             'Dotenv\\' => 7,
@@ -77,6 +82,10 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
         'Symfony\\Component\\Translation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
+        ),
+        'Symfony\\Component\\OptionsResolver\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/options-resolver',
         ),
         'Slim\\Views\\' => 
         array (
@@ -137,6 +146,10 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
+        ),
+        'Endroid\\QrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/endroid/qrcode/src',
         ),
         'Dotenv\\' => 
         array (

@@ -13,6 +13,7 @@
         "slim/csrf": "^0.8.2",
         "slim/flash": "^0.4.0",
         "vlucas/phpdotenv": "^2.4",
-        "firebase/php-jwt": "^5.0"
+        "firebase/php-jwt": "^5.0",
+        "endroid/qrcode": "1.7"
     }
 }

@@ -19,6 +19,7 @@
 								<th>Nom</th>
 								<th>Valeur</th>
 								<th>Position</th>
+								<th>QrCode</th>
 						</tr>
 				</thead>
 				<tbody>
@@ -31,6 +32,7 @@
 									{{ row.longitude }}<br>
 									{{ row.latitude }}
 								</td>
+								<td><img src="{{ row.qrcode | qrcode(size=200) }}" /></td>
 						</tr>
 						{% endfor %}
 				</tbody>
