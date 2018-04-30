@@ -24,7 +24,7 @@ class BaliseResultat extends Model
     return $this->belongsTo('App\Models\Resultat', 'id_resultat', 'fk_resultat');
   }
 
-  public function baliseCourse() {
-    return $this->belongsTo('App\Models\BaliseCourses', 'id_baliseCourse', 'fk_baliseCourse');
+  public function balisesCourse() {
+    return $this->belongsTo('App\Models\BaliseCourse', 'fk_baliseCourse', 'id_baliseCourse');
   }
 }

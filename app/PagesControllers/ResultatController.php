@@ -6,7 +6,6 @@ use Psr\Http\Message\ResponseInterface;
 use Respect\Validation\Validator as v;
 use App\Models\Course;
 use App\Models\Resultat;
-use App\Models\BaliseCourse;
 use App\Models\BaliseResultat;
 
 class ResultatController extends Controller {
@@ -25,7 +24,6 @@ class ResultatController extends Controller {
 		$resultats = Resultat::where('fk_course', $id)->get();
 
 		$this->render($response, 'pages/resultat/resultat.twig', [
-        'page' => 'course',
 				'resultats' => $resultats,
     ]);
 	}
@@ -35,9 +33,11 @@ class ResultatController extends Controller {
 
 		$resultat = Resultat::where('id_resultat', $id)->first();
 
+		$balises = BaliseResultat::where('fk_resultat', $id)->with('balisesCourse')->get();
+
 		$this->render($response, 'pages/resultat/run.twig', [
 				'resultat' => $resultat,
-				'balises' => $resultat->balisesResultat
+				'balises' => $balises
     ]);
 	}
 }

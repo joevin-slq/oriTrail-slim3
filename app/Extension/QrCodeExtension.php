@@ -50,4 +50,9 @@ class QrCodeExtension extends \Twig_Extension
 
         return $dataUrl;
     }
+
+    public function getName()
+    {
+      return 'qrcode_extension';
+    }
 }
