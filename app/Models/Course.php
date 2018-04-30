@@ -17,8 +17,7 @@ class Course extends Model
     'fin',
     'tempsImparti',
     'penalite',
-    'fk_user',
-    'fk_lieu'
+    'fk_user'
   ];
 
   public function getCourses() {
@@ -26,8 +25,11 @@ class Course extends Model
     return $courses;
   }
 
-  public function lieu() {
-    return $this->hasOne('App\Models\Lieu', 'id_lieu', 'fk_lieu');
+  public function balisesCourse() {
+    return $this->hasMany('App\Models\BaliseCourse', 'fk_course');
   }
 
+  public function resultats() {
+    return $this->hasMany('App\Models\Resultat', 'fk_resultat');
+  }
 }

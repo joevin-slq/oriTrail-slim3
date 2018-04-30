@@ -9,22 +9,22 @@ use App\Models\BaliseCourse;
 
 class CourseController extends Controller {
 
-		public function get(RequestInterface $request, ResponseInterface $response) {
-			$id = $request->getAttribute('id');
+	public function get(RequestInterface $request, ResponseInterface $response) {
+		$id = $request->getAttribute('id');
 
-			$course = Course::where('id_course', $id)->first();
-			$balises = BaliseCourse::where('fk_course', $id)->get();
+		$course = Course::where('id_course', $id)->first();
 
-			foreach ($balises as $champ) {
-					$champ['qrcode'] = json_encode(array('numero' => $champ['numero'], 'nom' => $champ['nom']));
-			}
-
-			$this->render($response, 'pages/course/get.twig', [
-	        'page' => 'course',
-					'course' => $course,
-					'balises' => $balises
-	    ]);
+		// on génère un objet JSON à uncorporer dans le QR Code
+		foreach ($course->balisesCourse as $champ) {
+				$champ['qrcode'] = json_encode(array('numero' => $champ['numero'], 'nom' => $champ['nom']));
 		}
+
+		$this->render($response, 'pages/course/get.twig', [
+        'page' => 'course',
+				'course' => $course,
+				'balises' => $course->balisesCourse
+    ]);
+	}
 
 	public function getAll(RequestInterface $request, ResponseInterface $response) {
 		$courses = Course::all();
@@ -51,10 +51,13 @@ class CourseController extends Controller {
     ]);
 	}
 
+	/**
+	 * Crée une nouvelle course composé de plusieurs balises
+	 */
 	public function postAjout(RequestInterface $request, ResponseInterface $response) {
 
 		$validation = $this->validator->validate($request, [
-			'nom' => v::notEmpty()->alpha(),
+			'nom' => v::notEmpty()->stringType(),
 			'type' => v::stringType()->length(1,1),
 			'debut' => v::date('d/m/Y H:i'),
 			'fin' => v::date('d/m/Y H:i'),
@@ -80,12 +83,11 @@ class CourseController extends Controller {
 		]);
 
 		$nbBalise = count($input['nomBalise']);
-		for($i=0 ; $i < $nbBalise; $i++) {
-    	BaliseCourse::create([
+		for($i=1 ; $i < $nbBalise; $i++) {
+    	$course->balisesCourse()->create([
 				"numero" => $i,
 				"nom" => $input['nomBalise'][$i],
-				"valeur" => $input['valeurBalise'][$i],
-				"fk_course" => $course->id_course
+				"valeur" => $input['valeurBalise'][$i]
 			]);
 		}
 
@@ -98,12 +100,11 @@ class CourseController extends Controller {
 		$id = $request->getAttribute('id');
 
 		$course = Course::where('id_course', $id)->first();
-		$balises = BaliseCourse::where('fk_course', $id)->get();
 
 		$this->render($response, 'pages/course/edit.twig', [
         'page' => 'course',
 				'course' => $course,
-				'balises' => $balises
+				'balises' => $course->balisesCourse
     ]);
 	}
 

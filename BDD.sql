@@ -82,7 +82,7 @@ CREATE TABLE BaliseResultats (
         id_baliseResultat INTEGER AUTO_INCREMENT  NOT NULL,
         tempsInter         TIME NOT NULL,
         fk_resultat        INT NOT NULL,
-        fk_baliseCourses   INT NOT NULL,
+        fk_baliseCourse   INT NOT NULL,
         PRIMARY KEY (id_baliseResultat)
 ) ENGINE = InnoDB
   DEFAULT CHARSET=utf8;
@@ -107,7 +107,7 @@ ALTER TABLE BaliseResultats
         ADD FOREIGN KEY (fk_resultat) REFERENCES Resultats(id_resultat)
         ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE BaliseResultats
-        ADD FOREIGN KEY (fk_baliseCourses) REFERENCES BaliseCourses(id_baliseCourse)
+        ADD FOREIGN KEY (fk_baliseCourse) REFERENCES BaliseCourses(id_baliseCourse)
         ON UPDATE CASCADE ON DELETE CASCADE;
 
 #------------------------------------------------------------
@@ -121,4 +121,4 @@ INSERT INTO `BaliseCourses` (`id_baliseCourse`, `nom`, `numero`, `valeur`, `long
 
 INSERT INTO `Resultats` (`id_resultat`, `debut`, `fin`, `score`, `fk_user`, `fk_course`) VALUES (NULL, '2018-04-09 14:00:00', '2018-04-09 15:00:00', NULL, '1', '1');
 
-INSERT INTO `BaliseResultats` (`id_baliseResultat`, `tempsInter`, `fk_resultat`, `fk_baliseCourses`) VALUES (NULL, '00:00:00', '1', '1'), (NULL, '00:20:00', '1', '2'), (NULL, '00:20:00', '1', '3'), (NULL, '00:20:00', '1', '4');
+INSERT INTO `BaliseResultats` (`id_baliseResultat`, `tempsInter`, `fk_resultat`, `fk_baliseCourse`) VALUES (NULL, '00:00:00', '1', '1'), (NULL, '00:20:00', '1', '2'), (NULL, '00:20:00', '1', '3'), (NULL, '00:20:00', '1', '4');

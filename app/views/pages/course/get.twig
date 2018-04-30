@@ -6,7 +6,7 @@
 		<a href="{{ path_for('course.edit') }}{{course.id_course}}" class="btn btn-lg btn-info" role="button">Éditer</a>
 	</h1>
 	<p>Description : {{ course.description }}</p>
-	<p>Type de course : {{ course.type }}</p>
+	<p>Type de course : {{ course.type is same as("S") ? 'Score' : 'Parcours' }}</p>
 	<p>Début : {{ course.debut }}</p>
 	<p>Fin : {{ course.fin }}</p>
 

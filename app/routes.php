@@ -28,6 +28,11 @@ $app->group('', function() {
 
   $this->get('/course/[{id}]', \App\PagesControllers\CourseController::class.':get')->setName('course.get');
 
+
+  $this->get('/resultat', \App\PagesControllers\ResultatController::class.':getCourse')->setName('resultat');
+  $this->get('/resultat/[{id}]', \App\PagesControllers\ResultatController::class.':getResultat')->setName('resultat.get');
+  $this->get('/resultat/run/[{id}]', \App\PagesControllers\ResultatController::class.':getRun')->setName('resultat.run');
+
   $this->get('/auth/signout', \App\PagesControllers\AuthController::class.':getSignOut')->setName('signout');
 })->add(new AuthMiddleware($container));
 

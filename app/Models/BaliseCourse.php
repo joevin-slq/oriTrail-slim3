@@ -24,7 +24,10 @@ class BaliseCourse extends Model
   }
 
   public function course() {
-    return $this->hasOne('App\Models\Course', 'id_course', 'fk_course');
+    return $this->belongsTo('App\Models\Course', 'id_course', 'fk_course');
   }
 
+  public function balisesResultat() {
+    return $this->hasMany('App\Models\BaliseResultat', 'fk_baliseCourse');
+  }
 }

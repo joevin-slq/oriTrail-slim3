@@ -1,0 +1,40 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+<h1>Résultats de la course</h1>
+
+	{% if resultats is not empty %}
+	<div class="table-responsive">
+		<table class="table table-hover">
+				<thead>
+						<tr>
+								<th>Nom du courreur</th>
+								<th>Sexe</th>
+								<th>Score</th>
+								<th>Date</th>
+								<th>Actions</th>
+						</tr>
+				</thead>
+				<tbody>
+						{% for row in resultats %}
+						<tr>
+								<td>{{ row.user.nom }} {{ row.user.prenom }}</td>
+								<td>{{ row.user.sexe }}</td>
+								<td>{{ row.score }}</td>
+								<td>
+									{{ row.debut }}<br>
+									{{ row.fin }}
+								</td>
+								<td>
+									<a href="run/{{row.id_resultat}}" class="btn btn-sm btn-block btn-secondary" role="button">Visualiser</a>
+								</td>
+						</tr>
+						{% endfor %}
+				</tbody>
+		</table>
+	</div>
+	{% else %}
+	<p>Aucun résultat enregistré pour cette course.</p>
+	{% endif %}
+
+{% endblock %}

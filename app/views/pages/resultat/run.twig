@@ -1,0 +1,46 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+<h1>Résultats n°{{resultat.id_resultat}} de la course</h1>
+
+<p>Nom : {{ resultat.user.nom }}</p>
+<p>Prénom : {{ resultat.user.prenom }}</p>
+<p>Sexe : {{ resultat.user.sexe }}</p>
+<p>Score : {{ resultat.score }}</p>
+<p>Date de début : {{ resultat.debut }}</p>
+<p>Date de fin : {{ resultat.fin }}</p>
+</p>
+
+{% if balises is not empty %}
+<div class="table-responsive">
+	<table class="table table-hover">
+			<thead>
+					<tr>
+						<th>Numéro</th>
+						<th>Temps intermédiaire</th>
+						<th>Nom</th>
+						<th>Valeur</th>
+						<th>Position</th>
+					</tr>
+			</thead>
+			<tbody>
+					{% for row in balises %}
+					<tr>
+						<td>{{ row.numero }}</td>
+						<td>{{ row.tempsInter }}</td>
+						<td>{{ row.nom }}</td>
+						<td>{{ row.valeur }}</td>
+						<td>
+							{{ row.longitude }}<br>
+							{{ row.latitude }}
+						</td>
+					</tr>
+					{% endfor %}
+			</tbody>
+	</table>
+</div>
+{% else %}
+<p>Aucune balise enregistré sur ce résultat de course.</p>
+{% endif %}
+
+{% endblock %}

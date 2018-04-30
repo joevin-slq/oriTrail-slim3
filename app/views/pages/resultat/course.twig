@@ -1,8 +1,8 @@
 {% extends "layout.twig" %}
 
 {% block content %}
-	<h1>Gestion des courses</h1>
-	<p>Bienvenue sur la page d'administration des courses. Vous pourrez ici visualiser, éditer, supprimer ou bien créer une course.</p>
+	<h1>Listes des courses</h1>
+	<p>Bienvenue sur la page qui répertoire les résultats des courses. Vous pourrez ici visualiser vos temps, classements et scores.</p>
 
   {% if courses %}
 		<div class="table-responsive">
@@ -25,10 +25,8 @@
                 	{{ row.fin }}
                 </td>
                 <td>
-									<a href="course/{{row.id_course}}" class="btn btn-sm btn-block btn-secondary"    role="button">Visualiser</a>
-									<a href="course/edit/{{row.id_course}}" class="btn btn-sm btn-block btn-info"    role="button">Éditer</a>
-									<a href="course/suppr/{{row.id_course}}" class="btn btn-sm btn-block btn-danger" role="button">Supprimer</a>
-              	</td>
+									<a href="resultat/{{row.id_course}}" class="btn btn-sm btn-block btn-secondary" role="button">Visualiser</a>
+                </td>
 	            </tr>
 	            {% endfor %}
 	        </tbody>
@@ -37,7 +35,5 @@
 	{% else %}
 	<p>Aucune course enregistrée.</p>
 	{% endif %}
-
-	<a href="{{ path_for('course.ajout') }}" class="btn btn-secondary" role="button">Ajouter</a>
 
 {% endblock %}
