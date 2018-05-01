@@ -1,4 +1,4 @@
-/* Sticky footer styles
+/* Sticky footer
 -------------------------------------------------- */
 html {
   position: relative;
@@ -16,36 +16,14 @@ body {
   background-color: #f5f5f5;
 }
 
-/* Carte Google Map
+/* Image de l'accueil
 -------------------------------------------------- */
-#map {
-	height: 400px;
-	width: 100%;
-}
-
-.controls {
-  margin-top: 10px;
-  border: 1px solid transparent;
-  border-radius: 2px 0 0 2px;
-  box-sizing: border-box;
-  height: 32px;
-  outline: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-#map-input {
-  background-color: #fff;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
-  text-overflow: ellipsis;
-  width: 300px;
-}
-
-#map-input:focus {
-  border-color: #4d90fe;
+.jumbotron {
+  height: 50vh;
+  min-height: 300px;
+  background-image: url("../img/background.jpg");
+  background-position: center;
+  background-size: cover;
 }
 
 /* Personalisation formulaire balises

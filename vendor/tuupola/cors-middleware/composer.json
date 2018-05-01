@@ -1,0 +1,52 @@
+{
+    "name": "tuupola/cors-middleware",
+    "description": "PSR-7 and PSR-15 CORS middleware",
+    "keywords": [
+        "middleware",
+        "cors",
+        "psr-7",
+        "psr-15"
+    ],
+    "homepage": "https://github.com/tuupola/cors-middleware",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mika Tuupola",
+            "email": "tuupola@appelsiini.net",
+            "homepage": "http://www.appelsiini.net/",
+            "role": "Developer"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/tuupola/dispatch",
+            "no-api": true
+        }
+    ],
+    "require": {
+        "php" : "^7.1",
+        "neomerx/cors-psr7": "^1.0",
+        "tuupola/http-factory": "^0.3.0",
+        "tuupola/callable-handler": "^0.3.0",
+        "psr/http-server-middleware": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tuupola\\Middleware\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tuupola\\Middleware\\": "tests"
+        }
+    },
+    "require-dev": {
+        "zendframework/zend-diactoros": "^1.0",
+        "overtrue/phplint": "^1.0",
+        "equip/dispatch": "dev-approved-psr15 as 1.0.x-dev",
+        "phpunit/phpunit": "^6.5",
+        "codedungeon/phpunit-result-printer": "^0.4.4",
+        "squizlabs/php_codesniffer": "^3.2"
+    }
+}
