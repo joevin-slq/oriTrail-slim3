@@ -17,8 +17,6 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
         'T' => 
         array (
             'Twig\\' => 5,
-            'Tuupola\\Middleware\\' => 19,
-            'Tuupola\\Http\\Factory\\' => 21,
         ),
         'S' => 
         array (
@@ -37,18 +35,11 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
-            'Psr\\Log\\' => 8,
-            'Psr\\Http\\Server\\' => 16,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
         ),
-        'N' => 
-        array (
-            'Neomerx\\Cors\\' => 13,
-        ),
         'I' => 
         array (
-            'Interop\\Http\\Factory\\' => 21,
             'Interop\\Container\\' => 18,
             'Illuminate\\Support\\' => 19,
             'Illuminate\\Database\\' => 20,
@@ -83,15 +74,6 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
-        ),
-        'Tuupola\\Middleware\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/tuupola/callable-handler/src',
-            1 => __DIR__ . '/..' . '/tuupola/cors-middleware/src',
-        ),
-        'Tuupola\\Http\\Factory\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/tuupola/http-factory/src',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -129,15 +111,6 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
-        'Psr\\Log\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
-        ),
-        'Psr\\Http\\Server\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-server-handler/src',
-            1 => __DIR__ . '/..' . '/psr/http-server-middleware/src',
-        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
@@ -145,14 +118,6 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
-        ),
-        'Neomerx\\Cors\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/neomerx/cors-psr7/src',
-        ),
-        'Interop\\Http\\Factory\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/http-interop/http-factory/src',
         ),
         'Interop\\Container\\' => 
         array (

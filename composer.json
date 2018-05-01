@@ -14,7 +14,6 @@
         "slim/flash": "^0.4.0",
         "vlucas/phpdotenv": "^2.4",
         "firebase/php-jwt": "^5.0",
-        "endroid/qrcode": "1.7",
-        "tuupola/cors-middleware": "^0.7.0"
+        "endroid/qrcode": "1.7"
     }
 }
