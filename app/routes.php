@@ -53,9 +53,10 @@ $app->group('/api', function() {
   $this->post('/course', \App\ApiControllers\CourseController::class.':add');
   $this->delete('/course/[{id}]', \App\ApiControllers\CourseController::class.':delete');
   $this->put('/course/[{id}]', \App\ApiControllers\CourseController::class.':update');
-
-  $this->get('/resultat', \App\ApiControllers\ResultatController::class.':getAll');
-  $this->get('/resultat/[{id}]', \App\ApiControllers\ResultatController::class.':get');
-  $this->get('/resultat/run/[{id}]', \App\ApiControllers\ResultatController::class.':getRun');
-  $this->post('/resultat', \App\ApiControllers\ResultatController::class.':add');
 })->add(new ApiAuthMiddleware($container));
+
+// authentification désactivée temporairement pour ces routes
+$app->get('/api/resultat', \App\ApiControllers\ResultatController::class.':getAll');
+$app->get('/api/resultat/[{id}]', \App\ApiControllers\ResultatController::class.':get');
+$app->get('/api/resultat/run/[{id}]', \App\ApiControllers\ResultatController::class.':getRun');
+$app->post('/api/resultat', \App\ApiControllers\ResultatController::class.':add');
