@@ -11,6 +11,7 @@ class Course extends Model
   public $timestamps = false;
   protected $fillable = [
     'nom',
+    'description',
     'prive',
     'type',
     'debut',

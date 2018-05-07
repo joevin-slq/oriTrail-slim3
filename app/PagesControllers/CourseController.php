@@ -6,6 +6,7 @@ use Psr\Http\Message\ResponseInterface;
 use Respect\Validation\Validator as v;
 use App\Models\Course;
 use App\Models\BaliseCourse;
+use App\PagesControllers\BaliseController;
 
 class CourseController extends Controller {
 
@@ -13,11 +14,6 @@ class CourseController extends Controller {
 		$id = $request->getAttribute('id');
 
 		$course = Course::where('id_course', $id)->first();
-
-		// on génère un objet JSON à uncorporer dans le QR Code
-		foreach ($course->balisesCourse as $champ) {
-				$champ['qrcode'] = json_encode(array('numero' => $champ['numero'], 'nom' => $champ['nom']));
-		}
 
 		$this->render($response, 'pages/course/get.twig', [
         'page' => 'course',
@@ -58,11 +54,14 @@ class CourseController extends Controller {
 
 		$validation = $this->validator->validate($request, [
 			'nom' => v::notEmpty()->stringType(),
+			'description' => v::stringType(),
 			'type' => v::stringType()->length(1,1),
 			'debut' => v::date('d/m/Y H:i'),
 			'fin' => v::date('d/m/Y H:i'),
 			'tempsImparti' => v::date('H:i'),
-			'penalite' => v::date('H:i:s')
+			'penalite' => v::date('H:i:s'),
+			'nomBalise' => v::notEmpty(),
+			'valeurBalise' => v::notEmpty()
 		]);
 
 		if($validation->failed()) {
@@ -73,7 +72,7 @@ class CourseController extends Controller {
 		$course = Course::create([
 			"nom" => $input['nom'],
 			"description" => $input['description'],
-			"prive" => ($input['prive']) ? true : false,
+			"prive" => (isset($input['prive'])) ? true : false,
 			"type" => $input['type'],
 			"debut" => date("Y-m-d H:i:s", strtotime($input['debut'])),
 			"fin" => date("Y-m-d H:i:s", strtotime($input['fin'])),
@@ -82,14 +81,7 @@ class CourseController extends Controller {
 			"fk_user" => $_SESSION['user']
 		]);
 
-		$nbBalise = count($input['nomBalise']);
-		for($i=1 ; $i < $nbBalise; $i++) {
-    	$course->balisesCourse()->create([
-				"numero" => $i,
-				"nom" => $input['nomBalise'][$i],
-				"valeur" => $input['valeurBalise'][$i]
-			]);
-		}
+		BaliseController::createBalises($course, $input['nomBalise'], $input['valeurBalise']);
 
 		$this->flash->addMessage('info', 'Course créé avec succès !');
 
@@ -112,6 +104,7 @@ class CourseController extends Controller {
 
 		$validation = $this->validator->validate($request, [
 			'nom' => v::notEmpty()->alpha(),
+			'description' => v::stringType(),
 			'type' => v::stringType()->length(1,1),
 			'debut' => v::date('d/m/Y H:i'),
 			'fin' => v::date('d/m/Y H:i'),

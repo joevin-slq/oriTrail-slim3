@@ -15,6 +15,7 @@ class BaliseCourse extends Model
     'valeur',
     'longitude',
     'latitude',
+    'qrcode',
     'fk_course'
   ];
 

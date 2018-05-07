@@ -48,18 +48,15 @@ $('#penalite').datetimepicker({
     ignoreReadonly: true
 });
 
-// Gestion des balises
+// Ajouter une balise
 $('.ajouter').click(function() {
   $('.champ-cache').first().clone().appendTo('.champ-visible').show();
-	supprimerBalise();
 });
 
-function supprimerBalise() {
-  $('.supprimer').off();
-  $('.supprimer').click(function() {
-    $(this).closest('.form-inline').remove();
-  });
-}
+// Supprimer une balise
+$('.supprimer').click(function() {
+  $(this).closest('.form-inline').remove();
+});
 
 // affiche le champ "Valeur" en mode score
 $('#S').click(function() {
@@ -70,3 +67,8 @@ $('#S').click(function() {
 $('#P').click(function() {
     $('.champ-cache :input[type="number"]').attr('type', 'hidden');
 });
+
+// si le champ parcours est pré-sélectionné on cache aussi "valeur"
+if($('#P').is(':checked')) {
+  $('.champ-cache :input[type="number"]').attr('type', 'hidden');
+}

@@ -52,6 +52,7 @@ CREATE TABLE BaliseCourses (
         valeur    INTEGER,
         longitude DECIMAL(9,6),
         latitude  DECIMAL(9,6),
+        qrcode    VARCHAR (255) NOT NULL,
         fk_course INT NOT NULL,
         PRIMARY KEY (id_baliseCourse)
 ) ENGINE = InnoDB
@@ -115,10 +116,10 @@ ALTER TABLE BaliseResultats
 #------------------------------------------------------------
 INSERT INTO `Utilisateurs` (`id_user`, `login`, `password`, `nom`, `prenom`, `mail`, `dateNaissance`, `sexe`) VALUES (NULL, 'root', '$2y$10$h4vkidOHWnaMXNXfaDNUxOQv4xGDkhKa2eX/mBNgwQq0/hYFS7BAe', 'USER', 'user', 'user@mail.fr', '2000-04-05', 'M');
 
-INSERT INTO `Courses` (`id_course`, `nom`, `description`, `prive`, `type`, `debut`, `fin`, `tempsImparti`, `penalite`, `fk_user`) VALUES (NULL, 'La ruthénoise', 'Rendez-vous à Layoule.', 0, 'S', '2018-04-01 00:00:00', NULL, NULL, '00:05:00', '1');
+INSERT INTO `Courses` (`id_course`, `nom`, `description`, `prive`, `type`, `debut`, `fin`, `tempsImparti`, `penalite`, `fk_user`) VALUES (NULL, 'La ruthénoise', 'Rendez-vous à Layoule.', 0, 'S', '2018-04-01 00:00:00', NULL, '02:00:00', '00:05:00', '1');
 
-INSERT INTO `BaliseCourses` (`id_baliseCourse`, `nom`, `numero`, `valeur`, `longitude`, `latitude`, `fk_course`) VALUES (NULL, 'Départ', '0', NULL, NULL, NULL, '1'), (NULL, 'Balise n°1', '1', NULL, NULL, NULL, '1'), (NULL, 'Balise n°2', '2', NULL, NULL, NULL, '1'), (NULL, 'Fin', '3', NULL, NULL, NULL, '1');
+INSERT INTO `BaliseCourses` (`id_baliseCourse`, `nom`, `numero`, `valeur`, `longitude`, `latitude`, `qrcode`, `fk_course`) VALUES (NULL, 'Configuration', '0', NULL, NULL, NULL, '{"nom":"La ruthénoise","type":"S","tImp":"02:00","balises":{"1":{"nom":"CP1","val":"10"},"2":{"nom":"CP2","val":"10"}}}', '1'), (NULL, 'CP1', '1', NULL, NULL, NULL, '{"num":1,"nom":"CP1","val":"10"}', '1'), (NULL, 'CP2', '2', NULL, NULL, NULL, '{"num":2,"nom":"CP2","val":"10"}', '1');
 
 INSERT INTO `Resultats` (`id_resultat`, `debut`, `fin`, `score`, `fk_user`, `fk_course`) VALUES (NULL, '2018-04-09 14:00:00', '2018-04-09 15:00:00', NULL, '1', '1');
 
-INSERT INTO `BaliseResultats` (`id_baliseResultat`, `tempsInter`, `fk_resultat`, `fk_baliseCourse`) VALUES (NULL, '00:00:00', '1', '1'), (NULL, '00:20:00', '1', '2'), (NULL, '00:20:00', '1', '3'), (NULL, '00:20:00', '1', '4');
+INSERT INTO `BaliseResultats` (`id_baliseResultat`, `tempsInter`, `fk_resultat`, `fk_baliseCourse`) VALUES (NULL, '00:00:00', '1', '1'), (NULL, '00:20:00', '1', '2'), (NULL, '00:20:00', '1', '3');
