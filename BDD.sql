@@ -116,9 +116,15 @@ ALTER TABLE BaliseResultats
 #------------------------------------------------------------
 INSERT INTO `Utilisateurs` (`id_user`, `login`, `password`, `nom`, `prenom`, `mail`, `dateNaissance`, `sexe`) VALUES (NULL, 'root', '$2y$10$h4vkidOHWnaMXNXfaDNUxOQv4xGDkhKa2eX/mBNgwQq0/hYFS7BAe', 'USER', 'user', 'user@mail.fr', '2000-04-05', 'M');
 
-INSERT INTO `Courses` (`id_course`, `nom`, `description`, `prive`, `type`, `debut`, `fin`, `tempsImparti`, `penalite`, `fk_user`) VALUES (NULL, 'La ruthénoise', 'Rendez-vous à Layoule.', 0, 'S', '2018-04-01 00:00:00', NULL, '02:00:00', '00:05:00', '1');
+INSERT INTO `Courses` (`id_course`, `nom`, `description`, `prive`, `type`, `debut`, `fin`, `tempsImparti`, `penalite`, `fk_user`) VALUES (NULL, 'La ruthénoise', 'Rendez-vous à Layoule.', 0, 'S', '2018-05-05 08:00:00', '2018-08-05 18:00:00', '02:00:00', '00:05:00', '1');
 
-INSERT INTO `BaliseCourses` (`id_baliseCourse`, `nom`, `numero`, `valeur`, `longitude`, `latitude`, `qrcode`, `fk_course`) VALUES (NULL, 'Configuration', '0', NULL, NULL, NULL, '{"nom":"La ruthénoise","type":"S","tImp":"02:00","balises":{"1":{"nom":"CP1","val":"10"},"2":{"nom":"CP2","val":"10"}}}', '1'), (NULL, 'CP1', '1', NULL, NULL, NULL, '{"num":1,"nom":"CP1","val":"10"}', '1'), (NULL, 'CP2', '2', NULL, NULL, NULL, '{"num":2,"nom":"CP2","val":"10"}', '1');
+INSERT INTO `BaliseCourses` (`id_baliseCourse`, `nom`, `numero`, `valeur`, `longitude`, `latitude`, `qrcode`, `fk_course`)
+VALUES (NULL, 'Configuration', '0', NULL, NULL, NULL,
+	'{"nom":"La ruthénoise","id":1,"type":"S","deb":"2018-05-05 08:00:00","fin":"2018-08-05 18:00:00","timp":"02:00:00","pnlt":"00:05:00","bals":{"1":{"nom":"CP1","val":"100"},"2":{"nom":"CP2","val":"50"}}}', '1'),
+	(NULL, 'Départ', '1', NULL, NULL, NULL, '{"num":1,"nom":"Start"}', '1'),
+	(NULL, 'CP1', '2', NULL, NULL, NULL, '{"num":2,"nom":"CP1","val":"100"}', '1'),
+	(NULL, 'CP2', '3', NULL, NULL, NULL, '{"num":3,"nom":"CP2","val":"50"}', '1'),
+	(NULL, 'Arrivée', '4', NULL, NULL, NULL, '{"num":4,"nom":"Stop"}', '1');
 
 INSERT INTO `Resultats` (`id_resultat`, `debut`, `fin`, `score`, `fk_user`, `fk_course`) VALUES (NULL, '2018-04-09 14:00:00', '2018-04-09 15:00:00', NULL, '1', '1');
 

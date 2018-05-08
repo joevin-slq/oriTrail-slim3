@@ -75,8 +75,11 @@ class BaliseController {
 
 		$jsonConfig = array(
 			'nom'  => $course->nom,
+			'id'  => $course->id_course,
 			'type' => $course->type,
-			'tImp' => $course->tempsImparti,
+			'deb' => $course->debut,
+			'fin' => $course->fin,
+			'timp' => $course->tempsImparti,
 			'pnlt' => $course->penalite,
 		  'bals' => $jsonBalise
 		);
