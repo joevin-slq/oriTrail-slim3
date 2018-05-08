@@ -52,7 +52,7 @@ CREATE TABLE BaliseCourses (
         valeur    INTEGER,
         longitude DECIMAL(9,6),
         latitude  DECIMAL(9,6),
-        qrcode    VARCHAR (255) NOT NULL,
+        qrcode    TEXT NOT NULL,
         fk_course INT NOT NULL,
         PRIMARY KEY (id_baliseCourse)
 ) ENGINE = InnoDB

@@ -6,6 +6,14 @@ use Psr\Http\Message\ResponseInterface;
 
 class AuthController extends Controller {
 
+	// inscription d'un utilisateur
+	public function postSignUp(RequestInterface $request, ResponseInterface $response) {
+		// TODO : à implémenter (voir App\PagesController\AuthController.php)
+		return $response->withJson([
+			['status' => 'TODO']
+		]);
+	}
+
 	// connecte un utilisateur
 	public function postCreate(RequestInterface $request, ResponseInterface $response) {
 

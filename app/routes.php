@@ -44,6 +44,8 @@ $app->group('', function() {
 $app->post('/api/token/create', \App\ApiControllers\AuthController::class.':postCreate')->setName('token');
 $app->post('/api/token/check', \App\ApiControllers\AuthController::class.':postCheck')->setName('check');
 $app->post('/api/token/renew', \App\ApiControllers\AuthController::class.':postRenew')->setName('renew');
+// Inscription
+$app->post('/api/signup', \App\ApiControllers\AuthController::class.':postSignUp')->setName('signup');
 
 // ces routes imposent que l'utilisateur soit connecté
 $app->group('/api', function() {
