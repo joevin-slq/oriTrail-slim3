@@ -51,12 +51,17 @@ $('#penalite').datetimepicker({
 // Ajouter une balise
 $('.ajouter').click(function() {
   $('.champ-cache').first().clone().appendTo('.champ-visible').show();
+  supprimerBalise();
 });
 
 // Supprimer une balise
-$('.supprimer').click(function() {
-  $(this).closest('.form-inline').remove();
-});
+function supprimerBalise() {
+  $('.supprimer').off();
+  $('.supprimer').click(function() {
+    $(this).closest('.form-inline').remove();
+  });
+}
+supprimerBalise();
 
 // affiche le champ "Valeur" en mode score
 $('#S').click(function() {

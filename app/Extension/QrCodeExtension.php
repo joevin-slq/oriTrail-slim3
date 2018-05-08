@@ -18,7 +18,7 @@ class QrCodeExtension extends \Twig_Extension
     {
         return array(
             'qrcode' => new \Twig_SimpleFilter(
-                'qrcode', array($this, 'qrcode'), array('pre_escape' => 'html', 'is_safe' => array('html'))
+                'qrcode', array($this, 'qrcode'), array('is_safe' => array('html'))
             ),
         );
     }

@@ -23,17 +23,35 @@ class BaliseController {
 				"fk_course" => $course->id_course
 			]);
 
+			// enregistre la balise de début
+			BaliseCourse::create([
+				"numero" => 1,
+				"nom" 	 => "Départ",
+				"qrcode" => BaliseController::getJsonTimer(1, "Start"),
+				"fk_course" => $course->id_course
+			]);
+
 			// enregistre les balise point de contrôle
 			$nbBalise = count($nomBalise);
 			for($i=1 ; $i < $nbBalise; $i++) {
+				$numero = $i + 1;
 				BaliseCourse::create([
-					"numero" => $i,
+					"numero" => $numero,
 					"nom" 	 => $nomBalise[$i],
 					"valeur" => $valeurBalise[$i],
-					"qrcode" => BaliseController::getJsonCheck($i, $nomBalise[$i], $valeurBalise[$i]),
+					"qrcode" => BaliseController::getJsonCheck($numero, $nomBalise[$i], $valeurBalise[$i]),
 					"fk_course" => $course->id_course
 				]);
 			}
+
+			// enregistre la balise de fin
+			BaliseCourse::create([
+				"numero" => $nbBalise + 1,
+				"nom" 	 => "Arrivée",
+				"qrcode" => BaliseController::getJsonTimer($nbBalise + 1, "Stop"),
+				"fk_course" => $course->id_course
+			]);
+
 		}
 
 	/**
@@ -59,7 +77,8 @@ class BaliseController {
 			'nom'  => $course->nom,
 			'type' => $course->type,
 			'tImp' => $course->tempsImparti,
-		  'balises' => $jsonBalise
+			'pnlt' => $course->penalite,
+		  'bals' => $jsonBalise
 		);
 
 		return json_encode($jsonConfig);
@@ -77,7 +96,23 @@ class BaliseController {
 		$tableau = array(
 			'num' => $numero,
 			'nom' => $nom,
-			'val' => $valeur,
+			'val' => $valeur
+		);
+
+		return json_encode($tableau);
+	}
+
+	/**
+	 * Crée l'objet JSON destiné au QR Code d'une balise de début ou de fin
+	 * @param numero
+	 * @param nom
+	 * @return tableau : objet JSON
+	 */
+	private function getJsonTimer($numero, $nom) {
+
+		$tableau = array(
+			'num' => $numero,
+			'nom' => $nom
 		);
 
 		return json_encode($tableau);
