@@ -73,16 +73,27 @@ class BaliseController {
 			$jsonBalise[$i] = $bal;
 		}
 
-		$jsonConfig = array(
-			'nom'  => $course->nom,
-			'id'  => $course->id_course,
-			'type' => $course->type,
-			'deb' => $course->debut,
-			'fin' => $course->fin,
-			'timp' => $course->tempsImparti,
-			'pnlt' => $course->penalite,
-		  'bals' => $jsonBalise
-		);
+		if ($course->type == 'S') {
+			$jsonConfig = array(
+				'nom'  => $course->nom,
+				'id'   => $course->id_course,
+				'type' => $course->type,
+				'deb'  => $course->debut,
+				'fin'  => $course->fin,
+				'timp' => $course->tempsImparti,
+				'bals' => $jsonBalise
+			);
+		} else {
+			$jsonConfig = array(
+				'nom'  => $course->nom,
+				'id'   => $course->id_course,
+				'type' => $course->type,
+				'deb'  => $course->debut,
+				'fin'  => $course->fin,
+				'pnlt' => $course->penalite,
+				'bals' => $jsonBalise
+			);
+		}
 
 		return json_encode($jsonConfig);
 	}

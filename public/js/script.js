@@ -63,17 +63,32 @@ function supprimerBalise() {
 }
 supprimerBalise();
 
-// affiche le champ "Valeur" en mode score
+// cache "penalite" en mode score
 $('#S').click(function() {
-    $('.champ-cache :input[type="hidden"]').attr('type', 'number');
+    modeScore();
 });
 
-// cache le champ "Valeur" en mode parcours
+// cache "Valeur" et "tempsImparti" en mode parcours
 $('#P').click(function() {
-    $('.champ-cache :input[type="number"]').attr('type', 'hidden');
+    modeParcours();
 });
 
-// si le champ parcours est pré-sélectionné on cache aussi "valeur"
+// si le champ parcours est pré-sélectionné
+if($('#S').is(':checked')) {
+  modeScore();
+}
+// si le champ parcours est pré-sélectionné
 if($('#P').is(':checked')) {
+  modeParcours();
+}
+
+function modeScore() {
+  $('.champ-cache :input[type="hidden"]').attr('type', 'number');
+  $('.tempsImparti').show();
+  $('.penalite').hide();
+}
+function modeParcours() {
   $('.champ-cache :input[type="number"]').attr('type', 'hidden');
+  $('.tempsImparti').hide();
+  $('.penalite').show();
 }

@@ -9,8 +9,11 @@
 	<p>Type de course : {{ course.type is same as("S") ? 'Score' : 'Parcours' }}</p>
 	<p>Début : {{ course.debut }}</p>
 	<p>Fin : {{ course.fin }}</p>
+	{% if course.type is same as("S") %}
 	<p>Temps imparti : {{ course.tempsImparti }}</p>
+	{% else %}
 	<p>Pénalité : {{ course.penalite }}</p>
+	{% endif %}
 
 	{% if balises is not empty %}
 	<div class="table-responsive">

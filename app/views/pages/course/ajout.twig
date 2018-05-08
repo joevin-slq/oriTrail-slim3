@@ -63,7 +63,7 @@
 		</div>
 
 		<div class="form-row">
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-6 tempsImparti">
 				<label for="tempsImparti">Temps imparti :</label>
 				<div class="input-group" id="tempsImparti" data-target-input="nearest">
 						<input type="text" name="tempsImparti" id="tempsImparti" value="{{old.tempsImparti}}" class="form-control datetimepicker-input {{ errors.tempsImparti ? 'is-invalid' : ''}}" data-target="#tempsImparti" readonly="true"/>
@@ -75,7 +75,7 @@
 				<p class="small text-danger">{{ errors.tempsImparti | first }}</p>
 				{% endif %}
 			</div>
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-6 penalite">
 				<label for="tempsImparti">Pénalité :</label>
 				<div class="input-group" id="penalite" data-target-input="nearest">
 						<input type="text" name="penalite" id="penalite" value="{{old.penalite}}" class="form-control datetimepicker-input {{ errors.penalite ? 'is-invalid' : ''}}" data-target="#penalite" readonly="true"/>
