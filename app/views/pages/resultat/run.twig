@@ -11,7 +11,7 @@
 <p>Date de fin : {{ resultat.fin }}</p>
 <p>Delta : {{ resultat.debut | date_diff(resultat.fin) }}</p>
 
-{% if balises is not empty %}
+{% if resultat.balisesResultat is not empty %}
 <div class="table-responsive">
 	<table class="table table-hover">
 			<thead>
@@ -23,12 +23,13 @@
 					</tr>
 			</thead>
 			<tbody>
-					{% for row in balises %}
+					{# le if permet d'omettre la balise de configuration #} 
+					{% for balise in resultat.balisesResultat if balise.balisesCourse.numero != 0 %}
 					<tr>
-						<td>{{ row.balisesCourse.numero }}</td>
-						<td>{{ row.balisesCourse.nom }}</td>
-						<td>{{ row.tempsInter }}</td>
-						<td>{{ row.balisesCourse.valeur }}</td>
+						<td>{{ balise.balisesCourse.numero }}</td>
+						<td>{{ balise.balisesCourse.nom }}</td>
+						<td>{{ balise.tempsInter }}</td>
+						<td>{{ balise.balisesCourse.valeur }}</td>
 					</tr>
 					{% endfor %}
 			</tbody>

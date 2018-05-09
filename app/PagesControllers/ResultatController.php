@@ -33,11 +33,8 @@ class ResultatController extends Controller {
 
 		$resultat = Resultat::where('id_resultat', $id)->first();
 
-		$balises = BaliseResultat::where('fk_resultat', $id)->with('balisesCourse')->get();
-
 		$this->render($response, 'pages/resultat/run.twig', [
-				'resultat' => $resultat,
-				'balises' => $balises
+				'resultat' => $resultat
     ]);
 	}
 }

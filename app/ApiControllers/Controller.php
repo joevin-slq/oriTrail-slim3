@@ -7,10 +7,12 @@ use Psr\Http\Message\ResponseInterface;
 class Controller {
 
 	protected $apiauth;
+	protected $validator;
 
 	public function __construct($container) {
 		$this->container = $container;
 		$this->apiauth = $this->container->get('apiauth');
+		$this->validator = $this->container->get('validator');
 	}
 
 }

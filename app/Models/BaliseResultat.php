@@ -11,8 +11,8 @@ class BaliseResultat extends Model
   public $timestamps = false;
   protected $fillable = [
     'tempsInter',
-    'id_resultat',
-    'id_baliseCourse'
+    'fk_resultat',
+    'fk_baliseCourse'
   ];
 
   public function getBalises() {

@@ -3,8 +3,10 @@ namespace App\ApiControllers;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Respect\Validation\Validator as v;
 use App\Models\Resultat;
 use App\Models\BaliseResultat;
+use App\Models\BaliseCourse;
 
 class ResultatController extends Controller {
 
@@ -31,24 +33,62 @@ class ResultatController extends Controller {
 
 	// enregistre le résultat d'une course
 	public function add(RequestInterface $request, ResponseInterface $response) {
-		$input = $request->getParsedBody();
 
-		$resultat = Resultat::create([
-			"debut" => $input['debut'],
-			"fin" => $input['fin'],
-			"score" => $input['score'],
-			"fk_user" => $input['user'],
-			"fk_course" => $input['course']
+		$validation = $this->validator->validate($request, [
+			'id_course' => v::notEmpty()->numeric(),
+			'id_user' => v::notEmpty()->numeric(),
+			'type' => v::stringType()->length(1,1),
+			'debut' => v::notEmpty()->date('Y-m-d H:i:s'),
+			'fin' => v::notEmpty()->date('Y-m-d H:i:s'),
 		]);
 
-		foreach ($input['balises'] as $balise) {
+		if($validation->failed()) {
+			return $response->withJson([
+				['status' => 'Champ manquant ou invalide.']
+			], 400);
+		}
+
+		if ($request->getParam('type') == "P") {
+			$statut = ResultatController::saveParcours($request);
+		} else {
+			$statut = ResultatController::saveScore($request);
+		}
+
+		return $response->withJson($statut[0], $statut[1]);
+	}
+
+	// enregistre une course de type parcours
+	private function saveParcours(RequestInterface $request) {
+
+		return array([
+			['status' => 'Course de type parcours enregistré : TODO']
+		], 501);
+	}
+
+	// enregistre une course de type score
+	private function saveScore(RequestInterface $request) {
+		$input = $request->getParsedBody();
+		$resultat = Resultat::create([
+			'fk_course' => $input['id_course'],
+			'fk_user' => $input['id_user'],
+			'debut' => $input['debut'],
+			'fin' => $input['fin'],
+			'score' => $input['score']
+		]);
+
+		foreach ($input['balises'] as $baliseResultat) {
+			$baliseCourse = BaliseCourse::where('fk_course', $input['id_course'])
+																		->where('numero', $baliseResultat['id_baliseCourse'])
+																		->first();
+
 			$resultat->balisesResultat()->create([
-				"tempsInter" => $balise['tempsInter'],
-				"fk_baliseCourse" => $balise['baliseCourse'],
+				'tempsInter' => $baliseResultat['tempsInter'],
+				'fk_baliseCourse' => $baliseCourse->id_baliseCourse
 			]);
 		}
 
-		return $response->withJson($resultat);
+		return array([
+			['status' => 'Course de type score enregistré.']
+		], 200);
 	}
-
 }
