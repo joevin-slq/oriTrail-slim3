@@ -11,7 +11,9 @@ use App\Models\BaliseResultat;
 class ResultatController extends Controller {
 
 	public function getCourse(RequestInterface $request, ResponseInterface $response) {
-		$courses = Course::all();
+		$courses = Course::where('prive', false)
+											 ->orWhere('fk_user', $this->auth->user()->id_user)
+											 ->get();
 
 		$this->render($response, 'pages/resultat/course.twig', [
   			'courses' => $courses

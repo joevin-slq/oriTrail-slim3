@@ -13,7 +13,9 @@ class CourseController extends Controller {
 	public function get(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
 
-		$course = Course::where('id_course', $id)->first();
+		$course = Course::where('id_course', $id)
+										  ->where('fk_user', $this->auth->user()->id_user)
+											->first();
 
 		$this->render($response, 'pages/course/get.twig', [
         'page' => 'course',
@@ -23,7 +25,7 @@ class CourseController extends Controller {
 	}
 
 	public function getAll(RequestInterface $request, ResponseInterface $response) {
-		$courses = Course::all();
+		$courses = Course::where('fk_user', $this->auth->user()->id_user)->get();
 
 		$this->render($response, 'pages/course/course.twig', [
   			'courses' => $courses
@@ -33,9 +35,15 @@ class CourseController extends Controller {
 	public function getSuppr(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
 
-		Course::where('id_course', $id)->delete();
+		$retour = Course::where('id_course', $id)
+						->where('fk_user', $this->auth->user()->id_user)
+						->delete();
 
-		$this->flash->addMessage('info', 'Course supprimé avec succès !');
+		if(!$retour) {
+			$this->flash->addMessage('error', 'Impossible de supprimer la course !');
+		} else {
+			$this->flash->addMessage('info', 'Course supprimé avec succès !');
+		}
 
 		return $response->withRedirect($this->router->pathFor('course'));
 	}

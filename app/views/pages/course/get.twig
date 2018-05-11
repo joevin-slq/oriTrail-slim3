@@ -22,7 +22,7 @@
 						<tr>
 								<th>Numéro</th>
 								<th>Nom</th>
-								<th>Valeur</th>
+								{% if course.type is same as("S") %}<th>Valeur</th>{% endif %}
 								<th>Position</th>
 								<th>QrCode</th>
 						</tr>
@@ -32,7 +32,7 @@
 						<tr>
 								<td>{{ row.numero }}</td>
 								<td>{{ row.nom }}</td>
-								<td>{{ row.valeur }}</td>
+								{% if course.type is same as("S") %}<td>{{ row.valeur }}</td>{% endif %}
 								<td>
 									{{ row.longitude }}<br>
 									{{ row.latitude }}
