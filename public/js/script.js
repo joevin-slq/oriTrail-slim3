@@ -2,13 +2,18 @@
  * Personalisation JavaScript / JQuery
  */
 
- // désactive l'appui sur la touche entrée
- $('#map').bind('keypress', function(e)
- {
-    if(e.keyCode == 13) {
-       return false;
-    }
- });
+// Désactive l'appui sur la touche entrée
+$('#map').bind('keypress', function(e)
+{
+  if(e.keyCode == 13) {
+    return false;
+  }
+});
+
+// Confirmer la suppression d'une course
+$('#supprModal').on('show.bs.modal', function(e) {
+  $(this).find('.btn-primary').attr('href', $(e.relatedTarget).data('href'));
+});
 
 // Configuration datetimepicker pour utiliser FontAwesome 5
 $.fn.datetimepicker.Constructor.Default = $.extend($.fn.datetimepicker.Constructor.Default, {
