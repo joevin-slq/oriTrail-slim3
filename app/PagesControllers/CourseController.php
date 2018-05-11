@@ -74,8 +74,8 @@ class CourseController extends Controller {
 			"description" => $input['description'],
 			"prive" => (isset($input['prive'])) ? true : false,
 			"type" => $input['type'],
-			"debut" => date("Y-m-d H:i:s", strtotime($input['debut'])),
-			"fin" => date("Y-m-d H:i:s", strtotime($input['fin'])),
+			"debut" => date_format(date_create_from_format('d/m/Y H:i', $input['debut']), 'Y-m-d  H:i:s'),
+			"fin" => date_format(date_create_from_format('d/m/Y H:i', $input['fin']), 'Y-m-d  H:i:s'),
 			"tempsImparti" => $input['tempsImparti'],
 			"penalite" => $input['penalite'],
 			"fk_user" => $_SESSION['user']
