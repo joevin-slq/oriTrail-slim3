@@ -66,8 +66,8 @@ class CourseController extends Controller {
 			'type' => v::stringType()->length(1,1),
 			'debut' => v::date('d/m/Y H:i'),
 			'fin' => v::date('d/m/Y H:i'),
-			'tempsImparti' => v::date('H:i'),
-			'penalite' => v::date('H:i:s'),
+			// 'tempsImparti' => v::date('H:i'),
+			// 'penalite' => v::date('H:i:s'),
 			'nomBalise' => v::notEmpty(),
 			'valeurBalise' => v::notEmpty()
 		]);
@@ -96,53 +96,47 @@ class CourseController extends Controller {
 		return $response->withRedirect($this->router->pathFor('course'));
 	}
 
-	public function getEdit(RequestInterface $request, ResponseInterface $response) {
+	/**
+	 * Récupère les informations de la course à dupliquer pour crée une nouvelle course composé de plusieurs balises
+	 */
+	public function getDuplicate(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
 
 		$course = Course::where('id_course', $id)->first();
 
-		$this->render($response, 'pages/course/edit.twig', [
+		// Transforme la datetime en date francaise
+		$course->debut = date_format(date_create_from_format('Y-m-d  H:i:s',  $course->debut), 'd/m/Y H:i');
+		$course->fin = date_format(date_create_from_format('Y-m-d  H:i:s',  $course->fin), 'd/m/Y H:i');
+
+		// Supprime les balises configuration, start et stop
+		$nbBalise = count($course->balisesCourse);
+
+		// TODO mettre zero lorsque la balise Stop au score n'existera plus
+		$aBaliseStop = ($course->type == ('S')) ? 1 : 1;
+
+		$nomBalise = Array();
+		$valeurBalise = Array();
+
+		if ($nbBalise != 2 + $aBaliseStop) {
+			for($i=0, $j=2; $j < $nbBalise - $aBaliseStop; $i++, $j++) {
+				$nomBalise[$i] = $course->balisesCourse[$j]->nom;
+				$valeurBalise[$i] = $course->balisesCourse[$j]->valeur;
+			}
+		}
+
+		$this->render($response, 'pages/course/ajout.twig', [
         'page' => 'course',
-				'course' => $course,
-				'balises' => $course->balisesCourse
+				'old' => $course,
+				'nomBalise' => $nomBalise,
+				'valeurBalise' => $valeurBalise,
     ]);
 	}
 
-	public function postEdit(RequestInterface $request, ResponseInterface $response) {
-
-		$validation = $this->validator->validate($request, [
-			'nom' => v::notEmpty()->alpha(),
-			'description' => v::stringType(),
-			'type' => v::stringType()->length(1,1),
-			'debut' => v::date('d/m/Y H:i'),
-			'fin' => v::date('d/m/Y H:i'),
-			'tempsImparti' => v::date('H:i'),
-			'penalite' => v::date('H:i:s'),
-			'lieu' => v::notEmpty()->numeric()
-		]);
-
-		if($validation->failed()) {
-			return $response->withRedirect($this->router->pathFor('course.edit'));
-		}
-
-		$input = $request->getParsedBody();
-		$id = $request->getAttribute('id');
-
-		Course::where('id_course', $id)->update([
-			"nom" => $input['nom'],
-			"description" => $input['description'],
-			"prive" => ($input['prive']) ? true : false,
-			"type" => $input['type'],
-			"debut" => date("Y-m-d H:i:s", strtotime($input['debut'])),
-			"fin" => date("Y-m-d H:i:s", strtotime($input['fin'])),
-			"tempsImparti" => $input['tempsImparti'],
-			"penalite" => $input['penalite'],
-			"fk_user" => $_SESSION['user']
-		]);
-
-		$this->flash->addMessage('info', 'Course modifié avec succès !');
-
-		return $response->withRedirect($this->router->pathFor('course'));
+	/**
+	 * Méthode non utilisé
+	 */
+	public function postDuplicate(RequestInterface $request, ResponseInterface $response) {
+		// Nothing
 	}
 
 }

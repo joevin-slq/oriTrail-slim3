@@ -98,11 +98,11 @@
 		<div class="form-group form-balise">
 			<div class="champ-visible">
 				<!-- Ré-affiche les champs déjà saisis -->
-				{% if old.nomBalise[1] is not empty %}
-					{% for key in old.nomBalise|keys|slice(1) %}
+				{% if nomBalise[0] is not empty %}
+					{% for key in nomBalise|keys|slice(0) %}
 					<div class="form-inline champ-cache">
-						<input type="text" name="nomBalise[]" id="nomBalise" value="{{ old.nomBalise[key] }}" placeholder="Nom" class="form-control mb-2 mr-sm-2"/>
-						<input type="number" name="valeurBalise[]" id="valeurBalise" value="{{ old.valeurBalise[key] }}" placeholder="Valeur" class="form-control mb-2 mr-sm-2"/>
+						<input type="text" name="nomBalise[]" id="nomBalise" value="{{ nomBalise[key] }}" placeholder="Nom" class="form-control mb-2 mr-sm-2"/>
+						<input type="number" name="valeurBalise[]" id="valeurBalise" value="{{ valeurBalise[key] }}" placeholder="Valeur" class="form-control mb-2 mr-sm-2"/>
 						<div class="supprimer btn-danger form-control mb-2 mr-sm-2">X</div>
 					</div>
 					{% endfor %}

@@ -21,8 +21,8 @@ $app->group('', function() {
   $this->get('/course/ajout', \App\PagesControllers\CourseController::class.':getAjout')->setName('course.ajout');
   $this->post('/course/ajout', \App\PagesControllers\CourseController::class.':postAjout')->setName('course.ajout');
 
-  $this->get('/course/edit/[{id}]', \App\PagesControllers\CourseController::class.':getEdit')->setName('course.edit');
-  $this->post('/course/edit/[{id}]', \App\PagesControllers\CourseController::class.':postEdit')->setName('course.edit');
+  $this->get('/course/ajout/[{id}]', \App\PagesControllers\CourseController::class.':getDuplicate')->setName('course.ajout.duplicate');
+  $this->post('/course/ajout/[{id}]', \App\PagesControllers\CourseController::class.':postDuplicate')->setName('course.ajout.duplicate');
 
   $this->get('/course/suppr/[{id}]', \App\PagesControllers\CourseController::class.':getSuppr')->setName('course');
 
