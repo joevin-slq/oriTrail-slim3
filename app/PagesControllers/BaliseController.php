@@ -27,7 +27,7 @@ class BaliseController {
 			BaliseCourse::create([
 				"numero" => 1,
 				"nom" 	 => "Départ",
-				"qrcode" => BaliseController::getJsonTimer(1, "Start"),
+				"qrcode" => BaliseController::getJsonTimer($course->id_course, 1, "Start"),
 				"fk_course" => $course->id_course
 			]);
 
@@ -39,7 +39,7 @@ class BaliseController {
 					"numero" => $numero,
 					"nom" 	 => $nomBalise[$i],
 					"valeur" => $valeurBalise[$i],
-					"qrcode" => BaliseController::getJsonCheck($numero, $nomBalise[$i], $valeurBalise[$i]),
+					"qrcode" => BaliseController::getJsonCheck($course->id_course, $numero, $nomBalise[$i], $valeurBalise[$i]),
 					"fk_course" => $course->id_course
 				]);
 			}
@@ -48,7 +48,7 @@ class BaliseController {
 			BaliseCourse::create([
 				"numero" => $nbBalise + 1,
 				"nom" 	 => "Arrivée",
-				"qrcode" => BaliseController::getJsonTimer($nbBalise + 1, "Stop"),
+				"qrcode" => BaliseController::getJsonTimer($course->id_course, $nbBalise + 1, "Stop"),
 				"fk_course" => $course->id_course
 			]);
 
@@ -100,14 +100,16 @@ class BaliseController {
 
 	/**
 	 * Crée l'objet JSON destiné au QR Code d'une balise checkpoint
-	 * @param numero
-	 * @param nom
-	 * @param valeur
+	 * @param id id_course
+	 * @param numero numéro de la balise
+	 * @param nom nom de la balise
+	 * @param valeur valeur de la balise
 	 * @return tableau : objet JSON
 	 */
-	private function getJsonCheck($numero, $nom, $valeur) {
+	private function getJsonCheck($id, $numero, $nom, $valeur) {
 
 		$tableau = array(
+			'id_course' => $id,
 			'num' => $numero,
 			'nom' => $nom,
 			'val' => $valeur
@@ -118,13 +120,15 @@ class BaliseController {
 
 	/**
 	 * Crée l'objet JSON destiné au QR Code d'une balise de début ou de fin
-	 * @param numero
-	 * @param nom
+	 * @param id id_course
+	 * @param numero numéro de la balise
+	 * @param nom nom de la balise
 	 * @return tableau : objet JSON
 	 */
-	private function getJsonTimer($numero, $nom) {
+	private function getJsonTimer($id, $numero, $nom) {
 
 		$tableau = array(
+			'id_course' => $id,
 			'num' => $numero,
 			'nom' => $nom
 		);
