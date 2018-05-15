@@ -39,7 +39,7 @@ class BaliseController {
 					"numero" => $numero,
 					"nom" 	 => $nomBalise[$i],
 					"valeur" => $valeurBalise[$i],
-					"qrcode" => BaliseController::getJsonCheck($course->id_course, $numero, $nomBalise[$i], $valeurBalise[$i]),
+					"qrcode" => BaliseController::getJsonCheck($course, $numero, $nomBalise[$i], $valeurBalise[$i]),
 					"fk_course" => $course->id_course
 				]);
 			}
@@ -68,11 +68,14 @@ class BaliseController {
 		$nbBalise = count($nom);
 
 		for($i=1 ; $i < $nbBalise; $i++) {
-			$bal = array(
-				'nom' => $nom[$i],
-				'val' => $valeur[$i]
+			$bals = array(
+				'num' => $i + 1,
+				'nom' => $nom[$i]
 			);
-			$jsonBalise[$i] = $bal;
+			if($course->type == 'S') { // supprime le champ valeur en mode score
+				$bals['val'] = $valeur[$i];
+			}
+			$jsonBalise[] = $bals;
 		}
 
 		if ($course->type == 'S') {
@@ -97,27 +100,30 @@ class BaliseController {
 			);
 		}
 
-		return json_encode($jsonConfig);
+		return json_encode($jsonConfig, JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
 	}
 
 	/**
 	 * Crée l'objet JSON destiné au QR Code d'une balise checkpoint
-	 * @param id id_course
+	 * @param Course objet Eloquent qui représente une course
 	 * @param numero numéro de la balise
 	 * @param nom nom de la balise
 	 * @param valeur valeur de la balise
 	 * @return tableau : objet JSON
 	 */
-	private function getJsonCheck($id, $numero, $nom, $valeur) {
+	private function getJsonCheck(Course $course, $numero, $nom, $valeur) {
 
 		$tableau = array(
-			'id_course' => $id,
+			'id_course' => $course->id_course,
 			'num' => $numero,
-			'nom' => $nom,
-			'val' => $valeur
+			'nom' => $nom
 		);
 
-		return json_encode($tableau);
+		if($course->type == 'S') {
+			$tableau['val'] = $valeur;
+		}
+
+		return json_encode($tableau, JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
 	}
 
 	/**
@@ -135,7 +141,7 @@ class BaliseController {
 			'nom' => $nom
 		);
 
-		return json_encode($tableau);
+		return json_encode($tableau, JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
 	}
 
 }

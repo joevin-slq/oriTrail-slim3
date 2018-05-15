@@ -38,18 +38,15 @@ class ResultatController extends Controller {
 	// enregistre le résultat d'une course
 	public function add(RequestInterface $request, ResponseInterface $response) {
 
-		$validation = $this->validator->validate($request, [
-			'id_course' => v::notEmpty()->numeric(),
-			'id_user' => v::notEmpty()->numeric(),
-			'type' => v::stringType()->length(1,1),
-			'debut' => v::notEmpty()->date('Y-m-d H:i:s'),
-			'fin' => v::notEmpty()->date('Y-m-d H:i:s'),
-		]);
-
-		if($validation->failed()) {
-			return $response->withJson([
-				['status' => 'Champ manquant ou invalide.']
-			], 400);
+		try {
+			$validation = v::key('id_course', v::notEmpty()->numeric())
+										 ->key('id_user', v::notEmpty()->numeric())
+										 ->key('type', v::stringType()->length(1,1))
+										 ->key('debut', v::notEmpty()->date())
+										 ->key('fin', v::notEmpty()->date())
+										 ->assert($request->getParsedBody());
+		} catch (NestedValidationException $exception) {
+			return $response->withJson(['status' => 'Erreur : ' . $exception->getMessages()[0]], 400);
 		}
 
 		if ($request->getParam('type') == "P") {

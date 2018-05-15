@@ -59,7 +59,9 @@ class ApiAuth
       return false;
     }
 
-    return (Utilisateur::where('login', $payload->user)->first()) ? true : false;
+    $user = Utilisateur::where('login', $payload->user)->first();
+
+    return $user ? $user : false;
   }
 
 // renouvelle le token
@@ -72,7 +74,7 @@ class ApiAuth
       return false;
     }
 
-    $future = new \DateTime("now +10 minutes");
+    $future = new \DateTime("now +60 minutes");
     $payload->future = $future->getTimestamp();
 
     return JWT::encode($payload, $key);

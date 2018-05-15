@@ -20,7 +20,7 @@ class CourseController extends Controller {
 			$this->flash->addMessage('error', "Impossible d'accéder à cette course.");
 			return $response->withRedirect($this->router->pathFor('course'));
 		}
-		
+
 		$this->render($response, 'pages/course/get.twig', [
         'page' => 'course',
 				'course' => $course,
@@ -115,8 +115,8 @@ class CourseController extends Controller {
 		// Supprime les balises configuration, start et stop
 		$nbBalise = count($course->balisesCourse);
 
-		// TODO mettre zero lorsque la balise Stop au score n'existera plus
-		$aBaliseStop = ($course->type == ('S')) ? 1 : 1;
+		// La balise stop en mode score n'existe pas
+		$aBaliseStop = ($course->type == ('S')) ? 0 : 1;
 
 		$nomBalise = Array();
 		$valeurBalise = Array();
@@ -134,13 +134,6 @@ class CourseController extends Controller {
 				'nomBalise' => $nomBalise,
 				'valeurBalise' => $valeurBalise,
     ]);
-	}
-
-	/**
-	 * Méthode non utilisé
-	 */
-	public function postDuplicate(RequestInterface $request, ResponseInterface $response) {
-		// Nothing
 	}
 
 }
