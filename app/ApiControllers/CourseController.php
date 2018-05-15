@@ -3,35 +3,54 @@ namespace App\ApiControllers;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Respect\Validation\Validator as v;
+use Respect\Validation\Exceptions\NestedValidationException;
 use App\Models\Course;
 
 class CourseController extends Controller {
 
 	// récupère tous les courses
 	public function getAll(RequestInterface $request, ResponseInterface $response) {
-		$lieux = Course::all();
-		return $response->withJson($lieux);
+		$courses = Course::all();
+		return $response->withJson($courses);
 	}
 
 	// récupère une course via son identifiant
 	public function get(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
-		$lieu = Course::where('id_course', $id);
-		return $response->withJson($lieu->get());
+		$course = Course::where('id_course', $id)->first();
+		if(!$course) {
+			return $response->withJson(['status' => 'Erreur : course introuvable'], 404);
+		}
+		return $response->withJson($course);
 	}
 
  	// recherche une course
 	public function search(RequestInterface $request, ResponseInterface $response) {
 		$query = '%' . $request->getAttribute('query') . '%';
-		$lieu = Course::where('nom', 'LIKE', $query);
-		return $response->withJson($lieu->get());
+		$course = Course::where('nom', 'LIKE', $query)->get();
+		if($course->count() == 0) {
+			return $response->withJson(['status' => 'Erreur : course introuvable'], 404);
+		}
+		return $response->withJson($course);
 	}
 
 	// ajoute une course
 	public function add(RequestInterface $request, ResponseInterface $response) {
 		$input = $request->getParsedBody();
 
-		$user = Course::create([
+		try {
+			$validation = v::key('nom', v::notEmpty()->stringType())
+										 ->key('description', v::stringType())
+										 ->key('type', v::stringType()->length(1,1))
+										 ->key('debut', v::date())
+										 ->key('fin', v::date())
+										 ->assert($input);
+		} catch (NestedValidationException $exception) {
+			return $response->withJson(['status' => 'Erreur : ' . $exception->getMessages()[0]], 400);
+		}
+
+		$course = Course::create([
 			"nom" => $input['nom'],
 			"description" => $input['description'],
 			"prive" => $input['prive'],
@@ -43,49 +62,27 @@ class CourseController extends Controller {
 			"fk_user" => $input['user']
 		]);
 
-		return $response->withJson($user);
+		if(!$course) {
+			return $response->withJson(['status' => 'Erreur'],400);
+		}
+
+		return $response->withJson(
+			['status' => 'Course "' . $course->nom . '" créée avec succès']
+		);
 	}
 
 	// supprime une course via son identifiant
 	public function delete(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
-		$lieu = Course::where('id_course', $id);
-		if(!$lieu->delete()) {
+		$course = Course::where('id_course', $id);
+		if(!$course->delete()) {
 			return $response->withJson([
 				['status' => 'Course introuvable']
-			],404);
+			], 404);
 		}
 
-		return $response->withJson([
-			['status' => $lieu->nom . 'Course supprimé avec succès']
-		]);
-	}
-
-	// met à jour un lieu via son identifiant
-	public function update(RequestInterface $request, ResponseInterface $response) {
-		$id = $request->getAttribute('id');
-		$input = $request->getParsedBody();
-
-		$lieu = Course::where('id_course', $id)->update([
-			"nom" => $input['nom'],
-			"description" => $input['description'],
-			"prive" => $input['prive'],
-			"type" => $input['type'],
-			"debut" => $input['debut'],
-			"fin" => $input['fin'],
-			"tempsImparti" => $input['tempsImparti'],
-			"penalite" => $input['penalite'],
-			"fk_user" => $input['user']
-		]);
-
-		if(!$lieu) {
-			return $response->withJson([
-				['status' => 'Erreur']
-			],400);
-		}
-
-		return $response->withJson([
-			['status' => $lieu->nom . 'Course modifié avec succès']
-		]);
+		return $response->withJson(
+			['status' => $course->nom . 'Course supprimé avec succès']
+		);
 	}
 }

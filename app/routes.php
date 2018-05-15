@@ -54,7 +54,10 @@ $app->group('/api', function() {
   $this->get('/course/search/[{query}]', \App\ApiControllers\CourseController::class.':search');
   $this->post('/course', \App\ApiControllers\CourseController::class.':add');
   $this->delete('/course/[{id}]', \App\ApiControllers\CourseController::class.':delete');
-  $this->put('/course/[{id}]', \App\ApiControllers\CourseController::class.':update');
+
+  $this->post('/install', \App\ApiControllers\InstallController::class.':set');
+
+  $this->get('/user', \App\ApiControllers\AuthController::class.':getUser')->setName('user');
 })->add(new ApiAuthMiddleware($container));
 
 // authentification désactivée temporairement pour ces routes

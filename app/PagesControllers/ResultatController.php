@@ -34,7 +34,11 @@ class ResultatController extends Controller {
 		$id = $request->getAttribute('id');
 
 		$resultat = Resultat::where('id_resultat', $id)->first();
-
+		if(!$resultat) {
+			$this->flash->addMessage('error', "Résultat introuvable.");
+			return $response->withRedirect($this->router->pathFor('resultat'));
+		}
+		
 		$this->render($response, 'pages/resultat/run.twig', [
 				'resultat' => $resultat
     ]);

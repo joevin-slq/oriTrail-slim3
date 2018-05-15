@@ -63,4 +63,22 @@ class AuthController extends Controller {
 		]);
 	}
 
+	// Retourne des informations sur l'utilisateur connecté
+	public function getUser(RequestInterface $request, ResponseInterface $response) {
+
+		// récupère le token depuis l'entête
+	 $token = \App\Middleware\ApiAuthMiddleware::fetchToken($request);
+
+	 $user = $this->apiauth->getUser($token);
+
+	 return $response->withJson([
+			'id_user' => $user->id_user,
+			'login' => $user->login,
+			'nom' => $user->nom,
+			'prenom' => $user->prenom,
+			'mail' => $user->mail,
+			'dateNaissance' => $user->dateNaissance,
+			'sexe' => $user->sexe
+		]);
+	}
 }

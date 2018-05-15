@@ -16,7 +16,11 @@ class CourseController extends Controller {
 		$course = Course::where('id_course', $id)
 										  ->where('fk_user', $this->auth->user()->id_user)
 											->first();
-
+		if(!$course) {
+			$this->flash->addMessage('error', "Impossible d'accéder à cette course.");
+			return $response->withRedirect($this->router->pathFor('course'));
+		}
+		
 		$this->render($response, 'pages/course/get.twig', [
         'page' => 'course',
 				'course' => $course,

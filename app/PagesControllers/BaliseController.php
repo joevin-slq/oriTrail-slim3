@@ -45,12 +45,14 @@ class BaliseController {
 			}
 
 			// enregistre la balise de fin
-			BaliseCourse::create([
-				"numero" => $nbBalise + 1,
-				"nom" 	 => "Arrivée",
-				"qrcode" => BaliseController::getJsonTimer($course->id_course, $nbBalise + 1, "Stop"),
-				"fk_course" => $course->id_course
-			]);
+			if($course->type == "P") { // uniquement pour les courses de type parcours
+				BaliseCourse::create([
+					"numero" => $nbBalise + 1,
+					"nom" 	 => "Arrivée",
+					"qrcode" => BaliseController::getJsonTimer($course->id_course, $nbBalise + 1, "Stop"),
+					"fk_course" => $course->id_course
+				]);
+			}
 
 		}
 
