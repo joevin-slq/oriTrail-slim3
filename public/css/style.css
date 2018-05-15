@@ -32,3 +32,9 @@ body {
   padding: 1rem;
   border: solid #f7f7f9;
 }
+
+/* Personalisation page accueil
+-------------------------------------------------- */
+.logo-mobile {
+  max-width:70px;
+}
