@@ -3,14 +3,47 @@ namespace App\ApiControllers;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Respect\Validation\Validator as v;
+use Respect\Validation\Exceptions\NestedValidationException;
+use App\Models\Utilisateur;
 
 class AuthController extends Controller {
 
 	// inscription d'un utilisateur
 	public function postSignUp(RequestInterface $request, ResponseInterface $response) {
 		// TODO : à implémenter (voir App\PagesController\AuthController.php)
+
+		$input = $request->getParsedBody();
+
+ 		try {
+			$validation = v::key('login', v::noWhitespace()->notEmpty()->LoginAvailable())
+										 ->key('password', v::notEmpty())
+										 ->key('nom', v::notEmpty()->alpha())
+										 ->key('prenom', v::notEmpty()->alpha())
+										 ->key('mail', v::email()->EmailAvailable())
+										 ->key('dateNaissance', v::date())
+										 ->key('sexe', v::stringType()->length(1,1))
+										 ->assert($input);
+		} catch (NestedValidationException $exception) {
+			return $response->withJson(['status' => 'Erreur : ' . $exception->getMessages()[0]], 400);
+		}
+		
+		$user = Utilisateur::create([
+			"login" => $input['login'],
+			"password" => password_hash($input['password'], PASSWORD_DEFAULT),
+			"nom" => $input['nom'],
+			"prenom" => $input['prenom'],
+			"mail" => $input['mail'],
+			"dateNaissance" => $input['dateNaissance'],
+			"sexe" => $input['sexe']
+		]);
+
+		if(!$user) {
+			return $response->withJson(['status' => 'Utilisateur non crée'], 400);
+		}
+
 		return $response->withJson([
-			['status' => 'TODO']
+			['status' => 'Utilisateur crée']
 		]);
 	}
 
