@@ -11,8 +11,6 @@ class AuthController extends Controller {
 
 	// inscription d'un utilisateur
 	public function postSignUp(RequestInterface $request, ResponseInterface $response) {
-		// TODO : à implémenter (voir App\PagesController\AuthController.php)
-
 		$input = $request->getParsedBody();
 
  		try {
