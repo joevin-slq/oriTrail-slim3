@@ -2,6 +2,10 @@
  * Personalisation JavaScript / JQuery
  */
 
+$(document).ready(function() {
+    $('#table').DataTable();
+} );
+
 // Désactive l'appui sur la touche entrée
 $('#map').bind('keypress', function(e)
 {

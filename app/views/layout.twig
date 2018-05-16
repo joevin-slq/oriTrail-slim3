@@ -7,6 +7,7 @@
     <meta name="description" content="Course d'orientation.">
     <link rel="icon" href="{{ path_for('home') }}img/favicon.ico">
     <link rel="stylesheet" href="{{ path_for('home') }}css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ path_for('home') }}css/dataTables.bootstrap4.min.css">
 {% if page == 'course' %}
     <link rel="stylesheet" href="{{ path_for('home') }}css/tempusdominus.min.css">
 {% endif %}
@@ -70,8 +71,10 @@
 {% if page == 'course' %}
     <script src="{{ path_for('home') }}js/moment-with-locales.min.js"></script>
     <script src="{{ path_for('home') }}js/tempusdominus.min.js"></script>
-{% endif %}
     <script defer src="{{ path_for('home') }}js/fontawesome-all.min.js"></script>
+{% endif %}
+    <script src="{{ path_for('home') }}js/jquery.dataTables.min.js"></script>
+    <script src="{{ path_for('home') }}js/dataTables.bootstrap4.min.js"></script>
     <script src="{{ path_for('home') }}js/script.js"></script>
 {% if page == 'lieu' %}
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCdrr00DUMh0cuWgVx5-28Jb2mkiXmQWg&libraries=places&callback=initMap"></script>
