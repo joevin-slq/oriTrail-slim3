@@ -25,8 +25,13 @@ class ResultatController extends Controller {
 
 		$resultats = Resultat::where('fk_course', $id)->get();
 
+		$course = Course::where('id_course', $id)->first();
+		$modeScore = ($course->type == 'S') ? true : false;
+
 		$this->render($response, 'pages/resultat/resultat.twig', [
 				'resultats' => $resultats,
+				'course' => $course,
+				'modeScore' => $modeScore
     ]);
 	}
 
@@ -38,7 +43,7 @@ class ResultatController extends Controller {
 			$this->flash->addMessage('error', "Résultat introuvable.");
 			return $response->withRedirect($this->router->pathFor('resultat'));
 		}
-		
+
 		$this->render($response, 'pages/resultat/run.twig', [
 				'resultat' => $resultat
     ]);
