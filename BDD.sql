@@ -114,10 +114,12 @@ ALTER TABLE BaliseResultats
 #------------------------------------------------------------
 #-- Données
 #------------------------------------------------------------
-INSERT INTO `Utilisateurs` (`id_user`, `login`, `password`, `nom`, `prenom`, `mail`, `dateNaissance`, `sexe`) VALUES (NULL, 'root', '$2y$10$h4vkidOHWnaMXNXfaDNUxOQv4xGDkhKa2eX/mBNgwQq0/hYFS7BAe', 'USER', 'user', 'user@mail.fr', '2000-04-05', 'M');
+INSERT INTO `Utilisateurs` (`id_user`, `login`, `password`, `nom`, `prenom`, `mail`, `dateNaissance`, `sexe`)
+VALUES (NULL, 'root', '$2y$10$h4vkidOHWnaMXNXfaDNUxOQv4xGDkhKa2eX/mBNgwQq0/hYFS7BAe', 'USER', 'user', 'user@mail.fr', '2000-04-05', 'M');
 
 # Score
-INSERT INTO `Courses` (`id_course`, `nom`, `description`, `prive`, `type`, `debut`, `fin`, `tempsImparti`, `fk_user`) VALUES (NULL, 'La ruthénoise', 'Rendez-vous à Layoule.', 0, 'S', '2018-05-05 08:00:00', '2018-08-05 18:00:00', '02:00:00', '1');
+INSERT INTO `Courses` (`id_course`, `nom`, `description`, `prive`, `type`, `debut`, `fin`, `tempsImparti`, `fk_user`)
+VALUES (NULL, 'La ruthénoise', 'Rendez-vous à Layoule.', 0, 'S', '2018-05-05 08:00:00', '2018-08-05 18:00:00', '02:00:00', '1');
 
 INSERT INTO `BaliseCourses` (`id_baliseCourse`, `nom`, `numero`, `valeur`, `longitude`, `latitude`, `qrcode`, `fk_course`)
 VALUES (NULL, 'Configuration', '0', NULL, NULL, NULL,
@@ -126,7 +128,8 @@ VALUES (NULL, 'Configuration', '0', NULL, NULL, NULL,
 	(NULL, 'CP1', '2', '100', NULL, NULL, '{"id_course":1,"num":2,"nom":"CP1","val":100}', '1'),
 	(NULL, 'CP2', '3', '50', NULL, NULL, '{"id_course":1,"num":3,"nom":"CP2","val":50}', '1');
 
-INSERT INTO `Resultats` (`id_resultat`, `debut`, `fin`, `score`, `fk_user`, `fk_course`) VALUES (NULL, '2018-04-09 14:00:00', '2018-04-09 15:00:00', 150, '1', '1');
+INSERT INTO `Resultats` (`id_resultat`, `debut`, `fin`, `score`, `fk_user`, `fk_course`)
+VALUES (NULL, '2018-04-09 14:00:00', '2018-04-09 15:00:00', 150, '1', '1');
 
 INSERT INTO `BaliseResultats` (`id_baliseResultat`, `tempsInter`, `fk_resultat`, `fk_baliseCourse`)
 VALUES
@@ -136,13 +139,13 @@ VALUES
 (NULL, '00:07:00', 1, 4);
 
 # Parcours
-INSERT INTO `Courses` (`id_course`, `nom`, `description`, `prive`, `type`, `debut`, `fin`, `tempsImparti`, `penalite`, `fk_user`) VALUES
-(NULL, 'L\'aurillacoise', 'Rendez-vous au gymnase de Peyrolles.', 1, 'P', '2018-05-16 10:00:00', '2018-08-15 18:00:00', '02:00:00', '00:15:00', 1);
+INSERT INTO `Courses` (`id_course`, `nom`, `description`, `prive`, `type`, `debut`, `fin`, `penalite`, `fk_user`) VALUES
+(NULL, 'L\'aurillacoise', 'Rendez-vous au gymnase de Peyrolles.', 1, 'P', '2018-05-16 10:00:00', '2018-08-15 18:00:00', '00:15:00', 1);
 
 INSERT INTO `BaliseCourses` (`id_baliseCourse`, `nom`, `numero`, `valeur`, `longitude`, `latitude`, `qrcode`, `fk_course`)
 VALUES (NULL, 'Configuration', 0, NULL, NULL, NULL,
-	'{"nom":"L\'aurillacoise","id":1,"type":"P","deb":"2018-05-16  10:00:00","fin":"2018-08-15  18:00:00","pnlt":"0:15:00","bals":[{"num":2,"nom":"CP1"},{"num":3,"nom":"CP2"}]}', 2),
-	(NULL, 'Départ', 1, NULL, NULL, NULL, '{"id_course":1,"num":1,"nom":"Start"}', 2),
-	(NULL, 'CP1', 2, 0, NULL, NULL, '{"id_course":1,"num":2,"nom":"CP1"}', 2),
-	(NULL, 'CP2', 3, 0, NULL, NULL, '{"id_course":1,"num":3,"nom":"CP2"}', 2),
-	(NULL, 'Arrivée', 4, NULL, NULL, NULL, '{"id_course":1,"num":4,"nom":"Stop"}', 2);
+	'{"nom":"L\'aurillacoise","id":2,"type":"P","deb":"2018-05-16  10:00:00","fin":"2018-08-15  18:00:00","pnlt":"0:15:00","bals":[{"num":2,"nom":"CP1"},{"num":3,"nom":"CP2"}]}', 2),
+	(NULL, 'Départ', 1, NULL, NULL, NULL, '{"id_course":2,"num":1,"nom":"Start"}', 2),
+	(NULL, 'CP1', 2, 0, NULL, NULL, '{"id_course":2,"num":2,"nom":"CP1"}', 2),
+	(NULL, 'CP2', 3, 0, NULL, NULL, '{"id_course":2,"num":3,"nom":"CP2"}', 2),
+	(NULL, 'Arrivée', 4, NULL, NULL, NULL, '{"id_course":2,"num":4,"nom":"Stop"}', 2);
