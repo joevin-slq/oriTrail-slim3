@@ -4,6 +4,7 @@ namespace App\ApiControllers;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Respect\Validation\Validator as v;
+use Respect\Validation\Exceptions\NestedValidationException;
 use App\Models\Resultat;
 use App\Models\BaliseResultat;
 use App\Models\BaliseCourse;
@@ -37,59 +38,58 @@ class ResultatController extends Controller {
 
 	// enregistre le résultat d'une course
 	public function add(RequestInterface $request, ResponseInterface $response) {
-
+		$input = $request->getParsedBody();
 		try {
 			$validation = v::key('id_course', v::notEmpty()->numeric())
 										 ->key('id_user', v::notEmpty()->numeric())
 										 ->key('type', v::stringType()->length(1,1))
 										 ->key('debut', v::notEmpty()->date())
 										 ->key('fin', v::notEmpty()->date())
-										 ->assert($request->getParsedBody());
+							 			 ->key('bals', v::arrayType()->each(
+							 				 v::key('num', v::numeric())
+											 	->key('temps', v::notEmpty())
+							 					->key('longitude', v::notEmpty())
+							 					->key('latitude', v::notEmpty())
+							 			 ))
+							 			 ->assert($input);
 		} catch (NestedValidationException $exception) {
 			return $response->withJson(['status' => 'Erreur : ' . $exception->getMessages()[0]], 400);
 		}
 
-		if ($request->getParam('type') == "P") {
-			$statut = ResultatController::saveParcours($request);
-		} else {
-			$statut = ResultatController::saveScore($request);
-		}
-
-		return $response->withJson($statut[0], $statut[1]);
-	}
-
-	// enregistre une course de type parcours
-	private function saveParcours(RequestInterface $request) {
-
-		return array([
-			['status' => 'Course de type parcours enregistré : TODO']
-		], 501);
-	}
-
-	// enregistre une course de type score
-	private function saveScore(RequestInterface $request) {
-		$input = $request->getParsedBody();
-		$resultat = Resultat::create([
+		$donnees = array(
 			'fk_course' => $input['id_course'],
 			'fk_user' => $input['id_user'],
 			'debut' => $input['debut'],
-			'fin' => $input['fin'],
-			'score' => $input['score']
+			'fin' => $input['fin']
+		);
+		if ($input['type'] == 'S') {
+			$donnees['score'] = $input['score'];
+		}
+		$resultat = Resultat::create($donnees);
+
+		// gestion de la balise résultat (associé à la balise de configuration)
+		$baliseCourse = BaliseCourse::where('fk_course', $input['id_course'])
+																	->where('numero', 0)
+																	->first();
+		$resultat->balisesResultat()->create([
+			'tempsInter' => '00:00:00',
+			'fk_baliseCourse' => $baliseCourse->id_baliseCourse
 		]);
 
-		foreach ($input['balises'] as $baliseResultat) {
+		// gestion des autres balises (start, cp, fin)
+		foreach ($input['bals'] as $baliseResultat) {
 			$baliseCourse = BaliseCourse::where('fk_course', $input['id_course'])
-																		->where('numero', $baliseResultat['id_baliseCourse'])
+																		->where('numero', $baliseResultat['num'])
 																		->first();
 
 			$resultat->balisesResultat()->create([
-				'tempsInter' => $baliseResultat['tempsInter'],
+				'tempsInter' => $baliseResultat['temps'],
 				'fk_baliseCourse' => $baliseCourse->id_baliseCourse
 			]);
 		}
 
-		return array([
-			['status' => 'Course de type score enregistré.']
-		], 200);
+		return $response->withJson(
+			['status' => 'Résultat de la course de type ' . (($score == 'S') ? 'score' : 'parcours') . ' enregistrée.']
+		, 200);
 	}
 }
