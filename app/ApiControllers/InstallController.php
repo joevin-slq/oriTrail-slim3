@@ -19,8 +19,9 @@ class InstallController extends Controller {
 		try {
 			$validation =
 			v::key('id_course', v::notEmpty())
-			 ->key('balises', v::arrayType()->each(
-				 v::key('numero', v::numeric())
+			 ->key('id_user', v::notEmpty())
+			 ->key('bals', v::arrayType()->each(
+				 v::key('num', v::numeric())
 					->key('longitude', v::notEmpty())
 					->key('latitude', v::notEmpty())
 			 ))
@@ -29,19 +30,22 @@ class InstallController extends Controller {
 			return $response->withJson(['status' => 'Erreur : ' . $exception->getMessages()[0]], 400);
 		}
 
-		/* TODO : Marquer la course comme installée
-		$course = Course::where('id_course', $input['course'])->update([
-			"instal" => true
-		]); */
+		// vérifie que l'utilisateur qui installe la course est l'organisateur
+		$course = Course::where('id_course', $input['id_course'])
+									  ->where('fk_user', $input['id_user'])
+								    ->first();
+		if(!$course) {
+			return $response->withJson(
+				['status' => 'Installation non autorisée !']
+			, 401);
+		}
 
-		// TODO: Vérifier que l'utilisateur qui installe la course est l'organisateur
-
-		foreach ($input['balises'] as $balise) {
+		foreach ($input['bals'] as $balise) {
 			// on ne tiens pas compte de la position de la balise de configuration
-			if($balise['numero'] == 0) { continue; }
+			if($balise['num'] == 0) { continue; }
 
 			BaliseCourse::where('fk_course', $input['id_course'])
-									->where('numero', $balise['numero'])
+									->where('numero', $balise['num'])
 									->update([
 				'longitude' => $balise['longitude'],
 				'latitude'  => $balise['latitude']

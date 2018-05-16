@@ -115,7 +115,8 @@ ALTER TABLE BaliseResultats
 #-- Données
 #------------------------------------------------------------
 INSERT INTO `Utilisateurs` (`id_user`, `login`, `password`, `nom`, `prenom`, `mail`, `dateNaissance`, `sexe`)
-VALUES (NULL, 'root', '$2y$10$h4vkidOHWnaMXNXfaDNUxOQv4xGDkhKa2eX/mBNgwQq0/hYFS7BAe', 'USER', 'user', 'user@mail.fr', '2000-04-05', 'M');
+VALUES (NULL, 'root', '$2y$10$h4vkidOHWnaMXNXfaDNUxOQv4xGDkhKa2eX/mBNgwQq0/hYFS7BAe', 'USER', 'user', 'user@mail.fr', '2000-04-05', 'M'),
+       (NULL, 'a', '$2y$10$AeaLszxcEuZphixThYFjVOIOuLlczbQkyPfLgk.BDnUzxd3IEOUpm', 'a', 'a', 'a@a.a', '2000-01-01', 'M');
 
 # Score
 INSERT INTO `Courses` (`id_course`, `nom`, `description`, `prive`, `type`, `debut`, `fin`, `tempsImparti`, `fk_user`)
