@@ -12,6 +12,7 @@ class AuthController extends Controller {
 	public function getSignUp(RequestInterface $request, ResponseInterface $response) {
 		return $this->render($response, 'pages/auth/signup.twig', []);
 	}
+
 	// ajout d'un utilisateur dans la BDD
 	public function postSignUp(RequestInterface $request, ResponseInterface $response) {
 

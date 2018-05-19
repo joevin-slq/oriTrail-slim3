@@ -10,6 +10,9 @@ use App\PagesControllers\BaliseController;
 
 class CourseController extends Controller {
 
+	/**
+	 * Affiche une course à partir de son identifiant
+	 */
 	public function get(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
 
@@ -28,6 +31,9 @@ class CourseController extends Controller {
     ]);
 	}
 
+	/**
+	 * Affiche l'intégralité des courses
+	 */
 	public function getAll(RequestInterface $request, ResponseInterface $response) {
 		$courses = Course::where('fk_user', $this->auth->user()->id_user)->get();
 
@@ -36,6 +42,9 @@ class CourseController extends Controller {
 		]);
 	}
 
+	/**
+	 * Supprime une course à partir de son identifiant
+	 */
 	public function getSuppr(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
 
@@ -52,7 +61,9 @@ class CourseController extends Controller {
 		return $response->withRedirect($this->router->pathFor('course'));
 	}
 
-
+	/**
+	 * Affiche la page qui permet de créer une course
+	 */
 	public function getAjout(RequestInterface $request, ResponseInterface $response) {
 		$this->render($response, 'pages/course/ajout.twig', [
         'page' => 'course'
@@ -101,7 +112,7 @@ class CourseController extends Controller {
 	}
 
 	/**
-	 * Récupère les informations de la course à dupliquer pour crée une nouvelle course composé de plusieurs balises
+	 * Récupère les informations de la course à dupliquer pour en créer une nouvelle
 	 */
 	public function getDuplicate(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');

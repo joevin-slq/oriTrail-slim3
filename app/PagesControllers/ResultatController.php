@@ -10,6 +10,9 @@ use App\Models\BaliseResultat;
 
 class ResultatController extends Controller {
 
+	/**
+	 * Affiche l'ensemble des courses
+	 */
 	public function getCourse(RequestInterface $request, ResponseInterface $response) {
 		$courses = Course::where('prive', false)
 											 ->orWhere('fk_user', $this->auth->user()->id_user)
@@ -20,6 +23,9 @@ class ResultatController extends Controller {
 		]);
 	}
 
+	/**
+	 * Affiche les résultats d'une course
+	 */
 	public function getResultat(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
 
@@ -35,6 +41,9 @@ class ResultatController extends Controller {
     ]);
 	}
 
+	/**
+	 * Affiche le détail d'un résultat de course
+	 */
 	public function getRun(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
 

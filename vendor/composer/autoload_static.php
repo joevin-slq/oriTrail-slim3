@@ -60,10 +60,6 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
             'Dotenv\\' => 7,
             'Doctrine\\Common\\Inflector\\' => 26,
         ),
-        'C' => 
-        array (
-            'Carbon\\' => 7,
-        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -159,14 +155,14 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
         ),
-        'Carbon\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
-        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+    );
+
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/..' . '/nesbot/carbon/src',
     );
 
     public static $prefixesPsr0 = array (
@@ -183,6 +179,17 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
             ),
+            'PHPParser' => 
+            array (
+                0 => __DIR__ . '/..' . '/nikic/php-parser/lib',
+            ),
+        ),
+        'G' => 
+        array (
+            'GettextExtractor' => 
+            array (
+                0 => __DIR__ . '/..' . '/voda/gettext-extractor',
+            ),
         ),
     );
 
@@ -191,6 +198,7 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit2193a5808188bdff0c30136e4b4bb256::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit2193a5808188bdff0c30136e4b4bb256::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit2193a5808188bdff0c30136e4b4bb256::$fallbackDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit2193a5808188bdff0c30136e4b4bb256::$prefixesPsr0;
 
         }, null, ClassLoader::class);
