@@ -4,9 +4,12 @@ html {
   position: relative;
   min-height: 100%;
 }
+
 body {
   margin-bottom: 60px; /* Margin bottom by footer height */
+  overflow: hidden;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -55,7 +58,10 @@ body {
   background-color: rgba(255, 255, 255, 0.7);
   border: 2px solid rgba(255, 255, 255, 0.7);
   margin-bottom: 30px;
+  margin-right: auto;
+  margin-left: auto;
   min-width: 234px;
+  max-width: 450px;
 }
 
 .jumbotron > h1 {
