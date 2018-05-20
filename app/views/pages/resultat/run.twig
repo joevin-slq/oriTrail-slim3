@@ -6,10 +6,15 @@
 <p>Courreur : {{ resultat.user.prenom }} {{ resultat.user.nom }}</p>
 <p>Sexe : {{ resultat.user.sexe }}</p>
 <p>Âge : {{ resultat.user.dateNaissance | age }}</p>
+{% if resultat.course.type is same as("S") %}
 <p>Score : {{ resultat.score }}</p>
+<p>Temps imparti : {{ resultat.course.tempsImparti }}</p>
+{% else %}
+<p>Temps de pénalité : {{ resultat.course.penalite }}</p>
+{% endif %}
 <p>Date de début : {{ resultat.debut }}</p>
 <p>Date de fin : {{ resultat.fin }}</p>
-<p>Delta : {{ resultat.debut | date_diff(resultat.fin) }}</p>
+<p>Temps réalisé : {{ resultat.debut | date_diff(resultat.fin) }}</p>
 
 {% if resultat.balisesResultat is not empty %}
 <div class="table-responsive">
@@ -20,7 +25,7 @@
 						<th>Nom</th>
 						<th>Temps cumulé</th>
 						{% if invalide %}<th>Distance (mètres)</th>{% endif %}
-						<th>Valeur</th>
+						{% if resultat.course.type is same as("S") %}<th>Valeur</th>{% endif %}
 					</tr>
 			</thead>
 			<tbody>
@@ -31,7 +36,7 @@
 						<td>{{ balise.balisesCourse.nom }}</td>
 						<td>{{ balise.temps }}</td>
 						{% if invalide %}<td>{{ balise.distance }}</td>{% endif %}
-						<td>{{ balise.balisesCourse.valeur }}</td>
+						{% if resultat.course.type is same as("S") %}<td>{{ balise.balisesCourse.valeur }}</td>{% endif %}
 					</tr>
 					{% endfor %}
 			</tbody>

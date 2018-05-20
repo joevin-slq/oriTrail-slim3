@@ -127,19 +127,19 @@ VALUES (NULL, 'La ruthénoise', 'Rendez-vous à Layoule.', 0, 'S', '2018-05-05 0
 INSERT INTO `BaliseCourses` (`id_baliseCourse`, `nom`, `numero`, `valeur`, `longitude`, `latitude`, `qrcode`, `fk_course`)
 VALUES (NULL, 'Configuration', '0', NULL, NULL, NULL,
 	'{"nom":"La ruthénoise","id":1,"type":"S","deb":"2018-05-05 08:00:00","fin":"2018-08-05 18:00:00","timp":"02:00","bals":[{"num":2,"nom":"CP1","val":100},{"num":3,"nom":"CP2","val":50}]}', '1'),
-	(NULL, 'Départ', '1', NULL, NULL, NULL, '{"id_course":1,"num":1,"nom":"Start"}', '1'),
-	(NULL, 'CP1', '2', '100', NULL, NULL, '{"id_course":1,"num":2,"nom":"CP1","val":100}', '1'),
-	(NULL, 'CP2', '3', '50', NULL, NULL, '{"id_course":1,"num":3,"nom":"CP2","val":50}', '1');
+	(NULL, 'Départ', '1', NULL, 2.580907, 44.353503, '{"id_course":1,"num":1,"nom":"Start"}', '1'),
+	(NULL, 'CP1', '2', '100', 2.582133, 44.350259, '{"id_course":1,"num":2,"nom":"CP1","val":100}', '1'),
+	(NULL, 'CP2', '3', '50', 2.583035, 44.348046, '{"id_course":1,"num":3,"nom":"CP2","val":50}', '1');
 
 INSERT INTO `Resultats` (`id_resultat`, `debut`, `fin`, `score`, `fk_user`, `fk_course`)
 VALUES (NULL, '2018-04-09 14:00:00', '2018-04-09 15:00:00', 150, '1', '1');
 
-INSERT INTO `BaliseResultats` (`id_baliseResultat`, `temps`, `fk_resultat`, `fk_baliseCourse`)
+INSERT INTO `BaliseResultats` (`id_baliseResultat`, `temps`, `longitude`, `latitude`, `fk_resultat`, `fk_baliseCourse`)
 VALUES
-(NULL, '00:00:00', 1, 1),
-(NULL, '00:00:00', 1, 2),
-(NULL, '00:05:00', 1, 3),
-(NULL, '00:07:00', 1, 4);
+(NULL, '00:00:00', NULL, NULL, 1, 1),
+(NULL, '00:00:00', 2.580959, 44.353525, 1, 2),
+(NULL, '00:05:00', 2.582101, 44.350346, 1, 3),
+(NULL, '00:07:00', 2.582998, 44.347994, 1, 4);
 
 # Parcours
 INSERT INTO `Courses` (`id_course`, `nom`, `description`, `prive`, `type`, `debut`, `fin`, `penalite`, `fk_user`) VALUES
@@ -148,7 +148,18 @@ INSERT INTO `Courses` (`id_course`, `nom`, `description`, `prive`, `type`, `debu
 INSERT INTO `BaliseCourses` (`id_baliseCourse`, `nom`, `numero`, `valeur`, `longitude`, `latitude`, `qrcode`, `fk_course`)
 VALUES (NULL, 'Configuration', 0, NULL, NULL, NULL,
 	'{"nom":"L\'aurillacoise","id":2,"type":"P","deb":"2018-05-16  10:00:00","fin":"2018-08-15  18:00:00","pnlt":"0:15:00","bals":[{"num":2,"nom":"CP1"},{"num":3,"nom":"CP2"}]}', 2),
-	(NULL, 'Départ', 1, NULL, NULL, NULL, '{"id_course":2,"num":1,"nom":"Start"}', 2),
-	(NULL, 'CP1', 2, 0, NULL, NULL, '{"id_course":2,"num":2,"nom":"CP1"}', 2),
-	(NULL, 'CP2', 3, 0, NULL, NULL, '{"id_course":2,"num":3,"nom":"CP2"}', 2),
-	(NULL, 'Arrivée', 4, NULL, NULL, NULL, '{"id_course":2,"num":4,"nom":"Stop"}', 2);
+	(NULL, 'Départ', 1, NULL, 2.457914, 44.938921, '{"id_course":2,"num":1,"nom":"Start"}', 2),
+	(NULL, 'CP1', 2, NULL, 2.459169, 44.939606, '{"id_course":2,"num":2,"nom":"CP1"}', 2),
+	(NULL, 'CP2', 3, NULL, 2.460001, 44.940778, '{"id_course":2,"num":3,"nom":"CP2"}', 2),
+	(NULL, 'Arrivée', 4, NULL, 2.460734, 44.941695, '{"id_course":2,"num":4,"nom":"Stop"}', 2);
+
+INSERT INTO `Resultats` (`id_resultat`, `debut`, `fin`, `fk_user`, `fk_course`)
+VALUES (NULL, '2018-05-20 15:00:00', '2018-05-20 16:00:00', '1', '2');
+
+INSERT INTO `BaliseResultats` (`id_baliseResultat`, `temps`, `longitude`, `latitude`, `fk_resultat`, `fk_baliseCourse`)
+VALUES
+(NULL, '00:00:00', NULL, NULL, 1, 5),
+(NULL, '00:00:00', 2.457453, 44.939136, 2, 6),
+(NULL, '00:03:27', 2.459304, 44.939772, 2, 7),
+(NULL, '00:05:47', 2.459969, 44.94072, 2, 8),
+(NULL, '00:05:47', 2.460305, 44.9424, 2, 9);

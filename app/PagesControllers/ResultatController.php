@@ -61,8 +61,8 @@ class ResultatController extends Controller {
 			$resultat = CoordController::calculResultat($resultat);
 
 			// on vérifie que les distances ne dépassent pas un certain seuil
-			if(!CoordController::validerResultat($resultat, 200)) {
-				$this->flash->addMessageNow('warn', "Attention : Certaines balises n'ont pas été scannées au bon endroit.");
+			if(!CoordController::validerResultat($resultat, 50)) {
+				$this->flash->addMessageNow('warn', "Attention : Certaines balises onn été scannées à plus de 50 mètres de leurs emplacement initial.");
 				$invalide = true;
 			}
 		}
