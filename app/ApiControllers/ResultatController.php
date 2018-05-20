@@ -71,7 +71,7 @@ class ResultatController extends Controller {
 																	->where('numero', 0)
 																	->first();
 		$resultat->balisesResultat()->create([
-			'tempsInter' => '00:00:00',
+			'temps' => '00:00:00',
 			'fk_baliseCourse' => $baliseCourse->id_baliseCourse
 		]);
 
@@ -82,7 +82,9 @@ class ResultatController extends Controller {
 																		->first();
 
 			$resultat->balisesResultat()->create([
-				'tempsInter' => $baliseResultat['temps'],
+				'temps' => $baliseResultat['temps'],
+				'longitude' => $baliseResultat['longitude'],
+				'latitude' => $baliseResultat['latitude'],
 				'fk_baliseCourse' => $baliseCourse->id_baliseCourse
 			]);
 		}

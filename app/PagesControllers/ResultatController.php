@@ -46,6 +46,7 @@ class ResultatController extends Controller {
 	 */
 	public function getRun(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
+		$invalide = false;
 
 		$resultat = Resultat::where('id_resultat', $id)->first();
 		if(!$resultat) {
@@ -53,8 +54,23 @@ class ResultatController extends Controller {
 			return $response->withRedirect($this->router->pathFor('resultat'));
 		}
 
+		// si la course est bien installée
+		if($resultat->course->estInstalle()) {
+
+			// on calcule les distances
+			$resultat = CoordController::calculResultat($resultat);
+
+			// on vérifie que les distances ne dépassent pas un certain seuil
+			if(!CoordController::validerResultat($resultat, 200)) {
+				$this->flash->addMessageNow('warn', "Attention : Certaines balises n'ont pas été scannées au bon endroit.");
+				$invalide = true;
+			}
+		}
+
 		$this->render($response, 'pages/resultat/run.twig', [
-				'resultat' => $resultat
+				'resultat' => $resultat,
+				'invalide' => $invalide
     ]);
 	}
+
 }

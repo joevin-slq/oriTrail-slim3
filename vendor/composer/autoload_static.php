@@ -60,6 +60,10 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
             'Dotenv\\' => 7,
             'Doctrine\\Common\\Inflector\\' => 26,
         ),
+        'B' => 
+        array (
+            'Ballen\\Distical\\' => 16,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -154,6 +158,10 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
         'Doctrine\\Common\\Inflector\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
+        ),
+        'Ballen\\Distical\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ballen/distical/src',
         ),
         'App\\' => 
         array (

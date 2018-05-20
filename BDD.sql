@@ -81,8 +81,10 @@ CREATE TABLE Resultats (
 
 CREATE TABLE BaliseResultats (
         id_baliseResultat INTEGER AUTO_INCREMENT  NOT NULL,
-        tempsInter         TIME NOT NULL,
-        fk_resultat        INT NOT NULL,
+        temps             TIME NOT NULL,
+        longitude         DECIMAL(9,6),
+        latitude          DECIMAL(9,6),
+        fk_resultat       INT NOT NULL,
         fk_baliseCourse   INT NOT NULL,
         PRIMARY KEY (id_baliseResultat)
 ) ENGINE = InnoDB
@@ -132,7 +134,7 @@ VALUES (NULL, 'Configuration', '0', NULL, NULL, NULL,
 INSERT INTO `Resultats` (`id_resultat`, `debut`, `fin`, `score`, `fk_user`, `fk_course`)
 VALUES (NULL, '2018-04-09 14:00:00', '2018-04-09 15:00:00', 150, '1', '1');
 
-INSERT INTO `BaliseResultats` (`id_baliseResultat`, `tempsInter`, `fk_resultat`, `fk_baliseCourse`)
+INSERT INTO `BaliseResultats` (`id_baliseResultat`, `temps`, `fk_resultat`, `fk_baliseCourse`)
 VALUES
 (NULL, '00:00:00', 1, 1),
 (NULL, '00:00:00', 1, 2),

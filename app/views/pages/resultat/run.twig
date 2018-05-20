@@ -18,17 +18,19 @@
 					<tr>
 						<th>Numéro</th>
 						<th>Nom</th>
-						<th>Temps intermédiaire</th>
+						<th>Temps cumulé</th>
+						{% if invalide %}<th>Distance (mètres)</th>{% endif %}
 						<th>Valeur</th>
 					</tr>
 			</thead>
 			<tbody>
-					{# le if permet d'omettre la balise de configuration #} 
+					{# le if permet d'omettre la balise de configuration #}
 					{% for balise in resultat.balisesResultat if balise.balisesCourse.numero != 0 %}
 					<tr>
 						<td>{{ balise.balisesCourse.numero }}</td>
 						<td>{{ balise.balisesCourse.nom }}</td>
-						<td>{{ balise.tempsInter }}</td>
+						<td>{{ balise.temps }}</td>
+						{% if invalide %}<td>{{ balise.distance }}</td>{% endif %}
 						<td>{{ balise.balisesCourse.valeur }}</td>
 					</tr>
 					{% endfor %}
