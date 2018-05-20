@@ -22,14 +22,12 @@ body {
 /* Image de l'accueil
 -------------------------------------------------- */
 .jumbotron {
-  height: 92.5vh;
+  height: 100vh;
   min-height: 300px;
-  margin: 0;
   border-radius: 0;
   background-image: url("../img/background.jpg");
   background-position: center;
   background-size: cover;
-  vertical-align: middle;
 }
 
 /* Personalisation formulaire balises
@@ -66,16 +64,15 @@ body {
 
 .jumbotron > h1 {
   font-weight: bold;
-  font-size: 75px;
+  font-size: 14vh;
   color: #343A40FF;
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  margin-top: 15vh;
 }
 
 .lead {
   font-weight: bold;
   font-style: italic;
-  font-size: 25px;
+  font-size: 4vh;
   color: #343A40FF;
   text-shadow: -0.5px 0 white, 0 0.5px white, 0.5px 0 white, 0 -0.5px white;
   margin-bottom: 5vh;
