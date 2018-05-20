@@ -43,12 +43,15 @@ $app->group('', function() {
 // Authentification
 $app->post('/api/token/create', \App\ApiControllers\AuthController::class.':postCreate')->setName('token');
 $app->post('/api/token/check', \App\ApiControllers\AuthController::class.':postCheck')->setName('check');
-$app->post('/api/token/renew', \App\ApiControllers\AuthController::class.':postRenew')->setName('renew');
+// $app->post('/api/token/renew', \App\ApiControllers\AuthController::class.':postRenew')->setName('renew');
+
 // Inscription
 $app->post('/api/signup', \App\ApiControllers\AuthController::class.':postSignUp')->setName('signup');
 
 // ces routes imposent que l'utilisateur soit connecté
 $app->group('/api', function() {
+  $this->get('/user', \App\ApiControllers\AuthController::class.':getUser')->setName('user');
+
   $this->get('/course', \App\ApiControllers\CourseController::class.':getAll');
   $this->get('/course/[{id}]', \App\ApiControllers\CourseController::class.':get');
   $this->get('/course/search/[{query}]', \App\ApiControllers\CourseController::class.':search');
@@ -57,11 +60,8 @@ $app->group('/api', function() {
 
   $this->post('/install', \App\ApiControllers\InstallController::class.':set');
 
-  $this->get('/user', \App\ApiControllers\AuthController::class.':getUser')->setName('user');
+  $this->get('/resultat', \App\ApiControllers\ResultatController::class.':getAll');
+  $this->get('/resultat/[{id}]', \App\ApiControllers\ResultatController::class.':get');
+  $this->get('/resultat/run/[{id}]', \App\ApiControllers\ResultatController::class.':getRun');
+  $this->post('/resultat', \App\ApiControllers\ResultatController::class.':add');
 })->add(new ApiAuthMiddleware($container));
-
-// authentification désactivée temporairement pour ces routes
-$app->get('/api/resultat', \App\ApiControllers\ResultatController::class.':getAll');
-$app->get('/api/resultat/[{id}]', \App\ApiControllers\ResultatController::class.':get');
-$app->get('/api/resultat/run/[{id}]', \App\ApiControllers\ResultatController::class.':getRun');
-$app->post('/api/resultat', \App\ApiControllers\ResultatController::class.':add');
