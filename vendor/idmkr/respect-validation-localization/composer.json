@@ -1,0 +1,14 @@
+{
+  "name": "idmkr/respect-validation-localization",
+  "description": "Provide a simple way to translate respect/validation exception messages",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Gael DEBOST",
+      "email": "gael@idmkr.io"
+    }
+  ],
+  "require": {
+    "voda/gettext-extractor": "^3.1"
+  }
+}
