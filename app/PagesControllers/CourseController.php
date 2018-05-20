@@ -24,6 +24,10 @@ class CourseController extends Controller {
 			return $response->withRedirect($this->router->pathFor('course'));
 		}
 
+		if(!$course->estInstalle()) {
+			$this->flash->addMessageNow('warn', "Attention : La course n'est pas installée, les positions GPS des balises ne sont pas renseignées.");
+		}
+
 		$this->render($response, 'pages/course/get.twig', [
         'page' => 'course',
 				'course' => $course,
