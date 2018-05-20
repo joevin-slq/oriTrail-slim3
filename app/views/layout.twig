@@ -34,6 +34,11 @@
         </ul>
         <ul class="navbar-nav">
           {% if auth.check %}
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path_for('aide') }}">Aide</a>
+              </li>
+            </ul>
             <div class="btn-group">
               <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ auth.user.nom }} {{ auth.user.prenom }}

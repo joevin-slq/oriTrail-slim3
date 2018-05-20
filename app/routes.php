@@ -16,6 +16,10 @@ $app->post('/auth/signin', \App\PagesControllers\AuthController::class.':postSig
 
 // ces routes imposent que l'utilisateur soit connecté
 $app->group('', function() {
+	
+  // Page d'aide
+  $this->get('/aide', \App\PagesControllers\Controller::class.':aide')->setName('aide');
+	
   $this->get('/course', \App\PagesControllers\CourseController::class.':getAll')->setName('course');
 
   $this->get('/course/ajout', \App\PagesControllers\CourseController::class.':getAjout')->setName('course.ajout');
