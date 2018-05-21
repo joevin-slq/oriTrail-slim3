@@ -24,14 +24,14 @@ body {
 /* Image de l'accueil
 -------------------------------------------------- */
 .jumbotron {
-  height: 100%;
-  min-height: 300px;
+  min-height: 100%;
   border-radius: 0;
   background-image: url("../img/background.jpg");
   background-position: center;
   background-size: cover;
   margin-bottom: 0px;
-  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 #home {
@@ -51,17 +51,12 @@ body {
   max-width:100px;
 }
 
-.container {
-  background-color: transparent;
-}
-
 .card {
   background-color: rgba(255, 255, 255, 0.7);
   border: 2px solid rgba(255, 255, 255, 0.7);
   margin-bottom: 10px;
   margin-right: auto;
   margin-left: auto;
-  min-width: 234px;
   max-width: 450px;
 }
 
