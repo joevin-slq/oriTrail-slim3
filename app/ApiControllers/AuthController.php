@@ -25,7 +25,7 @@ class AuthController extends Controller {
 		} catch (NestedValidationException $exception) {
 			return $response->withJson(['status' => 'Erreur : ' . $exception->getMessages()[0]], 400);
 		}
-		
+
 		$user = Utilisateur::create([
 			"login" => $input['login'],
 			"password" => password_hash($input['password'], PASSWORD_DEFAULT),
@@ -37,11 +37,14 @@ class AuthController extends Controller {
 		]);
 
 		if(!$user) {
-			return $response->withJson(['status' => 'Utilisateur non crée'], 400);
+			return $response->withJson(['status' => 'Utilisateur non créé !'], 400);
 		}
 
+		$token = $this->apiauth->createToken($user->login);
+
 		return $response->withJson([
-			['status' => 'Utilisateur crée']
+			['status' => 'Inscription terminée, vous êtes maintenant connecté.'],
+			['token' => $token]
 		]);
 	}
 
@@ -57,7 +60,7 @@ class AuthController extends Controller {
 			return $response->withJson(['status' => 'Identifiants incorrects'], 401);
 		}
 
-		$token = $this->apiauth->createToken($user);
+		$token = $this->apiauth->createToken($user->login);
 
 		return $response->withJson([
 			['status' => 'Authentifié avec succès'],

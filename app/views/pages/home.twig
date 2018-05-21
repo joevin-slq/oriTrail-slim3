@@ -1,36 +1,49 @@
 {% extends "layout.twig" %}
 
+{% block style %}
+  
+  body {
+    padding-bottom: 0;
+  }
+
+  html {
+    height: 100%;
+  }
+
+{% endblock %}
+
 {% block home %}
-<div class="jumbotron text-center">
-  <h1>Page d'accueil</h1>
-  <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit!</p>
-</div>
-<div class="container">
-  <h1>Bienvenue</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body row">
-          <div class="col-2 align-self-center logo-mobile">
-            <div class="fa-2x"><i class="fab fa-android"></i></div>
-          </div>
-          <div class="col">
-            <h5 class="card-title">Application Android</h5>
-            <a href="https://serveur.oritrail.fr/oriTrail/oriTrail.apk" class="btn btn-lg active btn-outline-success" role="button">Télécharger</a>
+<div id="home">
+  <div class="jumbotron text-center">
+    <h1>oriTrail</h1>
+    <!--<p class="lead">Le gestionnaire de courses d'orientation qui sort des sentiers battus !</p>!-->
+    <p class="lead">Les courses d'orientation qui sortent des sentiers battus !</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body row">
+              <div class="col-2 align-self-center logo-mobile">
+                <div class="fa-2x"><i class="fab fa-android"></i></div>
+              </div>
+              <div class="col">
+                <h5 class="card-title">App Android</h5>
+                <a href="https://serveur.oritrail.fr/oriTrail/oriTrail.apk" class="btn btn-lg active btn-outline-success" role="button">Télécharger</a>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body row">
-          <div class="col-2 align-self-center logo-mobile">
-            <div class="fa-2x"><i class="fab fa-apple"></i></div>
-          </div>
-          <div class="col">
-            <h5 class="card-title">Application iOS</h5>
-            <a href="#" class="btn btn-lg active btn-outline-secondary" role="button">Télécharger</a>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body row">
+              <div class="col-2 align-self-center logo-mobile">
+                <div class="fa-2x"><i class="fab fa-apple"></i></div>
+              </div>
+              <div class="col">
+                <h5 class="card-title">App iOS</h5>
+                <a href="#" class="btn btn-lg active btn-outline-secondary" role="button">Télécharger</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,0 +1,1 @@
+../voda/gettext-extractor/gettext-extractor.php
