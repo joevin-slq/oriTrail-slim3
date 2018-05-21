@@ -19,7 +19,7 @@ class AuthController extends Controller {
 										 ->key('nom', v::notEmpty()->alpha())
 										 ->key('prenom', v::notEmpty()->alpha())
 										 ->key('mail', v::email()->EmailAvailable())
-										 ->key('dateNaissance', v::date('d-m-Y'))
+										 ->key('dateNaissance', v::date())
 										 ->key('sexe', v::stringType()->length(1,1))
 										 ->assert($input);
 		} catch (NestedValidationException $exception) {
@@ -32,7 +32,7 @@ class AuthController extends Controller {
 			"nom" => $input['nom'],
 			"prenom" => $input['prenom'],
 			"mail" => $input['mail'],
-			"dateNaissance" => date_format(date_create_from_format('d-m-Y', $input['dateNaissance']), 'Y-m-d'),
+			"dateNaissance" => $input['dateNaissance'],
 			"sexe" => $input['sexe']
 		]);
 
