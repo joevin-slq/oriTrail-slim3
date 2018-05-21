@@ -12,13 +12,10 @@
     <link rel="stylesheet" href="{{ path_for('home') }}css/tempusdominus.min.css">
 {% endif %}
     <link rel="stylesheet" href="{{ path_for('home') }}css/style.css">
-    <style type="text/css">
-      {% block style %}{% endblock %}
-    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <nav class="navbar fixed-top navbar-expand-md bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
       <!-- Logo -->
       <a class="navbar-brand" href="{{ path_for('home') }}">oriTrail</a>
       <!-- Boutton sandwitch -->
@@ -37,11 +34,6 @@
         </ul>
         <ul class="navbar-nav">
           {% if auth.check %}
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path_for('aide') }}">Aide</a>
-              </li>
-            </ul>
             <div class="btn-group">
               <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ auth.user.nom }} {{ auth.user.prenom }}
@@ -68,12 +60,12 @@
     <div class="container">
       {% block content %}{% endblock %}
     </div>
+{% endif %}
     <footer class="footer">
       <div class="container text-center">
         <span class="text-muted">oriTrail - 2018</span>
       </div>
     </footer>
-{% endif %}
     <script src="{{ path_for('home') }}js/jquery.slim.js"></script>
     <script src="{{ path_for('home') }}js/bootstrap.min.js"></script>
 {% if page == 'course' %}

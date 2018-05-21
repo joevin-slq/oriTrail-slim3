@@ -28,23 +28,23 @@ final class Twig_TokenParser_For extends Twig_TokenParser
         $lineno = $token->getLine();
         $stream = $this->parser->getStream();
         $targets = $this->parser->getExpressionParser()->parseAssignmentExpression();
-        $stream->expect(/* Twig_Token::OPERATOR_TYPE */ 8, 'in');
+        $stream->expect(Twig_Token::OPERATOR_TYPE, 'in');
         $seq = $this->parser->getExpressionParser()->parseExpression();
 
         $ifexpr = null;
-        if ($stream->nextIf(/* Twig_Token::NAME_TYPE */ 5, 'if')) {
+        if ($stream->nextIf(Twig_Token::NAME_TYPE, 'if')) {
             $ifexpr = $this->parser->getExpressionParser()->parseExpression();
         }
 
-        $stream->expect(/* Twig_Token::BLOCK_END_TYPE */ 3);
+        $stream->expect(Twig_Token::BLOCK_END_TYPE);
         $body = $this->parser->subparse(array($this, 'decideForFork'));
         if ('else' == $stream->next()->getValue()) {
-            $stream->expect(/* Twig_Token::BLOCK_END_TYPE */ 3);
+            $stream->expect(Twig_Token::BLOCK_END_TYPE);
             $else = $this->parser->subparse(array($this, 'decideForEnd'), true);
         } else {
             $else = null;
         }
-        $stream->expect(/* Twig_Token::BLOCK_END_TYPE */ 3);
+        $stream->expect(Twig_Token::BLOCK_END_TYPE);
 
         if (count($targets) > 1) {
             $keyTarget = $targets->getNode(0);

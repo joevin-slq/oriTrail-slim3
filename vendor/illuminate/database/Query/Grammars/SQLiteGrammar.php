@@ -63,9 +63,9 @@ class SQLiteGrammar extends Grammar
      */
     protected function compileUnion(array $union)
     {
-        $conjunction = $union['all'] ? ' union all ' : ' union ';
+        $conjuction = $union['all'] ? ' union all ' : ' union ';
 
-        return $conjunction.'select * from ('.$union['query']->toSql().')';
+        return $conjuction.'select * from ('.$union['query']->toSql().')';
     }
 
     /**
@@ -138,9 +138,11 @@ class SQLiteGrammar extends Grammar
      */
     protected function dateBasedWhere($type, Builder $query, $where)
     {
-        $value = $this->parameter($where['value']);
+        $value = str_pad($where['value'], 2, '0', STR_PAD_LEFT);
 
-        return "strftime('{$type}', {$this->wrap($where['column'])}) {$where['operator']} cast({$value} as text)";
+        $value = $this->parameter($value);
+
+        return "strftime('{$type}', {$this->wrap($where['column'])}) {$where['operator']} {$value}";
     }
 
     /**

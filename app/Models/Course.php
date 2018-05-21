@@ -33,19 +33,4 @@ class Course extends Model
   public function resultats() {
     return $this->hasMany('App\Models\Resultat', 'fk_resultat');
   }
-
-  public function estInstalle() {
-    $balisesCourse = $this->balisesCourse()->get();
-
-    // parcours des balises
-    foreach ($balisesCourse as $balise) {
-      // on passe la première balise
-      if($balise['numero'] == 0) { continue; }
-
-      if(!isset($balise['longitude'])) { return false; }
-      if(!isset($balise['latitude']))  { return false; }
-    }
-
-    return true;
-  }
 }

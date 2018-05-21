@@ -1,7 +1,7 @@
 {% extends "layout.twig" %}
 
 {% block content %}
-<h1>Résultats de la course "{{ course.nom }}"</h1>
+<h1>Résultats de la course</h1>
 
 	{% if resultats is not empty %}
 	<div class="table-responsive">
@@ -9,8 +9,8 @@
 				<thead>
 						<tr>
 								<th>Nom du courreur</th>
-								<th>Âge</th>
-								{% if modeScore %}<th>Score</th>{% endif %}
+								<th>Sexe</th>
+								<th>Score</th>
 								<th>Date</th>
 								<th>Actions</th>
 						</tr>
@@ -19,8 +19,8 @@
 						{% for row in resultats %}
 						<tr>
 								<td>{{ row.user.nom }} {{ row.user.prenom }}</td>
-								<td>{{ row.user.dateNaissance | age }}</td>
-								{% if modeScore %}<td>{{ row.score }}</td>{% endif %}
+								<td>{{ row.user.sexe }}</td>
+								<td>{{ row.score }}</td>
 								<td>
 									{{ row.debut }}<br>
 									{{ row.fin }}

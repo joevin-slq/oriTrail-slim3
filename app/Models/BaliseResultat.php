@@ -10,9 +10,7 @@ class BaliseResultat extends Model
   protected $primaryKey = 'id_baliseResultat';
   public $timestamps = false;
   protected $fillable = [
-    'temps',
-    'longitude',
-    'latitude',
+    'tempsInter',
     'fk_resultat',
     'fk_baliseCourse'
   ];

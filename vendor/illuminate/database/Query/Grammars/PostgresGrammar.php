@@ -15,10 +15,9 @@ class PostgresGrammar extends Grammar
      */
     protected $operators = [
         '=', '<', '>', '<=', '>=', '<>', '!=',
-        'like', 'not like', 'between', 'ilike', 'not ilike',
-        '~', '&', '|', '#', '<<', '>>', '<<=', '>>=',
+        'like', 'not like', 'ilike',
+        '&', '|', '#', '<<', '>>', '>>=', '=<<',
         '&&', '@>', '<@', '?', '?|', '?&', '||', '-', '-', '#-',
-        'is distinct from', 'is not distinct from',
     ];
 
     /**

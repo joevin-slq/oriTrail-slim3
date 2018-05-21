@@ -424,31 +424,6 @@ class Builder
     }
 
     /**
-     * Add a subquery join clause to the query.
-     *
-     * @param  \Closure|\Illuminate\Database\Query\Builder|string $query
-     * @param  string  $as
-     * @param  string  $first
-     * @param  string|null  $operator
-     * @param  string|null  $second
-     * @param  string  $type
-     * @param  bool    $where
-     * @return \Illuminate\Database\Query\Builder|static
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function joinSub($query, $as, $first, $operator = null, $second = null, $type = 'inner', $where = false)
-    {
-        list($query, $bindings) = $this->createSub($query);
-
-        $expression = '('.$query.') as '.$this->grammar->wrap($as);
-
-        $this->addBinding($bindings, 'join');
-
-        return $this->join(new Expression($expression), $first, $operator, $second, $type, $where);
-    }
-
-    /**
      * Add a left join to the query.
      *
      * @param  string  $table
@@ -477,21 +452,6 @@ class Builder
     }
 
     /**
-     * Add a subquery left join to the query.
-     *
-     * @param  \Closure|\Illuminate\Database\Query\Builder|string $query
-     * @param  string  $as
-     * @param  string  $first
-     * @param  string|null  $operator
-     * @param  string|null  $second
-     * @return \Illuminate\Database\Query\Builder|static
-     */
-    public function leftJoinSub($query, $as, $first, $operator = null, $second = null)
-    {
-        return $this->joinSub($query, $as, $first, $operator, $second, 'left');
-    }
-
-    /**
      * Add a right join to the query.
      *
      * @param  string  $table
@@ -517,21 +477,6 @@ class Builder
     public function rightJoinWhere($table, $first, $operator, $second)
     {
         return $this->joinWhere($table, $first, $operator, $second, 'right');
-    }
-
-    /**
-     * Add a subquery right join to the query.
-     *
-     * @param  \Closure|\Illuminate\Database\Query\Builder|string $query
-     * @param  string  $as
-     * @param  string  $first
-     * @param  string|null  $operator
-     * @param  string|null  $second
-     * @return \Illuminate\Database\Query\Builder|static
-     */
-    public function rightJoinSub($query, $as, $first, $operator = null, $second = null)
-    {
-        return $this->joinSub($query, $as, $first, $operator, $second, 'right');
     }
 
     /**
@@ -719,8 +664,8 @@ class Builder
      * Add an "or where" clause to the query.
      *
      * @param  string|array|\Closure  $column
-     * @param  mixed  $operator
-     * @param  mixed  $value
+     * @param  string|null  $operator
+     * @param  mixed   $value
      * @return \Illuminate\Database\Query\Builder|static
      */
     public function orWhere($column, $operator = null, $value = null)
@@ -1078,10 +1023,10 @@ class Builder
      *
      * @param  string  $column
      * @param  string  $operator
-     * @param  mixed $value
+     * @param  string  $value
      * @return \Illuminate\Database\Query\Builder|static
      */
-    public function orWhereDate($column, $operator, $value = null)
+    public function orWhereDate($column, $operator, $value)
     {
         list($value, $operator) = $this->prepareValueAndOperator(
             $value, $operator, func_num_args() == 2
@@ -2384,7 +2329,7 @@ class Builder
      * Increment a column's value by a given amount.
      *
      * @param  string  $column
-     * @param  float|int  $amount
+     * @param  int     $amount
      * @param  array   $extra
      * @return int
      */
@@ -2405,7 +2350,7 @@ class Builder
      * Decrement a column's value by a given amount.
      *
      * @param  string  $column
-     * @param  float|int  $amount
+     * @param  int     $amount
      * @param  array   $extra
      * @return int
      */

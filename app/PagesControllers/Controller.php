@@ -32,10 +32,4 @@ class Controller {
         	'page' => 'home'
 		]);
 	}
-
-	public function aide(RequestInterface $request, ResponseInterface $response) {
-		$this->render($response, 'pages/aide.twig', [
-        	'page' => 'aide'
-		]);
-	}
 }

@@ -31,9 +31,9 @@ class ApiAuth
   public function createToken($login)
   {
 		$key = getenv('JWT_SECRET');
-//    $future = new \DateTime("now +60 minutes");
+    $future = new \DateTime("now +60 minutes");
     $payload = [
-//        "future" => $future->getTimestamp(),
+        "future" => $future->getTimestamp(),
         "user"   => $login
     ];
 
@@ -52,12 +52,12 @@ class ApiAuth
       return false;
     }
 
-    // $now    = new \DateTime();
-    // $future = \DateTime::createFromFormat('U', $payload->future);
+    $now    = new \DateTime();
+    $future = \DateTime::createFromFormat('U', $payload->future);
 
-    // if($now > $future) {
-    //   return false;
-    // }
+    if($now > $future) {
+      return false;
+    }
 
     $user = Utilisateur::where('login', $payload->user)->first();
 
@@ -65,20 +65,20 @@ class ApiAuth
   }
 
 // renouvelle le token
-  // public function renewToken($token)
-  // {
-  //   $key = getenv('JWT_SECRET');
-  //   try {
-  //     $payload = JWT::decode($token, $key, array('HS256'));
-  //   } catch (\Exception $e) {
-  //     return false;
-  //   }
-  //
-  //   $future = new \DateTime("now +60 minutes");
-  //   $payload->future = $future->getTimestamp();
-  //
-  //   return JWT::encode($payload, $key);
-  // }
+  public function renewToken($token)
+  {
+    $key = getenv('JWT_SECRET');
+    try {
+      $payload = JWT::decode($token, $key, array('HS256'));
+    } catch (\Exception $e) {
+      return false;
+    }
+
+    $future = new \DateTime("now +60 minutes");
+    $payload->future = $future->getTimestamp();
+
+    return JWT::encode($payload, $key);
+  }
 
 // récupère le nom d'utilisateur
   public function getUser($token)

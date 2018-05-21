@@ -41,7 +41,11 @@ abstract class Twig_Template
     public function __construct(Twig_Environment $env)
     {
         $this->env = $env;
-        $this->extensions = $env->getExtensions();
+        foreach ($env->getExtensions() as $extension) {
+            // For BC/FC with namespaced aliases
+            $class = (new ReflectionClass(get_class($extension)))->name;
+            $this->extensions[ltrim($class, '\\')] = $extension;
+        }
     }
 
     /**

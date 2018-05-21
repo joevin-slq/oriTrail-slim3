@@ -22,16 +22,16 @@ final class Twig_TokenParser_With extends Twig_TokenParser
 
         $variables = null;
         $only = false;
-        if (!$stream->test(/* Twig_Token::BLOCK_END_TYPE */ 3)) {
+        if (!$stream->test(Twig_Token::BLOCK_END_TYPE)) {
             $variables = $this->parser->getExpressionParser()->parseExpression();
-            $only = $stream->nextIf(/* Twig_Token::NAME_TYPE */ 5, 'only');
+            $only = $stream->nextIf(Twig_Token::NAME_TYPE, 'only');
         }
 
-        $stream->expect(/* Twig_Token::BLOCK_END_TYPE */ 3);
+        $stream->expect(Twig_Token::BLOCK_END_TYPE);
 
         $body = $this->parser->subparse(array($this, 'decideWithEnd'), true);
 
-        $stream->expect(/* Twig_Token::BLOCK_END_TYPE */ 3);
+        $stream->expect(Twig_Token::BLOCK_END_TYPE);
 
         return new Twig_Node_With($body, $variables, $only, $token->getLine(), $this->getTag());
     }

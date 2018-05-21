@@ -21,8 +21,9 @@ class ResultatController extends Controller {
 	public function get(RequestInterface $request, ResponseInterface $response) {
 		$id = $request->getAttribute('id');
 		$resultats = Resultat::where('fk_course', $id)->get();
-		if(!$resultats->isNotEmpty()) {
-			return $response->withJson(['status' => 'Erreur : Résultats de course introuvables.'], 400);
+		if(!$resultat) {
+			$this->flash->addMessage('error', "Résultat introuvable.");
+			return $response->withRedirect($this->router->pathFor('resultat'));
 		}
 		return $response->withJson($resultats);
 	}
@@ -71,7 +72,7 @@ class ResultatController extends Controller {
 																	->where('numero', 0)
 																	->first();
 		$resultat->balisesResultat()->create([
-			'temps' => '00:00:00',
+			'tempsInter' => '00:00:00',
 			'fk_baliseCourse' => $baliseCourse->id_baliseCourse
 		]);
 
@@ -82,9 +83,7 @@ class ResultatController extends Controller {
 																		->first();
 
 			$resultat->balisesResultat()->create([
-				'temps' => $baliseResultat['temps'],
-				'longitude' => $baliseResultat['longitude'],
-				'latitude' => $baliseResultat['latitude'],
+				'tempsInter' => $baliseResultat['temps'],
 				'fk_baliseCourse' => $baliseCourse->id_baliseCourse
 			]);
 		}
