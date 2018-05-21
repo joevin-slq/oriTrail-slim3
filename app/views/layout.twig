@@ -12,10 +12,13 @@
     <link rel="stylesheet" href="{{ path_for('home') }}css/tempusdominus.min.css">
 {% endif %}
     <link rel="stylesheet" href="{{ path_for('home') }}css/style.css">
+    <style type="text/css">
+      {% block style %}{% endblock %}
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <nav class="navbar fixed-top navbar-expand-md bg-dark navbar-dark">
       <!-- Logo -->
       <a class="navbar-brand" href="{{ path_for('home') }}">oriTrail</a>
       <!-- Boutton sandwitch -->
