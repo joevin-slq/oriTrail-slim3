@@ -1,7 +1,7 @@
 {% extends "layout.twig" %}
 
 {% block content %}
-<h1>Résultats n°{{resultat.id_resultat}} de {{ resultat.course.nom }}</h1>
+<h1>Résultat n°{{resultat.id_resultat}} de « {{ resultat.course.nom }} »</h1>
 
 <p>Courreur : {{ resultat.user.prenom }} {{ resultat.user.nom }}</p>
 <p>Sexe : {{ resultat.user.sexe }}</p>
@@ -24,7 +24,7 @@
 						<th>Numéro</th>
 						<th>Nom</th>
 						<th>Temps cumulé</th>
-						{% if invalide %}<th>Distance (mètres)</th>{% endif %}
+						{% if invalide %}<th>Écart (mètres)</th>{% endif %}
 						{% if resultat.course.type is same as("S") %}<th>Valeur</th>{% endif %}
 					</tr>
 			</thead>
