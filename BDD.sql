@@ -132,14 +132,14 @@ VALUES (NULL, 'Configuration', '0', NULL, NULL, NULL,
 	(NULL, 'CP2', '3', '50', 2.583035, 44.348046, '{"id_course":1,"num":3,"nom":"CP2","val":50}', '1');
 
 INSERT INTO `Resultats` (`id_resultat`, `debut`, `fin`, `score`, `fk_user`, `fk_course`)
-VALUES (NULL, '2018-04-09 14:00:00', '2018-04-09 15:00:00', 150, '1', '1');
+VALUES (NULL, '2018-04-09 14:31:23', '2018-04-09 14:39:00', 150, '1', '1');
 
 INSERT INTO `BaliseResultats` (`id_baliseResultat`, `temps`, `longitude`, `latitude`, `fk_resultat`, `fk_baliseCourse`)
 VALUES
 (NULL, '00:00:00', NULL, NULL, 1, 1),
 (NULL, '00:00:00', 2.580959, 44.353525, 1, 2),
-(NULL, '00:05:00', 2.582101, 44.350346, 1, 3),
-(NULL, '00:07:00', 2.582998, 44.347994, 1, 4);
+(NULL, '00:03:12', 2.582101, 44.350346, 1, 3),
+(NULL, '00:07:47', 2.582998, 44.347994, 1, 4);
 
 # Parcours
 INSERT INTO `Courses` (`id_course`, `nom`, `description`, `prive`, `type`, `debut`, `fin`, `penalite`, `fk_user`) VALUES
@@ -154,12 +154,12 @@ VALUES (NULL, 'Configuration', 0, NULL, NULL, NULL,
 	(NULL, 'Arrivée', 4, NULL, 2.460734, 44.941695, '{"id_course":2,"num":4,"nom":"Stop"}', 2);
 
 INSERT INTO `Resultats` (`id_resultat`, `debut`, `fin`, `fk_user`, `fk_course`)
-VALUES (NULL, '2018-05-20 15:00:00', '2018-05-20 16:00:00', '2', '2');
+VALUES (NULL, '2018-05-20 15:10:11', '2018-05-20 15:18:37', '2', '2');
 
 INSERT INTO `BaliseResultats` (`id_baliseResultat`, `temps`, `longitude`, `latitude`, `fk_resultat`, `fk_baliseCourse`)
 VALUES
 (NULL, '00:00:00', NULL, NULL, 1, 5),
 (NULL, '00:00:00', 2.457453, 44.939136, 2, 6),
 (NULL, '00:03:27', 2.459304, 44.939772, 2, 7),
-(NULL, '00:05:47', 2.459969, 44.94072, 2, 8),
-(NULL, '00:05:47', 2.460305, 44.9424, 2, 9);
+(NULL, '00:05:44', 2.459969, 44.94072, 2, 8),
+(NULL, '00:08:26', 2.460305, 44.9424, 2, 9);
