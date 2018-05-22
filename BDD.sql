@@ -117,8 +117,8 @@ ALTER TABLE BaliseResultats
 #-- Données
 #------------------------------------------------------------
 INSERT INTO `Utilisateurs` (`id_user`, `login`, `password`, `nom`, `prenom`, `mail`, `dateNaissance`, `sexe`)
-VALUES (NULL, 'root', '$2y$10$h4vkidOHWnaMXNXfaDNUxOQv4xGDkhKa2eX/mBNgwQq0/hYFS7BAe', 'USER', 'user', 'user@mail.fr', '2000-04-05', 'M'),
-       (NULL, 'a', '$2y$10$AeaLszxcEuZphixThYFjVOIOuLlczbQkyPfLgk.BDnUzxd3IEOUpm', 'a', 'a', 'a@a.a', '2000-01-01', 'M');
+VALUES (NULL, 'joevin', '$2y$10$UTIiVNyvWQU7hMnaLFATtuGKJUpYEqmacXoSYkO2OlmTztTBq6IH.', 'SOULENQ', 'Joévin', 'joevin.soulenq@gmail.com', '1996-01-23', 'M'),
+       (NULL, 'a', '$2y$10$AeaLszxcEuZphixThYFjVOIOuLlczbQkyPfLgk.BDnUzxd3IEOUpm', 'DELMONTEIL', 'Lucas', 'lucas.delmonteil@outlook.com', '1997-05-19', 'M');
 
 # Score
 INSERT INTO `Courses` (`id_course`, `nom`, `description`, `prive`, `type`, `debut`, `fin`, `tempsImparti`, `fk_user`)
@@ -143,7 +143,7 @@ VALUES
 
 # Parcours
 INSERT INTO `Courses` (`id_course`, `nom`, `description`, `prive`, `type`, `debut`, `fin`, `penalite`, `fk_user`) VALUES
-(NULL, 'L\'aurillacoise', 'Rendez-vous au gymnase de Peyrolles.', 1, 'P', '2018-05-16 10:00:00', '2018-08-15 18:00:00', '00:15:00', 1);
+(NULL, 'L\'aurillacoise', 'Rendez-vous au gymnase de Peyrolles.', 0, 'P', '2018-05-16 10:00:00', '2018-08-15 18:00:00', '00:15:00', 1);
 
 INSERT INTO `BaliseCourses` (`id_baliseCourse`, `nom`, `numero`, `valeur`, `longitude`, `latitude`, `qrcode`, `fk_course`)
 VALUES (NULL, 'Configuration', 0, NULL, NULL, NULL,
@@ -154,7 +154,7 @@ VALUES (NULL, 'Configuration', 0, NULL, NULL, NULL,
 	(NULL, 'Arrivée', 4, NULL, 2.460734, 44.941695, '{"id_course":2,"num":4,"nom":"Stop"}', 2);
 
 INSERT INTO `Resultats` (`id_resultat`, `debut`, `fin`, `fk_user`, `fk_course`)
-VALUES (NULL, '2018-05-20 15:00:00', '2018-05-20 16:00:00', '1', '2');
+VALUES (NULL, '2018-05-20 15:00:00', '2018-05-20 16:00:00', '2', '2');
 
 INSERT INTO `BaliseResultats` (`id_baliseResultat`, `temps`, `longitude`, `latitude`, `fk_resultat`, `fk_baliseCourse`)
 VALUES
