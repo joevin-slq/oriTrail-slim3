@@ -60,7 +60,7 @@ class AuthController extends Controller {
 			return $response->withJson(['status' => 'Identifiants incorrects'], 401);
 		}
 
-		$token = $this->apiauth->createToken($user->login);
+		$token = $this->apiauth->createToken($user);
 
 		return $response->withJson([
 			['status' => 'Authentifié avec succès'],
