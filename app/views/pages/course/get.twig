@@ -24,7 +24,7 @@
 								<th>Numéro</th>
 								<th>Nom</th>
 								{% if course.type is same as("S") %}<th>Valeur</th>{% endif %}
-								<th>Position</th>
+								{% if installe %}<th>Position</th>{% endif %}
 								<th>QrCode</th>
 						</tr>
 				</thead>
@@ -34,10 +34,10 @@
 								<td>{{ row.numero }}</td>
 								<td>{{ row.nom }}</td>
 								{% if course.type is same as("S") %}<td>{{ row.valeur }}</td>{% endif %}
-								<td>
+								{% if installe %}<td>
 									{{ row.longitude }}<br>
 									{{ row.latitude }}
-								</td>
+								</td>{% endif %}
 								<td><img src="{{ row.qrcode | qrcode(size=200) }}" /></td>
 						</tr>
 						{% endfor %}
