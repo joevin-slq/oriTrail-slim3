@@ -157,6 +157,9 @@ class CourseController extends Controller {
 	}
 
 	public function pdfQrCode(RequestInterface $request, ResponseInterface $response) {
+
+		qrcode::delete_qrcode_save();
+
 		$id = $request->getAttribute('id');
 
 		$course = Course::where('id_course', $id)
@@ -190,8 +193,6 @@ class CourseController extends Controller {
 		}
 
 		pdf::telecharger_pdf($pdf, $course->nom);
-				
-		qrcode::delete_qrcode_save();
 	}
 
 }

@@ -44,27 +44,27 @@ class PDFExtension extends \Twig_Extension
         switch ($postion) {
             case 1:
                 $pdf->Text(35, 12, $nomBalise);
-                $pdf->Image('.\img\qrcode\\' . $nomBalise . '.png', 17.5, 17, 80);
+                $pdf->Image('.\img\qrcode_' . $nomBalise . '.png', 17.5, 17, 80);
                 break;
             case 2:
                 $pdf->Text(140, 12, $nomBalise);
-                $pdf->Image('.\img\qrcode\\' . $nomBalise . '.png', 112.5, 17, 80);
+                $pdf->Image('.\img\qrcode_' . $nomBalise . '.png', 112.5, 17, 80);
                 break;
             case 3:
                 $pdf->Text(35, 108, $nomBalise);
-                $pdf->Image('.\img\qrcode\\' . $nomBalise . '.png', 17.5, 112, 80);
+                $pdf->Image('.\img\qrcode_' . $nomBalise . '.png', 17.5, 112, 80);
                 break;
             case 4:
                 $pdf->Text(140, 108, $nomBalise);
-                $pdf->Image('.\img\qrcode\\' . $nomBalise . '.png', 112.5, 112, 80);
+                $pdf->Image('.\img\qrcode_' . $nomBalise . '.png', 112.5, 112, 80);
                 break;
             case 5:
                 $pdf->Text(35, 203, $nomBalise);
-                $pdf->Image('.\img\qrcode\\' . $nomBalise . '.png', 17.5, 207, 80);
+                $pdf->Image('.\img\qrcode_' . $nomBalise . '.png', 17.5, 207, 80);
                 break;
             case 6:
                 $pdf->Text(140, 203, $nomBalise);
-                $pdf->Image('.\img\qrcode\\' . $nomBalise . '.png', 112.5, 207, 80);
+                $pdf->Image('.\img\qrcode_' . $nomBalise . '.png', 112.5, 207, 80);
                 break;
         }
     }

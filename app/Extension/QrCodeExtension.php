@@ -72,7 +72,7 @@ class QrCodeExtension extends \Twig_Extension
                 ->setSize((int) $size)
                 ->setText($value)
                 ->setVersion($version)
-                ->save('.\img\qrcode\\' . $name . '.png');
+                ->save('.\img\qrcode_' . $name . '.png');
         } catch (\Exception $e) {
             throw $e;
         }
@@ -83,13 +83,13 @@ class QrCodeExtension extends \Twig_Extension
      */
     public static function delete_qrcode_save()
     {
-        $dossier=opendir('.\img\qrcode');
+        $dossier=opendir('.\img');
 
         while ($fichier = readdir($dossier))
         {
-            if ($fichier != "." && $fichier != "..")
+            if (substr($fichier, 0, 7) === "qrcode_")
             {
-                unlink('.\img\qrcode\\' . $fichier);
+                unlink('.\img\\' . $fichier);
             }
         }
 
