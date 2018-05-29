@@ -22,6 +22,7 @@
     "firebase/php-jwt": "^5.0",
     "endroid/qrcode": "1.7",
     "idmkr/respect-validation-localization": "dev-master",
-    "ballen/distical": "^2.0"
+    "ballen/distical": "^2.0",
+    "setasign/fpdf": "1.8.1"
   }
 }

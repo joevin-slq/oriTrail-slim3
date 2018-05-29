@@ -201,6 +201,10 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
         ),
     );
 
+    public static $classMap = array (
+        'FPDF' => __DIR__ . '/..' . '/setasign/fpdf/fpdf.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
@@ -208,6 +212,7 @@ class ComposerStaticInit2193a5808188bdff0c30136e4b4bb256
             $loader->prefixDirsPsr4 = ComposerStaticInit2193a5808188bdff0c30136e4b4bb256::$prefixDirsPsr4;
             $loader->fallbackDirsPsr4 = ComposerStaticInit2193a5808188bdff0c30136e4b4bb256::$fallbackDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit2193a5808188bdff0c30136e4b4bb256::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit2193a5808188bdff0c30136e4b4bb256::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -51,6 +51,51 @@ class QrCodeExtension extends \Twig_Extension
         return $dataUrl;
     }
 
+    /**
+     * @return string
+     */
+    public static function qrcode_save(
+        $name,
+        $value,
+        $type = EndroidQrcode::IMAGE_TYPE_PNG,
+        $size=self::DEFAULT_IMAGE_SIZE,
+        $padding = self::DEFAULT_PADDING,
+        $label = '',
+        $version=null
+        )
+    {
+        try {
+            $qrCode = (new EndroidQrcode())
+                ->setImageType($type)
+                ->setLabel($label)
+                ->setPadding((int) $padding)
+                ->setSize((int) $size)
+                ->setText($value)
+                ->setVersion($version)
+                ->save('.\img\qrcode\\' . $name . '.png');
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public static function delete_qrcode_save()
+    {
+        $dossier=opendir('.\img\qrcode');
+
+        while ($fichier = readdir($dossier))
+        {
+            if ($fichier != "." && $fichier != "..")
+            {
+                unlink('.\img\qrcode\\' . $fichier);
+            }
+        }
+
+        closedir($dossier);
+    }
+
     public function getName()
     {
       return 'qrcode_extension';

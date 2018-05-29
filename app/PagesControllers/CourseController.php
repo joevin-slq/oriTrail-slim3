@@ -8,6 +8,9 @@ use App\Models\Course;
 use App\Models\BaliseCourse;
 use App\PagesControllers\BaliseController;
 
+use App\Extension\QrCodeExtension as qrcode;
+use App\Extension\PDFExtension as pdf;
+
 class CourseController extends Controller {
 
 	/**
@@ -150,7 +153,45 @@ class CourseController extends Controller {
 				'old' => $course,
 				'nomBalise' => $nomBalise,
 				'valeurBalise' => $valeurBalise,
-    ]);
+    	]);
+	}
+
+	public function pdfQrCode(RequestInterface $request, ResponseInterface $response) {
+		$id = $request->getAttribute('id');
+
+		$course = Course::where('id_course', $id)
+											->first();
+
+		if(!$course) {
+			$this->flash->addMessage('error', "Impossible d'accéder à cette course.");
+			return $response->withRedirect($this->router->pathFor('course'));
+		}
+
+		$pdf = pdf::create_pdf();
+
+		$positionQrCode = 0;
+
+		foreach ($course->balisesCourse as &$balise) {
+
+			qrcode::qrcode_save($balise->nom, $balise->qrcode, 10000);
+
+			if ($positionQrCode == 0) {
+				pdf::add_page($pdf);
+			}
+
+			$positionQrCode++;
+			
+			pdf::add_qrcode($pdf, $positionQrCode, $balise->nom);
+
+			if ($positionQrCode == 6) {
+				$positionQrCode = 0;
+			}
+
+		}
+
+		pdf::telecharger_pdf($pdf, $course->nom);
+				
+		qrcode::delete_qrcode_save();
 	}
 
 }

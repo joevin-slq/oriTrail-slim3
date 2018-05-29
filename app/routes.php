@@ -32,6 +32,7 @@ $app->group('', function() {
 
   $this->get('/course/[{id}]', \App\PagesControllers\CourseController::class.':get')->setName('course.get');
 
+  $this->get('/course/pdfQrCode/[{id}]', \App\PagesControllers\CourseController::class.':pdfQrCode')->setName('course.pdfQrCode');
 
   $this->get('/resultat', \App\PagesControllers\ResultatController::class.':getCourse')->setName('resultat');
   $this->get('/resultat/[{id}]', \App\PagesControllers\ResultatController::class.':getResultat')->setName('resultat.get');

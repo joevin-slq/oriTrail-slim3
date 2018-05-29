@@ -12,7 +12,7 @@
                 <th>Nom</th>
                 <th>Type</th>
                 <th>Date d'ouverture</th>
-								<th>Actions</th>
+				<th>Actions</th>
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -25,9 +25,10 @@
                 	{{ row.fin }}
                 </td>
                 <td>
-									<a href="course/{{row.id_course}}" class="btn btn-sm btn-block btn-secondary"    role="button">Visualiser</a>
-									<a href="course/ajout/{{row.id_course}}" class="btn btn-sm btn-block btn-info"    role="button">Dupliquer</a>
-									<a href="#" data-href="course/suppr/{{row.id_course}}" data-toggle="modal" data-target="#supprModal" class="btn btn-sm btn-block btn-danger">Supprimer</a>
+					<a href="course/{{row.id_course}}" class="btn btn-sm btn-block btn-secondary"    role="button">Visualiser</a>
+					<a href="{{path_for('course.pdfQrCode')}}{{row.id_course}}" class="btn btn-sm btn-block btn-dark" role="button">PDF QrCode</a>
+					<a href="course/ajout/{{row.id_course}}" class="btn btn-sm btn-block btn-info"    role="button">Dupliquer</a>
+					<a href="#" data-href="course/suppr/{{row.id_course}}" data-toggle="modal" data-target="#supprModal" class="btn btn-sm btn-block btn-danger">Supprimer</a>
               	</td>
 	            </tr>
 	            {% endfor %}

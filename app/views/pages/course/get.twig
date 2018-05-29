@@ -2,8 +2,9 @@
 
 {% block content %}
 	<h1>Course : {{ course.nom }}
-		<a href="#" data-href="{{ path_for('course') }}/suppr/{{course.id_course}}" data-toggle="modal" data-target="#supprModal" class="btn btn-lg btn-danger">Supprimer</a>
+		<a href="{{ path_for('course.pdfQrCode')}}{{course.id_course}}" class="btn btn-lg btn-dark" role="button">PDF QrCode</a>
 		<a href="{{ path_for('course.ajout.duplicate') }}{{course.id_course}}" class="btn btn-lg btn-info" role="button">Dupliquer</a>
+		<a href="#" data-href="{{ path_for('course') }}/suppr/{{course.id_course}}" data-toggle="modal" data-target="#supprModal" class="btn btn-lg btn-danger">Supprimer</a>
 	</h1>
 	<p>Description : {{ course.description }}</p>
 	<p>Type de course : {{ course.type is same as("S") ? 'Score' : 'Parcours' }}</p>
